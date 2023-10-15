@@ -74,5 +74,17 @@ Az új alkalmazás célja a folyamat jelentős leegyszerűsítése és hatékony
 - Az alkalmazásnak nyomon kell követnie a felhasználók tevékenységét és a kérdőívek teljesítményét adminisztratív célokra.
 
 ## Használati esetek
+### Regisztráció:
+- A felhasználó létrehozza a saját felhasználói fiókját, az ahhoz tartozó felhasználónév és jelszó megadásával.
+- Ha sikertelen a regisztráció, akkor a rendszer kiírja a megfelelő hibaüzenetet és újra lehet próbálkozni. 
+### Bejelentkezés:
+- A felhasználó megadja a bejelentkezési adatatait.
+- Ha helyes a megadott jelszó és felhasználónév páros, akkor a rendszer tovább enged és sikeres a bejelentkezés.
+- Ellenkező esetben kiírja a megfelelő hibaüzenetet.
+### Kérdőív kitöltése:
+- A felhasználó választ a rendelkezésre álló kérdőívek közül.
+- A kiválasztott kérdőívet kitölti a válaszadás módjának megfelelően.
+- A kitöltés végeztével a mentés gombra kattintva tudja rögzíteni az adatokat.
 
 ## Képernyő tervek
+TODO
