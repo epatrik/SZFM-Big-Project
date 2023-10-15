@@ -87,8 +87,8 @@ Az új alkalmazás célja a folyamat jelentős leegyszerűsítése és hatékony
 - A kitöltés végeztével a mentés gombra kattintva tudja rögzíteni az adatokat.
 
 ## Képernyő tervek
-TODO
-
+![kepernyoterv1](img/kepernyoterv1.png)
+![kepernyoterv2](img/kepernyoterv2.png)
 ## Fogalomszótár
    1. **Kérdőív**: Több azonos témájú kérdésből álló űrlap, melyet a felhasználó tölt ki.
    2. **HTML** - angolul: **HyperText Markup Language**, egy leíró nyelv, melyet weboldalak készítéséhez fejlesztettek ki.
