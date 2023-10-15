@@ -8,6 +8,17 @@
 
 ## Jelenlegi üzleti folyamatok leírása
 
+A felmérések elkészítése jelenleg lassú és költséges folyamat a következő lépésekkel:
+
+1. Felhasználónak otthon kérdéseket kell összeállítania.
+2. A kérdések összeállításához egy Word dokumentumot kell létrehoznia.
+3. A dokumentumot kinyomtatnia.
+4. Kézzel eljuttatnia a kérdőívet a felmérni kívánt közösséghez.
+5. Visszagyűjtenie a kitöltött kérdőíveket.
+6. Manuálisan összeszámolnia és összegeznie az egyes válaszokat.
+
+Az új alkalmazás célja a folyamat jelentős leegyszerűsítése és hatékonyságának növelése.
+
 ## Igényelt üzleti folyamatok leírása
 
 ### 1. Felhasználói regisztráció és bejelentkezés
