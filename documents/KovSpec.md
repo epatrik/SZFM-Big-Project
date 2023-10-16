@@ -2,7 +2,23 @@
 
 ## Jelenlegi helyzet leírása
 
+Jelenleg a felméréseket csak papír alapon tudjuk elvégezni. 
+A kérdőíveket nehéz rendszerezni és sok munka a kiértékelése és az adatok feldolgozása.
+A kérdőíveket először Word-ben írják meg és kinyomtatják a munkahelyen.
+A kérdőívek nyomtatása egy hosszadalmas és időigényes folyamat, ami sok papírlapot vesz igénybe és 
+kinyomtatásuk közben a többi dolgozó vár, hogy saját dokumentumaikat is kinyomtathassák. 
+A kérdőíveket tollal töltik ki, ami sokszor problémát okoz a feldolgozásnál, mivel nem mindig
+kiolvashatóak a válaszok.
+Az itt felsorolt problémákat szeretnénk megoldani egy webes kérdőív felület készíttetésével.
+
 ## Vágyálom rendszer
+
+Egy olyan rendszerre van szükségünk, amiben az adminok képesek kérdőívek létrehozására és módosítására.
+Ezeket a kérdőíveket a felhasználók látják és ki tudják tölteni.
+A felmérések kérdéseinek több típusa is legyen (pl. feleletválasztós, kifejtős).
+A felmérésekre kapott válaszok adatbázisban legyenek tárolva könnyen feldolgozható formátumban.
+A kérdőívek kitöltésére regisztrálni kell és be kell jelentkezni annak érdekében, hogy egy felhasználó
+ne tudja többször kitölteni ugyanazt a kérdőívet.
 
 ## Jelenlegi üzleti folyamatok leírása
 
@@ -51,6 +67,19 @@ Ez egy lassú, hosszadalmas és költséges folyamat, melyet egy alkalmazás jel
    - A felhasználók tevékenységének és a kérdőívek teljesítményének nyomon követésére szolgáló eszközök is szükségesek.
 
 ## Követelménylista
+
+|ID | Leírás|
+|---|-------|
+|K01| Regisztráció/Bejelentkezés implementálása|
+|K02| Admin/User szerepkör|
+|K03| Adatok tárolása adatbázisban|
+|K04| Kérdőívek létrehozása (Admin)|
+|K05| Kérdőívek törlése (Admin)|
+|K06| Userek látják a kérdőíveket|
+|K07| Userek ki tudják tölteni a kérdőíveket|
+|K08| Adminok látják a kérdőívekre adott válaszokat|
+|K09| Többféle kérdéstípus (pl. feleletválasztós, kifejtős)|
+|K10| Reszponzív dizájn|
 
 ## A rendszerre vonatkozó szabályok
    - A web felület szabványos eszközökkel készüljön: html/css/js. 
