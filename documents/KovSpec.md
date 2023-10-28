@@ -2,7 +2,7 @@
 
 ## Jelenlegi helyzet leírása
 
-Jelenleg a felméréseket csak papír alapon tudjuk elvégezni. 
+Jelenleg a felméréseket csak papír alapon tudjuk elvégezni.
 A kérdőíveket nehéz rendszerezni és sok munka a kiértékelése és az adatok feldolgozása.
 A kérdőíveket először Word-ben írják meg és kinyomtatják a munkahelyen.
 A kérdőívek nyomtatása egy hosszadalmas és időigényes folyamat, ami sok papírlapot vesz igénybe és 
@@ -82,13 +82,15 @@ Ez egy lassú, hosszadalmas és költséges folyamat, melyet egy alkalmazás jel
 |K10| Reszponzív dizájn|
 
 ## A rendszerre vonatkozó szabályok
-   - A web felület szabványos eszközökkel készüljön: html/css/js. 
-   - A képek jpeg és png formátumúak lehetnek. 
-   - A felhasználókat azonosító web oldalak esetében szükséges jogszabályokat be kell tartani: GDPR.
-   - A kinézet legyen igényes, és egyszerűen átlátható.
-   - A rendszer bíztosítsa a kérdőívet kitöltő személy teljes anonimítását.
+
+- A web felület szabványos eszközökkel készüljön: html/css/js.
+- A képek jpeg és png formátumúak lehetnek.
+- A felhasználókat azonosító web oldalak esetében szükséges jogszabályokat be kell tartani: GDPR.
+- A kinézet legyen igényes, és egyszerűen átlátható.
+- A rendszer bíztosítsa a kérdőívet kitöltő személy teljes anonimítását.
 
 ## Fogalomszótár
+
    1. **Kérdőív**: Több azonos témájú kérdésből álló űrlap, melyet a felhasználó tölt ki.
    2. **HTML** - angolul: **HyperText Markup Language**, egy leíró nyelv, melyet weboldalak készítéséhez fejlesztettek ki.
    3. **CSS** - **Cascading Style Sheets**, a számítástechnikában egy stílusleíró nyelv, mely a HTML vagy XHTML típusú strukturált dokumentumok megjelenését írja le.
