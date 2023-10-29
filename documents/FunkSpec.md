@@ -16,6 +16,16 @@ A kiértékelés manuálisan végződik és csak azután rögzül elektronikus f
 
 ## Vágyálom rendszer
 
+Az ideális kérdőívrendszer tulajdonságai:
+- A rendszer lehetővé teszi a kérdőív sablonok létrehozását és testreszabását.
+- Felhasználóbarát interfésszel rendelkezik a kérdőívek egyszerű és gyors létrehozásához.
+- A kérdőíveket online platformon keresztül lehet terjeszteni a résztvevők számára.
+- A résztvevők online platformon kitölthetik a kérdőíveket.
+- A kérdőívek könnyen elérhetőek és kitöltésükhöz egyszerűen megtehető.
+- A válaszokat a rendszer automatikusan rögzíti és tárolja adatbázisban.
+- Az adatok biztonságosan tárolódnak és védettek a jogosulatlan hozzáférés ellen.
+- A rendszer különböző szintű felhasználói jogosultságokat támogat.
+
 ## Követelménylista
 
 ## Jelenlegi üzleti folyamatok leírása
