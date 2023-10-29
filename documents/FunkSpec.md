@@ -2,6 +2,18 @@
 
 ## Jelenlegi helyzet leírása
 
+A megrendelő egy webes kérdőív alkalmazást szeretne ami lecseréli a jelenlegi kérdőívrendszert,
+amelyet többen is jelezték, hogy elavultnak vagy nehezen kezelhetőnek találtak. 
+Jelenleg a felmérések papír alapon működnek, amit a munkahelyen osztanak ki a kitöltőknek. 
+A kérdőíveket szövegszerkesztőben hozzák létre, majd otthon vagy a munkahelyen nyomtatják ki, 
+utóbbi esetben hátráltatva a többi dolgozó munkáját a nyomtató hosszadalmas használatával.
+A kérdőívek tollal töltődnek ki és általában 10-20 percet vesznek igénybe.
+Kitöltés után a kitöltők beadják a papírjukat egy megadott helyre, amit majd az arra felelősek feldolgoznak.
+Ha valami hibát vétettek a dolgozók kitöltés közben, akkor áthúzzák válaszukat és a helyeset 
+jelölik meg, ami nagyban megnehezíti a kérdőívek kiértékelését és az azokból 
+kinyert adatok feldolgozását. 
+A kiértékelés manuálisan végződik és csak azután rögzül elektronikus formában.
+
 ## Vágyálom rendszer
 
 ## Követelménylista
