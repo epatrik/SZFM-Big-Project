@@ -28,6 +28,19 @@ Az ideális kérdőívrendszer tulajdonságai:
 
 ## Követelménylista
 
+| ID | Név | Kifejtés |
+|----|-----|----------|
+| K1 | Webes reszponzív design | A rendszer webes alapú és bármilyen böngészőből elérhető. |
+| K2 | Felhasználói jogosultság | A rendszer különböző szintű felhasználói jogosultságokat támogat. |
+| K3 | Egyszerű kezelhetőség | Könnyen felhasználható legyen a rendszer a felhasználók számára. |
+| K4 | Adattárolás | A kérdőívekben adott válaszok adatbázisban tárolódnak. |
+| K5 | Adatvédelem | Az adatok jogosulatlan hozzáférés elleni védelmének biztosítása. |
+| K6 | Adatfeldolgozás | A rendszernek automatikusan kell feldolgoznia a beérkező válaszokat és létre kell hoznia elemzéseket. |
+| K7 | Regisztráció/Bejelentkezés | A felhasználók regisztráció után be tudnak jelentkezni email címükkel. |
+| K8 | Kérdőív létrehozás | A rendszernek rendelkeznie kell egy kérdőív szerkesztő felülettel a könnyű és gyors kérdőív készítéshez. |
+| K9 | Teljesítmény | A rendszernek jó teljesítményt kell nyújtania még a nagy adatmennyiség kezelése esetén is. |
+| K10 | Skálázhatóság | A rendszernek könnyen skálázhatónak kell lennie a növekvő felmérési igények kiszolgálásához. |
+
 ## Jelenlegi üzleti folyamatok leírása
 
 A felmérések elkészítése jelenleg lassú és költséges folyamat a következő lépésekkel:
