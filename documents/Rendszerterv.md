@@ -90,6 +90,34 @@ Az alkalmazásnak magas szintű biztonsági intézkedéseket kell alkalmaznia, k
 
 ## Absztrakt Domain Modell
 
+- Felhasználó (User):
+A felhasználók az alkalmazásban lévő interakciók szereplői.
+A felhasználók lehetnek regisztrált felhasználók vagy vendégek.
+A regisztrált felhasználók kérdőív létrehozási joggal rendelkeznek.
+Továbbá, egyes kédőívek megkövetelhetik hogy a kitöltő egy bejelentkezett felhasználó legyen spam elkerülése céljából.
+
+- Kérdőív (Questionare):
+A kérdőív egy témához tartozó kérdésekből áll.
+A kérdőív tartalmazza a kérdéseket és azokhoz kapcsolódó válaszlehetőségeket.
+
+- Kérdés (Question):
+A kérdőív kérdésekből és azok válaszlehetőségeiből áll.
+A kérdésekhez hozzárendelhető a helyes válasz is.
+
+- Eredmények (Results):
+Az oldal rögzíti és tárolja a felhasználók által adott válaszokat egy-egy kérdőív kitöltése után.
+
+- Felhasználói Interakciók (User Interactions):
+Az absztrakt domain modellben jelöljük, hogy a felhasználók kérdőíveket töltenek ki, kérdőíveket hoznak létre és válaszokat adnak kérdésekre.
+
+- Adatbázis (Database):
+Az adatbázis tárolja az összes információt, például a felhasználói adatokat, kérdőíveket, kérdéseiket és válaszokat.
+
+- Kapcsolatok (Relationships):
+Az absztrakt domain modellben mutatjuk be, hogy a felhasználók kapcsolódnak a kérdőívekhez, a kérdésekhez és az eredményekhez.
+A kérdőívek tartalmazzák a kérdéseket.
+Az eredmények az egyes felhasználók és kérdőívek közötti kapcsolatot jelentik.
+
 ## Architektúrális terv
 
 ## Tesztterv
