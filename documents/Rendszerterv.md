@@ -36,6 +36,30 @@ terén, és lehetőséget teremtsen a gyorsabb döntéshozatalra és az üzleti 
 
 ## Projektterv
 
+### Projektmunkások és szerepköreik
+
+| Név | Felelősségi kör | Munka felosztása|
+|-----|-----------------|-----------------|
+| Csepreghy Tamás | Programozó | Frontend |
+| Eperjesi Patrik | Programozó | Backend |
+| Vadon Dániel | Programozó | Backend |
+
+### Ütemterv
+
+A sprintek megkezdése előtti két hétben el kell készülnie a projekt dokumentumainak.
+A projekt kivitelezésére 5 egyhetes sprint áll rendelkezésre.
+Az első 2 sprint alatt el kell készülnie egy projektet bemutató demónak, melyet a megrendelő
+értékelhet a kész projekt átvétele előtt.
+
+### Mérföldkövek
+
+1. Funkciók meghatározása
+2. UI megtervezése
+3. Funkciók kivitelezése
+4. UI kivitelezése
+5. Funkciók integrálása
+6. UI, Funkciók tesztelése
+
 ## Üzleti folyamatok modellje
 
 ## Követelmények
