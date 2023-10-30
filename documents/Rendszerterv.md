@@ -2,6 +2,38 @@
 
 ## A rendszer célja
 
+A rendszer célja az alábbiak szerint határozható meg:
+
+### Kérdőívek és felmérések hatékony digitalizálása
+
+- A rendszer létrehozásának fő célja a cégünk által használt kérdőív alapú felmérések hatékonyabbá
+tétele és digitalizálása. A jelenlegi papíralapú folyamatok helyett a rendszer lehetővé teszi a
+kérdőívek elektronikus létrehozását, terjesztését, válaszok gyűjtését és adatok elemzését.
+
+### Adminisztratív és időbeli hatékonyság növelése
+
+- A rendszer célja az adminisztratív terhek csökkentése és az adatfeldolgozás és elemzés időbeli
+hatékonyságának növelése. Ennek révén a cégünk gyorsabban és hatékonyabban képes lesz felméréseket
+végrehajtani és az eredményekre reagálni.
+
+### Pontosság és adatvédelem
+
+- A rendszer célja az adatok pontosságának növelése és az adatvédelem biztosítása. Az automatizált
+adatgyűjtés és -feldolgozás csökkenti a hibalehetőségeket, és az adatok biztonságos tárolása védi az
+érzékeny információkat.
+
+### Felhasználói kényelem és testreszabhatóság
+
+- A rendszernek könnyen használhatónak kell lennie, és lehetőséget kell nyújtania a felhasználóknak a
+kérdőívek testreszabására és az adatok egyedi riportokban történő megjelenítésére.
+
+### Skálázhatóság
+
+- A rendszernek skálázhatónak kell lennie, hogy képes legyen növekedni a felmérések számával.
+
+A rendszer célja, hogy elősegítse a cégünk hatékonyabb működését a kérdőívekkel végzett felmérések
+terén, és lehetőséget teremtsen a gyorsabb döntéshozatalra és az üzleti eredmények javítására az adatok alapján.
+
 ## Projektterv
 
 ## Üzleti folyamatok modellje
