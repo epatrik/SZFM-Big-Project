@@ -70,16 +70,6 @@
                 "answers": [
                   "Igen", "Nem", "Talán"
                 ]
-            },
-            {
-                "id": 1,
-                "question": "Hány éves vagy?",
-                "type": "numberInput"
-            },
-            {
-                "id": 3,
-                "question": "Hogy hívnak?",
-                "type": "textInput"
             }
         ]
     }

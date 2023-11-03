@@ -1,32 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Dynamic Data Display</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <h1>Data Details</h1>
-    <div id="dataContainer"></div>
-
-    <script>
-        const queryString = window.location.pathname;
-        const index = queryString.split('/').pop();
-
-        fetch('/forms.json')
-            .then(response => response.json())
-            .then(data => {
-                const specificData = data[index];
-
-                const dataContainer = document.getElementById('dataContainer');
-                const keys = Object.keys(specificData);
-
-                keys.forEach(key => {
-                    const para = document.createElement('p');
-                    para.textContent = `${key}: ${specificData[key]}`;
-                    dataContainer.appendChild(para);
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    </script>
-</body>
+    <head>
+        <title>Dynamic Data Display</title>
+        <link rel="stylesheet" type="text/css" href="/formstyles.css">
+        <script src="/formscript.js"></script>
+    </head>
+    <body>
+        <h1>Data Details</h1>
+        <div id="dataContainer"></div>
+    </body>
 </html>
