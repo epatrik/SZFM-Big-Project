@@ -1,0 +1,86 @@
+[
+    {
+        "id": 0,
+        "userid": 0,
+        "isActive": true,
+        "isPublic": true,
+        "registered": "2022-05-29T07:19:40 -02:00",
+        "title": "Első kérdőív",
+        "questions": [
+            {
+                "id": 0,
+                "question": "Jól vagy?",
+                "type": "multipleChoice",
+                "answers": [
+                  "Igen", "Nem", "Talán"
+                ]
+            },
+            {
+                "id": 1,
+                "question": "Hány éves vagy?",
+                "type": "numberInput"
+            },
+            {
+                "id": 3,
+                "question": "Hogy hívnak?",
+                "type": "textInput"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "userid": 0,
+        "isActive": true,
+        "isPublic": true,
+        "registered": "2023-05-29T07:19:40 -02:00",
+        "title": "Második kérdőív",
+        "questions": [
+            {
+                "id": 0,
+                "question": "Jól vagy?",
+                "type": "multipleChoice",
+                "answers": [
+                  "Igen", "Nem", "Talán"
+                ]
+            },
+            {
+                "id": 1,
+                "question": "Hány éves vagy?",
+                "type": "numberInput"
+            },
+            {
+                "id": 3,
+                "question": "Hogy hívnak?",
+                "type": "textInput"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "userid": 0,
+        "isActive": true,
+        "isPublic": false,
+        "registered": "2023-07-29T07:19:40 -02:00",
+        "title": "Harmadik kérdőív",
+        "questions": [
+            {
+                "id": 0,
+                "question": "Jól vagy?",
+                "type": "multipleChoice",
+                "answers": [
+                  "Igen", "Nem", "Talán"
+                ]
+            },
+            {
+                "id": 1,
+                "question": "Hány éves vagy?",
+                "type": "numberInput"
+            },
+            {
+                "id": 3,
+                "question": "Hogy hívnak?",
+                "type": "textInput"
+            }
+        ]
+    }
+]
