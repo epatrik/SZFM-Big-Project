@@ -64,6 +64,56 @@ Az első 2 sprint alatt el kell készülnie egy projektet bemutató demónak, me
 
 ## Követelmények
 
+A követelmények tartalmazzák a rendszer funkcionális és nem funkcionális követelményeit, amelyek a tervezés és fejlesztés alapját képezik.
+
+### Webes reszponzív design
+
+A rendszer olyan módon van kifejlesztve, hogy független legyen a specifikus hardverről,
+operációs rendszerről vagy egyéb környezeti tényezőkről.
+Ez azt jelenti, hogy a rendszert bármelyik kompatibilis platformon futtathatják anélkül,
+hogy a forráskódját vagy a rendszert meg kellene változtatni.
+
+### Felhasználói jogosultság
+
+A rendszerben több jogosultság van, ami meghatározza a benne lévő tartalmakhoz való hozzáférést és azok módosítását.
+Csak a megfelelő jogosultsággal rendelkező felhasználók tudnak kérdőíveket készíteni és törölni.
+
+### Egyszerű kezelhetőség
+
+Könnyen felhasználható legyen a rendszer a felhasználók számára.
+A kérdőívek kitöltéséhez ne kelljen előzetes tudás a rendszer működéséről a válaszok megadásához.
+A kérdőívek készítésének és kitöltésének módja ne legyen bonyolult.
+
+### Adattárolás
+
+A rendszer a felhasználók adatait, kérdőíveket, és az azokon belüli kérdéseket
+és válaszokat adatbázisban tárolja az adatok struktúrált és rendszerezett tárolása céljából.
+
+### Adatvédelem
+
+Az adatokhoz való hozzáférést szigorúan ellenőrizni kell, és csak azoknak a felhasználóknak
+kell engedélyezni, akik jogosultak hozzájuk.
+
+### Adatfeldolgozás
+
+A rendszernek automatikusan kell feldolgoznia a beérkező válaszokat és létre kell hoznia elemzéseket. Ezen elemzések alapján láthatjuk a felhasználók többsége milyen választ adott a bizonyos kérdésekre.
+
+### Regisztráció/Bejelentkezés
+
+A felhasználók regisztráció után be tudnak jelentkezni email címükkel.
+
+### Kérdőív létrehozás
+
+A rendszernek rendelkeznie kell egy kérdőív szerkesztő felülettel a könnyű és gyors kérdőív készítéshez.
+
+### Teljesítmény
+
+A rendszernek jó teljesítményt kell nyújtania még a nagy adatmennyiség kezelése esetén is.
+
+### Skálázhatóság
+
+A rendszernek könnyen skálázhatónak kell lennie a növekvő felmérési igények kiszolgálásához.
+
 ## Funkcionális terv
 
 ## Fizikai Környezet
