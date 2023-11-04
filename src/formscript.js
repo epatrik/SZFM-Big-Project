@@ -10,6 +10,7 @@ fetch('/forms.json')
         const titleElement = document.getElementById('questionnaireTitle');
 
         titleElement.textContent = specific.title;
+        document.title = specific.title;
 
         const form = document.createElement('form');
         form.setAttribute('method', 'POST');
