@@ -26,6 +26,84 @@
                 "question": "Hogy hívnak?",
                 "type": "textInput",
                 "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják anyukádat?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják apukádat?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják az öcsédet?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a második öcsédet?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a harmadik öcsédet?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a negyedik öcsédet?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a bátyádat?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a húgodat?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a nővéred?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a nagymamádat?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hogy hívják a nagyapád?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Hol laksz?",
+                "type": "textInput",
+                "required": false
+            },
+            {
+                "id": 2,
+                "question": "Mikor nem vagy otthon?",
+                "type": "textInput",
+                "required": false
             }
         ]
     },
