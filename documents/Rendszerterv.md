@@ -61,6 +61,7 @@ Az első 2 sprint alatt el kell készülnie egy projektet bemutató demónak, me
 6. UI, Funkciók tesztelése
 
 ## Üzleti folyamatok modellje
+![uzletifolyamatok](img/uzl_foly_modell.png)
 
 ## Követelmények
 
@@ -115,6 +116,36 @@ A rendszernek jó teljesítményt kell nyújtania még a nagy adatmennyiség kez
 A rendszernek könnyen skálázhatónak kell lennie a növekvő felmérési igények kiszolgálásához.
 
 ## Funkcionális terv
+**1. Rendszerszereplők**
+ - Fejlesztő
+ - Adminisztrátor
+ - Felhasználó
+
+ **2. Rendszerhasználati esetek és lefutásaik**
+  - Fejlesztő:
+    - Teljes hozzáférés a rendszerhez
+
+  - Adminisztrátor:
+    - Kérdőív létrehozása, módosítása és törlése
+    - Felhasználók adatainak megtekintése
+    - Kérdőívek kiértékelése
+
+  - Felhasználó:
+    - Regisztrálást, illetve bejelentkezést 
+    követően kitöltheti választott
+    a kérdőíveket
+
+**3. Menü-hierarchiák**
+ - Bejelentkezés:
+    - regisztráció/belépés
+
+ - Kérdőív választás
+    - navigálás a kérdőívek között
+    - kérdőív kiválasztása
+
+ - Kérdőív megoldás:
+    - kérdések megválaszolása
+    - válaszok beküldése
 
 ## Fizikai Környezet
 
@@ -169,6 +200,15 @@ A kérdőívek tartalmazzák a kérdéseket.
 Az eredmények az egyes felhasználók és kérdőívek közötti kapcsolatot jelentik.
 
 ## Architektúrális terv
+A szoftver egy webapplikáció lesz, és két nagyrészre bontható:
+
+**Backend** és **Frontend**.
+
+A **Backend**:
+ - Adatbázis szerver
+ - js
+A **Frontend**:
+ - html/css
 
 ## Tesztterv
 
