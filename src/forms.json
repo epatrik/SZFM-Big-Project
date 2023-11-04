@@ -40,6 +40,7 @@
                 "id": 0,
                 "question": "Létezel?",
                 "type": "multipleChoice",
+                "required": true,
                 "answers": [
                   "Igen", "Nem", "Talán"
                 ]
@@ -47,12 +48,14 @@
             {
                 "id": 1,
                 "question": "Hányszor vagy?",
-                "type": "numberInput"
+                "type": "numberInput",
+                "required": true
             },
             {
                 "id": 3,
                 "question": "Mi az élet értelme?",
-                "type": "textInput"
+                "type": "textInput",
+                "required": true
             }
         ]
     },
@@ -67,6 +70,7 @@
                 "id": 0,
                 "question": "Mennyi V-Buckod van?",
                 "type": "multipleChoice",
+                "required": true,
                 "answers": [
                   "Sok", "Kevés", "Megszámlálhatatlan"
                 ]
@@ -75,6 +79,7 @@
                 "id": 1,
                 "question": "Honnan szerezted a V-Buckjaid?",
                 "type": "multipleChoice",
+                "required": true,
                 "answers": [
                   "Loptam", "Találtam", "Én tenyésztettem"
                 ]
@@ -90,8 +95,9 @@
         "questions": [
             {
                 "id": 0,
-                "question": "Jól vagy?",
+                "question": "Ezt elérted?",
                 "type": "multipleChoice",
+                "required": true,
                 "answers": [
                   "Igen", "Nem", "Talán"
                 ]
