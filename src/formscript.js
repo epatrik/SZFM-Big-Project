@@ -25,10 +25,8 @@ fetch('/forms.json')
         specific.questions.forEach(question => {
             const div = document.createElement('div');
             const label = document.createElement('label');
-            label.textContent = question.question;
-
             let input;
-
+        
             if (question.type === 'multipleChoice') {
                 input = document.createElement('select');
                 const blankOption = document.createElement('option');
@@ -44,12 +42,42 @@ fetch('/forms.json')
                 input = document.createElement('input');
                 input.type = question.type === 'numberInput' ? 'number' : 'text';
             }
-
+        
             input.name = `question_${question.id}`;
-            input.required = question.required;
+            input.required = question.required; // Set the 'required' attribute
+        
+            if (question.required) {
+                label.textContent = question.question;
+                const redStar = document.createElement('span');
+                redStar.style.color = 'red';
+                redStar.textContent = ' *'; // Space added to separate the red star from the text
+                label.appendChild(redStar); // Append red star after the question text for required fields
+                input.classList.add('required-field'); // Add class to style required fields
+            } else {
+                label.textContent = question.question; // Display the question text for non-required fields
+            }
+        
             div.appendChild(label);
             div.appendChild(input);
             form.appendChild(div);
+        
+            if (question.required) {
+                label.addEventListener('mouseover', () => {
+                    if (input.value === '') {
+                        label.setAttribute('title', 'Ennek a mezőnek kitöltése kötelező');
+                    }
+                });
+        
+                if (question.type === 'multipleChoice') {
+                    input.addEventListener('change', () => {
+                        if (input.value === '') {
+                            label.setAttribute('title', 'Ennek a mezőnek kitöltése kötelező');
+                        } else {
+                            label.removeAttribute('title');
+                        }
+                    });
+                }
+            }
         });
 
         const submitButton = document.createElement('button');
