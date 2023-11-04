@@ -10,6 +10,7 @@
                 "id": 0,
                 "question": "Jól vagy?",
                 "type": "multipleChoice",
+                "required": true,
                 "answers": [
                   "Igen", "Nem", "Talán"
                 ]
@@ -17,12 +18,14 @@
             {
                 "id": 1,
                 "question": "Hány éves vagy?",
-                "type": "numberInput"
+                "type": "numberInput",
+                "required": true
             },
             {
                 "id": 2,
                 "question": "Hogy hívnak?",
-                "type": "textInput"
+                "type": "textInput",
+                "required": false
             }
         ]
     },

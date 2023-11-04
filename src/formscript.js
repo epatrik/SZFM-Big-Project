@@ -11,21 +11,17 @@ fetch('/forms.json')
 
         titleElement.textContent = specific.title;
 
-        // Create a form element
         const form = document.createElement('form');
-
-        // Set form attributes
         form.setAttribute('method', 'POST');
         form.setAttribute('action', '/submit');
+        form.addEventListener('submit', validateForm);
 
-        // Create a hidden input for the id
         const idInput = document.createElement('input');
         idInput.type = 'hidden';
         idInput.name = 'formId';
         idInput.value = id;
         form.appendChild(idInput);
 
-        // Loop through the questions and create form elements dynamically
         specific.questions.forEach(question => {
             const div = document.createElement('div');
             const label = document.createElement('label');
@@ -33,9 +29,11 @@ fetch('/forms.json')
 
             let input;
 
-            // Create different types of inputs based on the question type
             if (question.type === 'multipleChoice') {
                 input = document.createElement('select');
+                const blankOption = document.createElement('option');
+                blankOption.text = '';
+                input.appendChild(blankOption);
                 question.answers.forEach(answer => {
                     const option = document.createElement('option');
                     option.value = answer;
@@ -47,19 +45,35 @@ fetch('/forms.json')
                 input.type = question.type === 'numberInput' ? 'number' : 'text';
             }
 
-            // Set attributes for the input
             input.name = `question_${question.id}`;
+            input.required = question.required;
             div.appendChild(label);
             div.appendChild(input);
             form.appendChild(div);
         });
 
-        // Create a submit button
         const submitButton = document.createElement('button');
         submitButton.type = 'submit';
         submitButton.textContent = 'Submit';
 
         form.appendChild(submitButton);
         formContainer.appendChild(form);
+
+        function validateForm(event) {
+            const inputs = form.querySelectorAll('input, select');
+            let isFormValid = true;
+
+            inputs.forEach(input => {
+                if (input.required && input.value === '') {
+                    isFormValid = false;
+                    // You can provide visual feedback for required fields not filled out (e.g., highlighting the field).
+                    // For example: input.style.border = '1px solid red';
+                }
+            });
+
+            if (!isFormValid) {
+                event.preventDefault();
+            }
+        }
     })
     .catch(error => console.error('Error fetching data:', error));
