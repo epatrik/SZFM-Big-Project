@@ -207,6 +207,7 @@ A szoftver egy webapplikáció lesz, és két nagyrészre bontható:
 A **Backend**:
  - Adatbázis szerver
  - js
+ 
 A **Frontend**:
  - html/css
 
