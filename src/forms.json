@@ -4,8 +4,7 @@
         "userid": 0,
         "isActive": true,
         "isPublic": true,
-        "registered": "2022-05-29T07:19:40 -02:00",
-        "title": "Első kérdőív",
+        "title": "Publikus kérdőív",
         "questions": [
             {
                 "id": 0,
@@ -21,7 +20,7 @@
                 "type": "numberInput"
             },
             {
-                "id": 3,
+                "id": 2,
                 "question": "Hogy hívnak?",
                 "type": "textInput"
             }
@@ -31,13 +30,12 @@
         "id": 1,
         "userid": 0,
         "isActive": true,
-        "isPublic": true,
-        "registered": "2023-05-29T07:19:40 -02:00",
-        "title": "Második kérdőív",
+        "isPublic": false,
+        "title": "Nem publikus kérdőív",
         "questions": [
             {
                 "id": 0,
-                "question": "Jól vagy?",
+                "question": "Létezel?",
                 "type": "multipleChoice",
                 "answers": [
                   "Igen", "Nem", "Talán"
@@ -45,12 +43,12 @@
             },
             {
                 "id": 1,
-                "question": "Hány éves vagy?",
+                "question": "Hányszor vagy?",
                 "type": "numberInput"
             },
             {
                 "id": 3,
-                "question": "Hogy hívnak?",
+                "question": "Mi az élet értelme?",
                 "type": "textInput"
             }
         ]
@@ -60,15 +58,22 @@
         "userid": 0,
         "isActive": true,
         "isPublic": false,
-        "registered": "2023-07-29T07:19:40 -02:00",
-        "title": "Harmadik kérdőív",
+        "title": "V-Buck quiz",
         "questions": [
             {
                 "id": 0,
-                "question": "Jól vagy?",
+                "question": "Mennyi V-Buckod van?",
                 "type": "multipleChoice",
                 "answers": [
-                  "Igen", "Nem", "Talán"
+                  "Sok", "Kevés", "Megszámlálhatatlan"
+                ]
+            },
+            {
+                "id": 1,
+                "question": "Honnan szerezted a V-Buckjaid?",
+                "type": "multipleChoice",
+                "answers": [
+                  "Loptam", "Találtam", "Én tenyésztettem"
                 ]
             }
         ]
@@ -78,8 +83,7 @@
         "userid": 1,
         "isActive": false,
         "isPublic": false,
-        "registered": "2023-07-29T07:19:40 -02:00",
-        "title": "Teszt",
+        "title": "Kikapcsolt kérdőív",
         "questions": [
             {
                 "id": 0,

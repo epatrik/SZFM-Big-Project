@@ -1,25 +1,32 @@
 const queryString = window.location.pathname;
-const index = queryString.split('/').pop();
+const id = queryString.split('/').pop();
 
 fetch('/forms.json')
     .then(response => response.json())
     .then(data => {
-        const specificData = data[index];
+        const specific = data[id];
 
         const formContainer = document.getElementById('questionnaireForm');
         const titleElement = document.getElementById('questionnaireTitle');
 
-        titleElement.textContent = specificData.title;
+        titleElement.textContent = specific.title;
 
         // Create a form element
         const form = document.createElement('form');
 
         // Set form attributes
         form.setAttribute('method', 'POST');
-        form.setAttribute('action', '/submit'); // Change this to the appropriate submission URL
+        form.setAttribute('action', '/submit');
+
+        // Create a hidden input for the id
+        const idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'formId';
+        idInput.value = id;
+        form.appendChild(idInput);
 
         // Loop through the questions and create form elements dynamically
-        specificData.questions.forEach(question => {
+        specific.questions.forEach(question => {
             const div = document.createElement('div');
             const label = document.createElement('label');
             label.textContent = question.question;
