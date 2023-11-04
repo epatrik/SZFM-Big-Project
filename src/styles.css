@@ -1,13 +1,64 @@
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
 h1 {
     color: #333;
+    margin-top: 20px;
 }
 
-p {
-    color: #666;
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    background-color: #eaeaea;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+nav a:hover {
+    background-color: #ccc;
+}
+
+ul#formList {
+    list-style: none;
+    padding: 0;
+}
+
+ul#formList li {
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Add transition for smoother effect */
+}
+
+ul#formList li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+}
+
+ul#formList li:hover {
+    background-color: #f9f9f9; /* Change background on hover */
+}
+
+ul#formList li a:hover {
+    color: #000;
 }
