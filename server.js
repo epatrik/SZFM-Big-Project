@@ -29,7 +29,10 @@ app.post('/submit', (req, res) => {
     const formId = req.body.formId;
     let answers = Object.keys(req.body)
         .filter(key => key.startsWith('question_'))
-        .map(key => req.body[key]);
+        .map(key => {
+            const value = req.body[key];
+            return !isNaN(value) ? parseInt(value, 10) : value;
+        });
 
     let formattedAnswers = {
         formId,
