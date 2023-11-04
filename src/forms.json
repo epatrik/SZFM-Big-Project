@@ -97,13 +97,13 @@
                 "id": 2,
                 "question": "Hol laksz?",
                 "type": "textInput",
-                "required": false
+                "required": true
             },
             {
                 "id": 2,
                 "question": "Mikor nem vagy otthon?",
                 "type": "textInput",
-                "required": false
+                "required": true
             }
         ]
     },
