@@ -6,21 +6,21 @@ function addQuestion() {
     const div = document.createElement('div');
     div.classList.add('question');
     div.innerHTML = `
-        <label>Question ${questionNumber}:</label>
+        <label>${questionNumber}. kérdés:</label>
         <input type="text" name="question[]" required>
         <select name="type[]" required onchange="showOptions(this)">
-            <option value="textInput">Text Input</option>
-            <option value="numberInput">Number Input</option>
-            <option value="multipleChoice">Multiple Choice</option>
+            <option value="textInput">Szöveges bevitel</option>
+            <option value="numberInput">Szám bevitel</option>
+            <option value="multipleChoice">Több opció</option>
         </select>
-        <label for="required">Required:</label>
+        <label for="required">Kötelező:</label>
         <input type="checkbox" name="required[]" value="true">
-        <button type="button" onclick="removeQuestion(this)">Remove Question</button>
+        <button type="button" onclick="removeQuestion(this)">Kérdés törlése</button>
         <div class="options" style="display: none;">
             <div class="option-item">
-                <input type="text" name="options[]" placeholder="Option 1">
+                <input type="text" name="options[]" placeholder="1. opció">
             </div>
-            <button type="button" onclick="addOption(this)">Add Option</button>
+            <button type="button" onclick="addOption(this)">Új opció</button>
         </div>
     `;
     questionsDiv.appendChild(div);
@@ -45,7 +45,7 @@ function addOption(element) {
         const input = document.createElement('input');
         input.type = 'text';
         input.name = 'options[]';
-        input.placeholder = `Option ${nextOptionNumber}`;
+        input.placeholder = `${nextOptionNumber}. opció`;
 
         const removeOptionBtn = document.createElement('button');
         removeOptionBtn.type = 'button';
@@ -75,7 +75,7 @@ function removeOption(element) {
 function renumberOptions(optionsDiv) {
     const options = optionsDiv.querySelectorAll('.option-item input[type="text"]');
     options.forEach((option, index) => {
-        option.placeholder = `Option ${index + 1}`;
+        option.placeholder = `${index + 1}. opció`;
     });
 }
 
@@ -92,7 +92,7 @@ function updateQuestionNumbers() {
     const questionDivs = document.querySelectorAll('.question');
     questionNumber = 0;
     questionDivs.forEach((questionDiv, index) => {
-        questionDiv.querySelector('label').textContent = `Question ${index + 1}:`;
+        questionDiv.querySelector('label').textContent = `${index + 1}. kérdés:`;
         questionNumber++;
     });
 }
