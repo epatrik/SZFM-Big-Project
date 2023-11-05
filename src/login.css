@@ -8,36 +8,48 @@
     outline: none;
 }
 
-body{
-    position: relative;
+body {
     width: 100%;
     min-height: 100vh;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: white;
+    background-color: rgb(58, 41, 122);;
     background-size: cover;
     background-position: center;
-    font-family: 'roboto', sans-serif;
+    font-family: 'Dosis', sans-serif;
 }
 
-.loginForm{
-    width: 30%;
+#loginForm{
+    width: 400px;
+    min-width: 350px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: rgb(209, 201, 248);
     border: 1px solid #858585;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 5px;
 }
+/*
+.moveup1 {
+    animation-name: moveup;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+}
 
+@keyframes moveup {
+    from {top: 200px;}
+    to {top: 0px;}
+}
+*/
 .heading{
     text-transform: capitalize;
     text-align: center;
     font-size: 60px;
     font-weight: 300;
     margin-bottom: 100px;
+    margin-top: 30px;
 }
 
 input,
@@ -72,15 +84,38 @@ input:focus::placeholder{
     padding: 0 20px;
     cursor: pointer;
     margin: 50px auto 0;
+    background-color: rgb(196, 183, 255);
+}
+
+.submit-btn:hover {
+    background-color: rgb(117, 94, 216);
+    color: white;
 }
 
 .link{
+    padding-top: 5px;
     text-align: center;
     color: gray;
     display: block;
     margin: 30px auto;
+    text-decoration: none;
 }
 
 .link:hover{
     color: black;
 }
+
+.fadein {
+    animation: fadeIn 0.2s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {  
+    from {  
+        opacity:0;  
+    }  
+ 
+    to {  
+        opacity:1;  
+    }  
+ }
