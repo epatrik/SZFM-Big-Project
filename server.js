@@ -27,29 +27,48 @@ app.get('/form/:index', (req, res) => {
 app.post('/submit', (req, res) => {
     const answersFilePath = path.join(__dirname, 'src/answers.json');
     const formId = req.body.formId;
-    let answers = Object.keys(req.body)
-        .filter(key => key.startsWith('question_'))
-        .map(key => {
-            const value = req.body[key];
-            return !isNaN(value) ? parseInt(value, 10) : value;
-        });
+    const userId = 0; // Placeholder for user ID
 
     let formattedAnswers = {
         formId,
-        answers
+        userId,
+        answers: []
     };
 
     if (fs.existsSync(answersFilePath)) {
         const existingData = fs.readFileSync(answersFilePath);
         const parsedData = JSON.parse(existingData);
+
+        // Check if the same user has already submitted for this form
+        const userSubmitted = parsedData.some(answer => answer.formId === formId && answer.userId === userId);
+
+        if (userSubmitted) {
+            res.status(403).send('You have already submitted answers for this form.');
+            return;
+        }
+
+        formattedAnswers.answers = Object.keys(req.body)
+            .filter(key => key.startsWith('question_'))
+            .map(key => {
+                const value = req.body[key];
+                return !isNaN(value) ? parseInt(value, 10) : value;
+            });
+
         parsedData.push(formattedAnswers);
         fs.writeFileSync(answersFilePath, JSON.stringify(parsedData, null, 2));
     } else {
+        formattedAnswers.answers = Object.keys(req.body)
+            .filter(key => key.startsWith('question_'))
+            .map(key => {
+                const value = req.body[key];
+                return !isNaN(value) ? parseInt(value, 10) : value;
+            });
+
         const newAnswers = [formattedAnswers];
         fs.writeFileSync(answersFilePath, JSON.stringify(newAnswers, null, 2));
     }
 
-    res.redirect('/index.html');
+    res.redirect('/');
 });
 
 app.get('/create', (req, res) => {
@@ -71,7 +90,7 @@ app.post('/createQuestionnaire', (req, res) => {
 
     const newQuestionnaire = {
         id: formsData.length > 0 ? formsData[formsData.length - 1].id + 1 : 1,
-        userid: 0, // You can update this with the user ID when implemented
+        userId: 0, // You can update this with the user ID when implemented
         isActive: true,
         isPublic,
         title: req.body.title,
@@ -104,7 +123,7 @@ app.post('/createQuestionnaire', (req, res) => {
     formsData.push(newQuestionnaire);
     fs.writeFileSync(formsFilePath, JSON.stringify(formsData, null, 2));
 
-    res.redirect('/index.html');
+    res.redirect('/');
 });
 
 const server = http.createServer(app);
