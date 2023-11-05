@@ -6,15 +6,38 @@ ul {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
+    /*background-image: linear-gradient(to right, rgb(39, 24, 95) , rgb(103, 77, 175), rgb(44, 20, 131));*/
+    background-color: rgb(58, 41, 122);
     text-align: center;
     margin: 0 auto;
     max-width: 800px;
+    min-width: 700px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#title-container {
+    background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+    display: flex;
+    margin-top: 12%;
+    top: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 h1 {
-    color: #333;
-    margin-top: 20px;
+    color: #ffffff;
+    top: 100px;
+    font-size: 35px;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0vh 1vh 1vh rgb(17, 5, 44);
+    font-weight: bold;
 }
 
 nav {
@@ -28,23 +51,74 @@ nav a {
     color: #333;
     background-color: #eaeaea;
     border-radius: 5px;
-    margin: 0 5px;
+    /*margin: 0 5px;*/
+}
+
+nav#kezdolap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(rgb(47, 33, 107), rgb(15, 9, 43));
+    margin-top: 0px;
+    overflow-x:auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 20px;
+    max-width: 800px;
+    min-width: 700px;
+    border: solid 4px rgb(133, 104, 226);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0vh 0vh 5px rgb(37, 14, 92);
+}
+
+nav#kezdolap a {
+    background-color: rgb(171, 171, 245);
+    width: 250px;
+    margin-bottom: 10px;
+    box-shadow: 0vh 1vh 2vh rgb(31, 11, 78);
+    transition: background-color 0.2s;
+}
+
+nav#kezdolap a:hover {
+    background-color: rgb(118, 118, 207);
+    color: white;
 }
 
 nav a:hover {
     background-color: #ccc;
 }
 
+.list-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+    box-shadow: 0 10px 20px rgb(34, 27, 65);
+}
+
+#list-h1 {
+    margin-top: 100px;
+}
+
 ul#formList {
+    display: grid;
+    row-gap: 5px;
     list-style: none;
+    overflow-y: auto;
     padding: 0;
 }
 
 ul#formList li {
-    margin-bottom: 10px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin: 0 auto;
+    max-width: 700px;
+    min-width: 600px;
     transition: background-color 0.3s; /* Add transition for smoother effect */
 }
 
@@ -56,9 +130,9 @@ ul#formList li a {
 }
 
 ul#formList li:hover {
-    background-color: #f9f9f9; /* Change background on hover */
+    background-color: rgb(145, 71, 230); /* Change background on hover */
 }
 
 ul#formList li a:hover {
-    color: #000;
+    color: white;
 }
