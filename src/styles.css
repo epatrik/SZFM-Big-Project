@@ -91,6 +91,7 @@ nav#kezdolap a:hover {
     top: 0;
     left: 0;
     width: 100%;
+    min-width: 800px;
     height: 50px;
     background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
     box-shadow: 0 10px 20px rgb(34, 27, 65);
@@ -183,3 +184,79 @@ ul#formList li:hover {
 ul#formList li a:hover {
     color: white;
 }
+
+.create-title {
+    margin-top: 100px;
+}
+
+form#questionnaireForm {
+    margin-top: 50px;
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    min-height: 70px;
+    min-width: 800px;
+    background-image: linear-gradient(to right, rgb(17, 10, 39) , rgb(17, 10, 48), rgb(13, 8, 32));
+    justify-content: center;
+    align-items:center;
+    margin-bottom: 30px;
+    /*background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+    */
+}
+
+.que-title {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgb(31, 25, 56);
+}
+
+#title {
+    margin-left: 5px;
+    margin-right: 30px;
+    background-color: rgb(214, 206, 250);
+    border: solid 1px white;
+    border-radius: 1px;
+    box-shadow: 0 2px 10px rgb(48, 31, 114);
+}
+
+#questions {
+    max-height: 320px;
+    min-height: 320px;
+    overflow-y: auto;
+    background-color: rgb(44, 31, 99);
+    padding: 30px;
+    border: solid 1.25px rgb(32, 21, 80);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.question {
+    background-image: linear-gradient(to right, rgb(27, 15, 65) , rgb(28, 17, 78), rgb(27, 15, 65));
+    color: white;
+    padding: 40px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.btn {
+    margin-right: 30px;
+    width: 150px;
+    padding: 10px;
+    background-color:rgb(172, 159, 230);
+    border-radius: 10px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: rgb(109, 95, 172);
+    color: white;
+    text-shadow: 0 2px 10px rgb(31, 25, 56);
+    cursor: pointer;
+}
+
