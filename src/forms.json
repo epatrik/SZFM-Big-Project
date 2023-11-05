@@ -1,185 +1,195 @@
 [
-    {
+  {
+    "id": 0,
+    "userid": 0,
+    "isActive": true,
+    "isPublic": true,
+    "title": "Publikus kérdőív",
+    "questions": [
+      {
         "id": 0,
-        "userid": 0,
-        "isActive": true,
-        "isPublic": true,
-        "title": "Publikus kérdőív",
-        "questions": [
-            {
-                "id": 0,
-                "question": "Jól vagy?",
-                "type": "multipleChoice",
-                "required": true,
-                "answers": [
-                  "Igen", "Nem", "Talán"
-                ]
-            },
-            {
-                "id": 1,
-                "question": "Hány éves vagy?",
-                "type": "numberInput",
-                "required": true
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívnak?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják anyukádat?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják apukádat?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják az öcsédet?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a második öcsédet?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a harmadik öcsédet?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a negyedik öcsédet?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a bátyádat?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a húgodat?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a nővéred?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a nagymamádat?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hogy hívják a nagyapád?",
-                "type": "textInput",
-                "required": false
-            },
-            {
-                "id": 2,
-                "question": "Hol laksz?",
-                "type": "textInput",
-                "required": true
-            },
-            {
-                "id": 2,
-                "question": "Mikor nem vagy otthon?",
-                "type": "textInput",
-                "required": true
-            }
+        "question": "Jól vagy?",
+        "type": "multipleChoice",
+        "required": true,
+        "answers": [
+          "Igen",
+          "Nem",
+          "Talán"
         ]
-    },
-    {
+      },
+      {
         "id": 1,
-        "userid": 0,
-        "isActive": true,
-        "isPublic": false,
-        "title": "Nem publikus kérdőív",
-        "questions": [
-            {
-                "id": 0,
-                "question": "Létezel?",
-                "type": "multipleChoice",
-                "required": true,
-                "answers": [
-                  "Igen", "Nem", "Talán"
-                ]
-            },
-            {
-                "id": 1,
-                "question": "Hányszor vagy?",
-                "type": "numberInput",
-                "required": true
-            },
-            {
-                "id": 3,
-                "question": "Mi az élet értelme?",
-                "type": "textInput",
-                "required": true
-            }
-        ]
-    },
-    {
+        "question": "Hány éves vagy?",
+        "type": "numberInput",
+        "required": true
+      },
+      {
         "id": 2,
-        "userid": 0,
-        "isActive": true,
-        "isPublic": false,
-        "title": "V-Buck quiz",
-        "questions": [
-            {
-                "id": 0,
-                "question": "Mennyi V-Buckod van?",
-                "type": "multipleChoice",
-                "required": true,
-                "answers": [
-                  "Sok", "Kevés", "Megszámlálhatatlan"
-                ]
-            },
-            {
-                "id": 1,
-                "question": "Honnan szerezted a V-Buckjaid?",
-                "type": "multipleChoice",
-                "required": true,
-                "answers": [
-                  "Loptam", "Találtam", "Én tenyésztettem"
-                ]
-            }
+        "question": "Hogy hívnak?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják anyukádat?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják apukádat?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják az öcsédet?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a második öcsédet?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a harmadik öcsédet?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a negyedik öcsédet?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a bátyádat?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a húgodat?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a nővéred?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a nagymamádat?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hogy hívják a nagyapád?",
+        "type": "textInput",
+        "required": false
+      },
+      {
+        "id": 2,
+        "question": "Hol laksz?",
+        "type": "textInput",
+        "required": true
+      },
+      {
+        "id": 2,
+        "question": "Mikor nem vagy otthon?",
+        "type": "textInput",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "userid": 0,
+    "isActive": true,
+    "isPublic": false,
+    "title": "Nem publikus kérdőív",
+    "questions": [
+      {
+        "id": 0,
+        "question": "Létezel?",
+        "type": "multipleChoice",
+        "required": true,
+        "answers": [
+          "Igen",
+          "Nem",
+          "Talán"
         ]
-    },
-    {
+      },
+      {
+        "id": 1,
+        "question": "Hányszor vagy?",
+        "type": "numberInput",
+        "required": true
+      },
+      {
         "id": 3,
-        "userid": 1,
-        "isActive": false,
-        "isPublic": false,
-        "title": "Kikapcsolt kérdőív",
-        "questions": [
-            {
-                "id": 0,
-                "question": "Ezt elérted?",
-                "type": "multipleChoice",
-                "required": true,
-                "answers": [
-                  "Igen", "Nem", "Talán"
-                ]
-            }
+        "question": "Mi az élet értelme?",
+        "type": "textInput",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "userid": 0,
+    "isActive": true,
+    "isPublic": false,
+    "title": "V-Buck quiz",
+    "questions": [
+      {
+        "id": 0,
+        "question": "Mennyi V-Buckod van?",
+        "type": "multipleChoice",
+        "required": true,
+        "answers": [
+          "Sok",
+          "Kevés",
+          "Megszámlálhatatlan"
         ]
-    }
+      },
+      {
+        "id": 1,
+        "question": "Honnan szerezted a V-Buckjaid?",
+        "type": "multipleChoice",
+        "required": true,
+        "answers": [
+          "Loptam",
+          "Találtam",
+          "Én tenyésztettem"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "userid": 1,
+    "isActive": false,
+    "isPublic": false,
+    "title": "Kikapcsolt kérdőív",
+    "questions": [
+      {
+        "id": 0,
+        "question": "Ezt elérted?",
+        "type": "multipleChoice",
+        "required": true,
+        "answers": [
+          "Igen",
+          "Nem",
+          "Talán"
+        ]
+      }
+    ]
+  }
 ]

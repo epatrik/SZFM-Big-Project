@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Új kérdőív létrehozása</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="createscript.js"></script>
+</head>
+<body>
+    <h1>Új kérdőív létrehozása</h1>
+    <nav>
+        <a href="/">Kezdőlap</a>
+        <a href="/account">Fiók</a>
+    </nav>
+    <form id="questionnaireForm" action="/createQuestionnaire" method="post">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="isPublic">Is Public:</label>
+            <input type="checkbox" id="isPublic" name="isPublic">
+        </div>
+        <div>
+            
+        </div>
+        <div id="questions">
+            <div class="question">
+                <label>Question 1:</label>
+                <input type="text" name="question[]" required>
+                <select name="type[]" required onchange="showOptions(this)">
+                    <option value="textInput">Text Input</option>
+                    <option value="numberInput">Number Input</option>
+                    <option value="multipleChoice">Multiple Choice</option>
+                </select>
+                <label for="required">Required:</label>
+                <input type="checkbox" name="required[]" value="true">
+                <button type="button" onclick="removeQuestion(this)">Remove Question</button>
+                <div class="options" style="display: none;">
+                    <div class="option-item">
+                        <input type="text" name="options[]" placeholder="Option 1">
+                    </div>
+                    <button type="button" onclick="addOption(this)">Add Option</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="addQuestion()">Add Question</button>
+        <button type="submit">Save Questionnaire</button>
+    </form>
+</body>
+</html>
