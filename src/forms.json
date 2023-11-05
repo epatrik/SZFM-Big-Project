@@ -191,5 +191,20 @@
         ]
       }
     ]
+  },
+  {
+    "id": 4,
+    "userId": 0,
+    "isActive": true,
+    "isPublic": true,
+    "title": "Név",
+    "questions": [
+      {
+        "id": 0,
+        "question": "Név",
+        "type": "textInput",
+        "required": true
+      }
+    ]
   }
 ]
