@@ -3,16 +3,21 @@
 <head>
     <title>Új kérdőív létrehozása</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dosis&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <script src="createscript.js"></script>
 </head>
 <body>
-    <h1>Új kérdőív létrehozása</h1>
-    <nav>
-        <a href="/">Kezdőlap</a>
-        <a href="/login">Bejelentkezés</a>
-    </nav>
+    <h1 class="create-title">Új kérdőív létrehozása</h1>
+    <div class="list-header">
+        <nav class="list">
+            <a href="/">Kezdőlap</a>
+            <a href="/login">Bejelentkezés</a>
+        </nav>
+    </div>
     <form id="questionnaireForm" action="/createQuestionnaire" method="post">
-        <div>
+        <div class="que-title">
             <label for="title">Kérdőív címe:</label>
             <input type="text" id="title" name="title" required>
             <label for="isPublic">Nyilvános:</label>
@@ -41,8 +46,10 @@
                 </div>
             </div>
         </div>
-        <button type="button" onclick="addQuestion()">Új kérdés</button>
-        <button type="submit">Kérdőív elmentése</button>
+        <div class="footer">
+            <button type="button" onclick="addQuestion()" class="btn">Új kérdés</button>
+            <button type="submit" class="btn">Kérdőív elmentése</button>
+        </div>
     </form>
 </body>
 </html>
