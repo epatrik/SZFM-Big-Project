@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "userid": 0,
+    "userId": 0,
     "isActive": true,
     "isPublic": true,
     "title": "Publikus kérdőív",
@@ -111,7 +111,7 @@
   },
   {
     "id": 1,
-    "userid": 0,
+    "userId": 0,
     "isActive": true,
     "isPublic": false,
     "title": "Nem publikus kérdőív",
@@ -143,7 +143,7 @@
   },
   {
     "id": 2,
-    "userid": 0,
+    "userId": 0,
     "isActive": true,
     "isPublic": false,
     "title": "V-Buck quiz",
@@ -174,7 +174,7 @@
   },
   {
     "id": 3,
-    "userid": 1,
+    "userId": 1,
     "isActive": false,
     "isPublic": false,
     "title": "Kikapcsolt kérdőív",

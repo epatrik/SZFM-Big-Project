@@ -26,7 +26,7 @@ app.get('/form/:index', (req, res) => {
 
 app.post('/submit', (req, res) => {
     const answersFilePath = path.join(__dirname, 'src/answers.json');
-    const formId = req.body.formId;
+    const formId = parseInt(req.body.formId); // Parse the formId to an integer
     const userId = 0; // Placeholder for user ID
 
     let formattedAnswers = {
@@ -39,10 +39,17 @@ app.post('/submit', (req, res) => {
         const existingData = fs.readFileSync(answersFilePath);
         const parsedData = JSON.parse(existingData);
 
-        // Check if the same user has already submitted for this form
+        // Get the questionnaire details from the forms.json file
+        const formsDataPath = path.join(__dirname, 'src/forms.json');
+        const formData = JSON.parse(fs.readFileSync(formsDataPath));
+
+        const form = formData.find(form => form.id === formId);
+
+        // Check if the form is public or the user has already submitted for this form
+        const isPublic = form ? form.isPublic : false;
         const userSubmitted = parsedData.some(answer => answer.formId === formId && answer.userId === userId);
 
-        if (userSubmitted) {
+        if (!isPublic && userSubmitted) {
             res.status(403).send('You have already submitted answers for this form.');
             return;
         }
