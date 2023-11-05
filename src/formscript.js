@@ -83,7 +83,7 @@ fetch('/forms.json')
 
         const submitButton = document.createElement('button');
         submitButton.type = 'submit';
-        submitButton.textContent = 'Submit';
+        submitButton.textContent = 'Beküldés';
 
         form.appendChild(submitButton);
         formContainer.appendChild(form);

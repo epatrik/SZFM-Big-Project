@@ -20,6 +20,10 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'login.html'));
 });
 
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'register.html'));
+});
+
 app.get('/form/:index', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'form.html'));
 });
