@@ -18,7 +18,7 @@ function addQuestion() {
         <button type="button" onclick="removeQuestion(this)">Kérdés törlése</button>
         <div class="options" style="display: none;">
             <div class="option-item">
-                <input type="text" name="options[]" placeholder="1. opció">
+                <input type="text" name="options[] required" placeholder="1. opció">
             </div>
             <button type="button" onclick="addOption(this)">Új opció</button>
         </div>
@@ -46,6 +46,7 @@ function addOption(element) {
         input.type = 'text';
         input.name = 'options[]';
         input.placeholder = `${nextOptionNumber}. opció`;
+        input.required = true; // Add 'required' attribute to the option input
 
         const removeOptionBtn = document.createElement('button');
         removeOptionBtn.type = 'button';
