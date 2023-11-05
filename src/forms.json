@@ -30,79 +30,79 @@
         "required": false
       },
       {
-        "id": 2,
+        "id": 3,
         "question": "Hogy hívják anyukádat?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 4,
         "question": "Hogy hívják apukádat?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 5,
         "question": "Hogy hívják az öcsédet?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 6,
         "question": "Hogy hívják a második öcsédet?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 7,
         "question": "Hogy hívják a harmadik öcsédet?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 8,
         "question": "Hogy hívják a negyedik öcsédet?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 9,
         "question": "Hogy hívják a bátyádat?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 10,
         "question": "Hogy hívják a húgodat?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 11,
         "question": "Hogy hívják a nővéred?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 12,
         "question": "Hogy hívják a nagymamádat?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 13,
         "question": "Hogy hívják a nagyapád?",
         "type": "textInput",
         "required": false
       },
       {
-        "id": 2,
+        "id": 14,
         "question": "Hol laksz?",
         "type": "textInput",
         "required": true
       },
       {
-        "id": 2,
+        "id": 15,
         "question": "Mikor nem vagy otthon?",
         "type": "textInput",
         "required": true
@@ -134,7 +134,7 @@
         "required": true
       },
       {
-        "id": 3,
+        "id": 2,
         "question": "Mi az élet értelme?",
         "type": "textInput",
         "required": true
