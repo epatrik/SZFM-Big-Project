@@ -16,8 +16,8 @@ app.get('/list', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'list.html'));
 });
 
-app.get('/account', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'account.html'));
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'login.html'));
 });
 
 app.get('/form/:index', (req, res) => {
