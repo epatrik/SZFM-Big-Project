@@ -1,10 +1,18 @@
+body {
+  background-color: rgb(58, 41, 122);
+  font-family: 'Dosis', sans-serif;
+}
+
 /* Style for the main results div */
 #resultsDiv {
+  background-color: rgb(178, 171, 212);
   margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+
 
 /* Style for the breakdown table */
 .breakdown-table {

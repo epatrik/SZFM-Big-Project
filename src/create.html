@@ -9,14 +9,14 @@
     <script src="createscript.js"></script>
 </head>
 <body>
-    <h1 class="create-title">Új kérdőív létrehozása</h1>
-    <div class="list-header">
+    <h1 class="create-title fadein">Új kérdőív létrehozása</h1>
+    <div class="list-header" id="header-movedown">
         <nav class="list">
             <a href="/">Kezdőlap</a>
             <a href="/login">Bejelentkezés</a>
         </nav>
     </div>
-    <form id="questionnaireForm" action="/createQuestionnaire" method="post">
+    <form class="fadein" id="questionnaireForm" action="/createQuestionnaire" method="post">
         <div class="que-title">
             <label for="title">Kérdőív címe:</label>
             <input type="text" id="title" name="title" required>
