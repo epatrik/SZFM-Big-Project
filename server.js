@@ -26,44 +26,34 @@ app.get('/form/:index', (req, res) => {
 
 app.post('/submit', (req, res) => {
     const answersFilePath = path.join(__dirname, 'src/answers.json');
-    const formId = req.body.formId;
+    const formsFilePath = path.join(__dirname, 'src/forms.json');
+    const formId = parseInt(req.body.formId);
     const userId = 0; // Placeholder for user ID
 
-    let formattedAnswers = {
+    const existingForms = JSON.parse(fs.readFileSync(formsFilePath));
+    const specificForm = existingForms.find(form => form.id === formId);
+
+    if (!specificForm) {
+        // Handle case where the form doesn't exist
+        return res.status(404).send('Form not found.');
+    }
+
+    const formattedAnswers = {
         formId,
         userId,
-        answers: []
+        answers: specificForm.questions.map(question => {
+            const key = `question_${question.id}`;
+            const value = req.body[key];
+            return question.type === 'numberInput' ? parseInt(value, 10) : value;
+        })
     };
 
     if (fs.existsSync(answersFilePath)) {
         const existingData = fs.readFileSync(answersFilePath);
         const parsedData = JSON.parse(existingData);
-
-        // Check if the same user has already submitted for this form
-        const userSubmitted = parsedData.some(answer => answer.formId === formId && answer.userId === userId);
-
-        if (userSubmitted) {
-            res.status(403).send('You have already submitted answers for this form.');
-            return;
-        }
-
-        formattedAnswers.answers = Object.keys(req.body)
-            .filter(key => key.startsWith('question_'))
-            .map(key => {
-                const value = req.body[key];
-                return !isNaN(value) ? parseInt(value, 10) : value;
-            });
-
         parsedData.push(formattedAnswers);
         fs.writeFileSync(answersFilePath, JSON.stringify(parsedData, null, 2));
     } else {
-        formattedAnswers.answers = Object.keys(req.body)
-            .filter(key => key.startsWith('question_'))
-            .map(key => {
-                const value = req.body[key];
-                return !isNaN(value) ? parseInt(value, 10) : value;
-            });
-
         const newAnswers = [formattedAnswers];
         fs.writeFileSync(answersFilePath, JSON.stringify(newAnswers, null, 2));
     }
