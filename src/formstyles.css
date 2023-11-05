@@ -1,22 +1,25 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-family: Dosis, sans-serif;
+    background-color: rgb(58, 41, 122);
     margin: 0;
     padding: 0;
 }
 
-h1 {
+h1#questionnaireTitle {
     text-align: center;
     margin-bottom: 20px;
+    color: rgb(219, 212, 250);
+    text-shadow: 0vh 5px 10px rgb(17, 5, 44);
 }
 
 #questionnaireForm {
     width: 60%;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: rgb(200, 193, 232);
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 5px;
+    margin-bottom: 50px;
 }
 
 form {
@@ -36,24 +39,41 @@ div {
 input,
 select {
     width: 100%;
+    background-color: rgb(178, 171, 212);
+    border: solid 1px rgb(109, 102, 141);
     padding: 8px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 5px;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: rgb(101, 76, 214);
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: rgb(77, 56, 172);
 }
+
+.fadein {
+    animation: fadeIn 0.2s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {  
+    from {  
+        opacity:0;  
+    }  
+ 
+    to {  
+        opacity:1;  
+    }  
+ }
