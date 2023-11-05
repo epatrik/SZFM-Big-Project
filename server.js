@@ -24,6 +24,10 @@ app.get('/form/:index', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'form.html'));
 });
 
+app.get('/results/:index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'results.html'));
+});
+
 app.post('/submit', (req, res) => {
     const answersFilePath = path.join(__dirname, 'src/answers.json');
     const formsFilePath = path.join(__dirname, 'src/forms.json');
