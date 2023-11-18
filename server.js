@@ -2,11 +2,33 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require("bcrypt");
+const mysql = require("mysql2");
+const dotenv = require('dotenv');
+
+dotenv.config({path: './.env'})
+
+const db = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	password: "sqlpass",
+	database: "szfmdb"
+});
+
+db.connect(function(error){
+    if (error) {
+        throw(error)
+    }
+    else {
+        console.log("Database connected successfully!")
+    }
+});
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'index.html'));
@@ -123,6 +145,29 @@ app.post('/createQuestionnaire', (req, res) => {
 
     res.redirect('/');
 });
+
+app.post("/createUser", async (req,res) => {
+    const username = req.body.username;
+    const hashedPassword = await bcrypt.hash(req.body.password,10);
+    const email = req.body.email;
+
+    const sqlSearch = "SELECT * FROM accounts WHERE username = ?"
+    const sqlInsert = "INSERT INTO accounts VALUES (0,?,?,?)"
+
+    db.query(sqlSearch,[username], async (error, result, fields)=>{
+        if (result.length != 0){
+            console.log("Username already exists!")
+            res.sendStatus(409)
+        }
+        else {
+            db.query (sqlInsert,[username, hashedPassword, email], (error, result, fields)=> {
+                console.log ("--------> Created new User")
+                console.log(result.insertId)
+                res.sendStatus(201)
+            })
+        }
+    })
+})
 
 const server = http.createServer(app);
 
