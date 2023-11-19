@@ -85,15 +85,15 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
             }
         });
 
-        loadFormsFromDatabase();
+        loadQuestionnairesFromDatabase();
     }
 });
 
-function loadFormsFromDatabase() {
-    const formsData = [];
+function loadQuestionnairesFromDatabase() {
+    const questionnairesData = [];
 
-    const sqlSelectForms = 'SELECT * FROM questionnaires';
-    db.all(sqlSelectForms, [], (err, rows) => {
+    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires';
+    db.all(sqlSelectQuestionnaires, [], (err, rows) => {
         if (err) {
             console.error(err.message);
             return;
@@ -109,11 +109,11 @@ function loadFormsFromDatabase() {
                 questions: [],
             };
 
-            formsData.push(newQuestionnaire);
+            questionnairesData.push(newQuestionnaire);
         });
 
-        // Update the global formsData variable
-        global.formsData = formsData;
+        // Update the global questionnairesData variable
+        global.questionnairesData = questionnairesData;
     });
 }
 
@@ -129,6 +129,26 @@ app.get('/', (req, res) => {
 
 app.get('/list', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'list.html'));
+});
+
+app.get('/questionnaires', (req, res) => {
+    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE isActive = 1 AND isPublic = 1';
+    db.all(sqlSelectQuestionnaires, [], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        const questionnairesData = rows.map(row => ({
+            id: row.id,
+            userId: row.userId,
+            isActive: row.isActive === 1,
+            isPublic: row.isPublic === 1,
+            title: row.title,
+        }));
+
+        res.json(questionnairesData);
+    });
 });
 
 app.get('/login', (req, res) => {
@@ -149,12 +169,12 @@ app.get('/results/:index', (req, res) => {
 
 app.post('/submit', (req, res) => {
     const answersFilePath = path.join(__dirname, 'src/answers.json');
-    const formsFilePath = path.join(__dirname, 'src/forms.json');
+    const questionnairesFilePath = path.join(__dirname, 'src/forms.json');
     const formId = parseInt(req.body.formId);
     const userId = 0; // Placeholder for user ID
 
-    const existingForms = JSON.parse(fs.readFileSync(formsFilePath));
-    const specificForm = existingForms.find(form => form.id === formId);
+    const existingQuestionnaires = JSON.parse(fs.readFileSync(questionnairesFilePath));
+    const specificForm = existingQuestionnaires.find(form => form.id === formId);
 
     if (!specificForm) {
         // Handle case where the form doesn't exist
