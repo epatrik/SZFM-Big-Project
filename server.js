@@ -13,7 +13,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
     if (err) {
         console.error('Error opening database', err.message);
     } else {
-        console.log('Connected to the database');
+        //console.log('Connected to the database');
 
         // Create 'accounts' table if it doesn't exist
         db.run(`
@@ -27,7 +27,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
             if (createErr) {
                 console.error('Error creating table', createErr.message);
             } else {
-                console.log('Table "accounts" created or already exists');
+                //console.log('Table "accounts" created or already exists');
             }
         });
 
@@ -44,7 +44,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
             if (createErr) {
                 console.error('Error creating table', createErr.message);
             } else {
-                console.log('Table "questionnaires" created or already exists');
+                //console.log('Table "questionnaires" created or already exists');
             }
         });
 
@@ -63,7 +63,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
             if (createErr) {
                 console.error('Error creating table', createErr.message);
             } else {
-                console.log('Table "questions" created or already exists');
+                //console.log('Table "questions" created or already exists');
             }
         });
 
@@ -81,7 +81,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
             if (createErr) {
                 console.error('Error creating table', createErr.message);
             } else {
-                console.log('Table "options" created or already exists');
+                //console.log('Table "options" created or already exists');
             }
         });
     }
@@ -183,14 +183,14 @@ app.get('/questionnaireData/:id', async (req, res) => {
 
                 if (optionRows.length > 0) {
                     question.options = optionRows.map(optionRow => optionRow.value);
-                    console.log('Question Options:', question.options);
+                    //console.log('Question Options:', question.options);
                 }
             }
 
             questionnaireData.questions.push(question);
         }
 
-        console.log('Questionnaire Data:', questionnaireData); // Log questionnaire data
+        //console.log('Questionnaire Data:', questionnaireData); // Log questionnaire data
 
         res.json(questionnaireData);
     });
