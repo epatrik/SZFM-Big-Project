@@ -360,7 +360,7 @@ app.post("/loginUser", (req, res)=> {
 
     if (username == "" || password == ""){
         console.log("Fill in all the fields")
-        return res.sendStatus(409)
+        return res.json("Fill in all the fields")
     }
     else {
         db.get (sqlSearch, [username], async (error, row) => {
@@ -371,37 +371,21 @@ app.post("/loginUser", (req, res)=> {
 
             if (!row) {
                 console.log("--------> Username or password incorrect!")
-                return res.sendStatus(409)
+                return res.json("Username or password incorrect!")
             }
             else {
                 const hashedPassword = row.password
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---------> Login Successful")
-                    return res.sendStatus(200)
+                    return res.json({id: row.id,username: row.username,email: row.email})
                 } 
                 else {
                     console.log("---------> Username or password incorrect!")
-                    return res.sendStatus(409) 
+                    return res.json("Username or password incorrect!") 
                 }
             }
         })
     }
-
-    /*if (result.length == 0) {
-        console.log("--------> Username or password incorrect!")
-        res.sendStatus(404)
-    }
-    else {
-        const hashedPassword = result[0].password
-        //get the hashedPassword from result
-        if (await bcrypt.compare(password, hashedPassword)) {
-            console.log("---------> Login Successful")
-        } 
-        else {
-            console.log("---------> Username or password incorrect!")
-            res.send("Password incorrect!")
-        }
-    }*/
 })
 
 const server = http.createServer(app);

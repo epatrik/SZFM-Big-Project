@@ -6,17 +6,21 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-        <script src="script.js"></script>
     </head>
     <body>
+            <div>
+                <button class="logout hide">Kijelentkezés</button>
+            </div>
             <div id="title-container" class="fadein">
                 <h1>Questionnaire</h1>
             </div>
             <nav id="kezdolap" class="fadein">
                 <a href="/list">Kérdőív lista</a>
-                <a href="/login">Bejelentkezés</a>
-                <a href="/create">Kérdőív létrehozása</a>
-                <a>Kérdőív adatok</a>
+                <a href="/login" id="login">Bejelentkezés</a>
+                <a href="/create" id="create">Kérdőív létrehozása</a>
+                <a id="data">Kérdőív adatok</a>
             </nav>
+            
+            <script src="script.js"></script>
     </body>
 </html>
