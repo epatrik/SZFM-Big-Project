@@ -14,7 +14,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
         console.error('Error opening database', err.message);
     } else {
         console.log('Connected to the database');
-        
+
         // Create 'accounts' table if it doesn't exist
         db.run(`
             CREATE TABLE IF NOT EXISTS accounts (
@@ -30,8 +30,92 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
                 console.log('Table "accounts" created or already exists');
             }
         });
+
+        // Create 'questionnaires' table if it doesn't exist
+        db.run(`
+            CREATE TABLE IF NOT EXISTS questionnaires (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                userId INTEGER,
+                isActive BOOLEAN,
+                isPublic BOOLEAN,
+                title TEXT
+            )
+        `, (createErr) => {
+            if (createErr) {
+                console.error('Error creating table', createErr.message);
+            } else {
+                console.log('Table "questionnaires" created or already exists');
+            }
+        });
+
+        // Create 'questions' table if it doesn't exist
+        db.run(`
+            CREATE TABLE IF NOT EXISTS questions (
+                questionnaireId INTEGER,
+                id INTEGER,
+                question TEXT,
+                type TEXT,
+                required BOOLEAN,
+                PRIMARY KEY (id, questionnaireId),
+                FOREIGN KEY (questionnaireId) REFERENCES questionnaires(id)
+            )
+        `, (createErr) => {
+            if (createErr) {
+                console.error('Error creating table', createErr.message);
+            } else {
+                console.log('Table "questions" created or already exists');
+            }
+        });
+
+        db.run(`
+            CREATE TABLE IF NOT EXISTS options (
+                questionnaireId INTEGER,
+                questionId INTEGER,
+                id INTEGER,
+                value TEXT,
+                PRIMARY KEY (questionnaireId, questionId, id),
+                FOREIGN KEY (questionnaireId) REFERENCES questionnaires(id),
+                FOREIGN KEY (questionId) REFERENCES questions(id)
+            )
+        `, (createErr) => {
+            if (createErr) {
+                console.error('Error creating table', createErr.message);
+            } else {
+                console.log('Table "options" created or already exists');
+            }
+        });
+
+        loadFormsFromDatabase();
     }
 });
+
+function loadFormsFromDatabase() {
+    const formsData = [];
+
+    const sqlSelectForms = 'SELECT * FROM questionnaires';
+    db.all(sqlSelectForms, [], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return;
+        }
+
+        rows.forEach((row) => {
+            const newQuestionnaire = {
+                id: row.id,
+                userId: row.userId,
+                isActive: row.isActive === 1, // Convert SQLite BOOLEAN to JavaScript boolean
+                isPublic: row.isPublic === 1, // Convert SQLite BOOLEAN to JavaScript boolean
+                title: row.title,
+                questions: [],
+            };
+
+            formsData.push(newQuestionnaire);
+        });
+
+        // Update the global formsData variable
+        global.formsData = formsData;
+    });
+}
 
 const app = express();
 
@@ -105,20 +189,9 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/createQuestionnaire', (req, res) => {
-    const formsFilePath = path.join(__dirname, 'src/forms.json');
-
-    let formsData;
-    if (fs.existsSync(formsFilePath)) {
-        const existingData = fs.readFileSync(formsFilePath);
-        formsData = JSON.parse(existingData);
-    } else {
-        formsData = [];
-    }
-
     const isPublic = req.body.isPublic === 'on';
 
     const newQuestionnaire = {
-        id: formsData.length > 0 ? formsData[formsData.length - 1].id + 1 : 1,
         userId: 0, // You can update this with the user ID when implemented
         isActive: true,
         isPublic,
@@ -126,33 +199,72 @@ app.post('/createQuestionnaire', (req, res) => {
         questions: [],
     };
 
-    const questions = req.body.question || [];
-    const types = req.body.type || [];
-    const required = req.body.required || [];
-    const options = req.body.options || [];
-
-    const booleanRequired = required.map(value => value === 'true');
-
-    questions.forEach((question, index) => {
-        const newQuestion = {
-            id: index,
-            question,
-            type: types[index],
-            required: booleanRequired[index] === true,
-        };
-
-        if (types[index] === 'multipleChoice') {
-            const numOptions = options.length / questions.length;
-            newQuestion.answers = options.splice(0, numOptions);
+    // Insert the new questionnaire into the database
+    const sqlInsertQuestionnaire = 'INSERT INTO questionnaires (userId, isActive, isPublic, title) VALUES (?,?,?,?)';
+    db.run(sqlInsertQuestionnaire, [
+        newQuestionnaire.userId,
+        newQuestionnaire.isActive,
+        newQuestionnaire.isPublic,
+        newQuestionnaire.title
+    ], function (error) {
+        if (error) {
+            console.error(error);
+            return res.sendStatus(500); // Internal Server Error
         }
 
-        newQuestionnaire.questions.push(newQuestion);
+        newQuestionnaire.id = this.lastID; // Update the ID after insertion
+
+        const questions = req.body.question || [];
+        const types = req.body.type || [];
+        const required = req.body.required || [];
+        const options = req.body.options || [];
+
+        const booleanRequired = required.map(value => value === 'true');
+
+        questions.forEach((question, index) => {
+            const newQuestion = {
+                id: index,
+                questionnaireId: newQuestionnaire.id,
+                question,
+                type: types[index],
+                required: booleanRequired[index] === true,
+            };
+
+            // Insert each question into the database
+            const sqlInsertQuestion = 'INSERT INTO questions (id, questionnaireId, question, type, required) VALUES (?,?,?,?,?)';
+            db.run(sqlInsertQuestion, [
+                newQuestion.id,
+                newQuestion.questionnaireId,
+                newQuestion.question,
+                newQuestion.type,
+                newQuestion.required
+            ], function (error) {
+                if (error) {
+                    console.error(error);
+                    return res.sendStatus(500); // Internal Server Error
+                }
+
+                // Insert options for multiple-choice questions
+                if (newQuestion.type === 'multipleChoice') {
+                    const numOptions = options.length / questions.length;
+
+                    for (let i = 0; i < numOptions; i++) {
+                        const optionValue = options[index * numOptions + i];
+                        db.run('INSERT INTO options (questionnaireId, questionId, id, value) VALUES (?, ?, ?, ?)', [newQuestion.questionnaireId, index, i, optionValue], (optionError) => {
+                            if (optionError) {
+                                console.error(optionError);
+                            }
+                        });
+                    }
+                }
+            });
+
+            newQuestion.id = index + 1; // Update the question ID after insertion
+            newQuestionnaire.questions.push(newQuestion);
+        });
+
+        res.redirect('/');
     });
-
-    formsData.push(newQuestionnaire);
-    fs.writeFileSync(formsFilePath, JSON.stringify(formsData, null, 2));
-
-    res.redirect('/');
 });
 
 app.post('/createUser', async (req, res) => {

@@ -46,7 +46,6 @@ function addOption(element) {
         input.type = 'text';
         input.name = 'options[]';
         input.placeholder = `${nextOptionNumber}. opció`;
-        input.required = true; // Add 'required' attribute to the option input
 
         const removeOptionBtn = document.createElement('button');
         removeOptionBtn.type = 'button';
@@ -82,10 +81,17 @@ function renumberOptions(optionsDiv) {
 
 function showOptions(selectElement) {
     const optionsDiv = selectElement.parentElement.querySelector('.options');
+    const requiredCheckbox = selectElement.parentElement.querySelector('[name="required[]"]');
+    
     if (selectElement.value === 'multipleChoice') {
         optionsDiv.style.display = 'block';
+        // Update the 'required' attribute based on the selected type
+        requiredCheckbox.removeAttribute('disabled');
     } else {
         optionsDiv.style.display = 'none';
+        // If it's not multipleChoice, disable the 'required' checkbox
+        requiredCheckbox.checked = false;
+        requiredCheckbox.setAttribute('disabled', 'disabled');
     }
 }
 
