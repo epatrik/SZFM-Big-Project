@@ -14,16 +14,17 @@ submitBtn.addEventListener('click', async () => {
             })
         })
 
-        if (response.ok) {
-            console.log('User logged in successfully!');
-            // You might want to redirect the user or perform other actions.
+        const loginMessage = await response.json();
+        if (loginMessage.id) {
+            console.log(loginMessage.username + ' logged in successfully!');
+            sessionStorage.id = loginMessage.id;
+            sessionStorage.username = loginMessage.username;
+            location.href = '/';
         } else {
-            console.error('Failed to log in:', response.statusText);
-            // Handle errors, maybe display an error message to the user.
+            console.log(loginMessage);
         }
     } catch (error) {
         console.error('An error occurred during the fetch:', error);
         // Handle unexpected errors, maybe display a generic error message.
     }
-    
 })
