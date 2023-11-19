@@ -299,6 +299,58 @@ app.post('/createUser', async (req, res) => {
     });
 });
 
+app.post("/loginUser", (req, res)=> {
+    const username = req.body.username
+    const password = req.body.password
+
+    const sqlSearch = "Select * from accounts where username = ?"
+
+    if (username == "" || password == ""){
+        console.log("Fill in all the fields")
+        return res.sendStatus(409)
+    }
+    else {
+        db.get (sqlSearch, [username], async (error, row) => {
+            if (error) {
+                console.error(error);
+                return res.sendStatus(500); // Internal Server Error
+            }
+
+            if (!row) {
+                console.log("--------> Username or password incorrect!")
+                return res.sendStatus(409)
+            }
+            else {
+                const hashedPassword = row.password
+                if (await bcrypt.compare(password, hashedPassword)) {
+                    console.log("---------> Login Successful")
+                    return res.sendStatus(200)
+                } 
+                else {
+                    console.log("---------> Username or password incorrect!")
+                    return res.sendStatus(409) 
+                }
+            }
+        })
+    }
+
+    /*if (result.length == 0) {
+        console.log("--------> Username or password incorrect!")
+        res.sendStatus(404)
+    }
+    else {
+        const hashedPassword = result[0].password
+        //get the hashedPassword from result
+        if (await bcrypt.compare(password, hashedPassword)) {
+            console.log("---------> Login Successful")
+        } 
+        else {
+            console.log("---------> Username or password incorrect!")
+            res.send("Password incorrect!")
+        }
+    }*/
+})
+
 const server = http.createServer(app);
 
 server.listen(80, () => {
