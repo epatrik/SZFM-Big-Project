@@ -1,19 +1,19 @@
 fetch('/questionnaires')
     .then(response => response.json())
     .then(data => {
-        const formList = document.getElementById('formList');
+        const questionnaireList = document.getElementById('questionnaireList');
 
-        const activeQuestionnaires = data.filter(form => form.isActive);
+        const activeQuestionnaires = data.filter(questionnaire => questionnaire.isActive);
 
-        activeQuestionnaires.forEach(form => {
+        activeQuestionnaires.forEach(questionnaire => {
             const listItem = document.createElement('li');
             const link = document.createElement('a');
 
-            link.href = `/form/${form.id}`;
-            link.textContent = form.title;
+            link.href = `/questionnaire/${questionnaire.id}`;
+            link.textContent = questionnaire.title;
 
             listItem.appendChild(link);
-            formList.appendChild(listItem);
+            questionnaireList.appendChild(listItem);
         });
     })
     .catch(error => console.error('Error fetching questionnaires:', error));

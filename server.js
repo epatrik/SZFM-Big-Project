@@ -84,38 +84,8 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
                 console.log('Table "options" created or already exists');
             }
         });
-
-        loadQuestionnairesFromDatabase();
     }
 });
-
-function loadQuestionnairesFromDatabase() {
-    const questionnairesData = [];
-
-    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires';
-    db.all(sqlSelectQuestionnaires, [], (err, rows) => {
-        if (err) {
-            console.error(err.message);
-            return;
-        }
-
-        rows.forEach((row) => {
-            const newQuestionnaire = {
-                id: row.id,
-                userId: row.userId,
-                isActive: row.isActive === 1, // Convert SQLite BOOLEAN to JavaScript boolean
-                isPublic: row.isPublic === 1, // Convert SQLite BOOLEAN to JavaScript boolean
-                title: row.title,
-                questions: [],
-            };
-
-            questionnairesData.push(newQuestionnaire);
-        });
-
-        // Update the global questionnairesData variable
-        global.questionnairesData = questionnairesData;
-    });
-}
 
 const app = express();
 
@@ -159,8 +129,71 @@ app.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'register.html'));
 });
 
-app.get('/form/:index', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'form.html'));
+app.get('/questionnaire/:index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'questionnaire.html'));
+});
+
+app.get('/questionnaireData/:id', async (req, res) => {
+    const questionnaireId = req.params.id;
+
+    const sqlSelectQuestionnaire = 'SELECT * FROM questionnaires WHERE id = ?';
+    db.get(sqlSelectQuestionnaire, [questionnaireId], async (err, row) => {
+        if (err) {
+            console.error('Error fetching questionnaire:', err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        if (!row) {
+            return res.status(404).send('Questionnaire not found');
+        }
+
+        const questionnaireData = {
+            id: row.id,
+            userId: row.userId,
+            isActive: row.isActive === 1,
+            isPublic: row.isPublic === 1,
+            title: row.title,
+            questions: [],
+        };
+
+        const sqlSelectQuestions = 'SELECT * FROM questions WHERE questionnaireId = ?';
+        const questionRows = await new Promise((resolve) => {
+            db.all(sqlSelectQuestions, [questionnaireId], (err, rows) => {
+                resolve(rows);
+            });
+        });
+
+        for (const questionRow of questionRows) {
+            const question = {
+                id: questionRow.id,
+                question: questionRow.question,
+                type: questionRow.type,
+                required: questionRow.required === 1,
+                options: [], // Add this line
+            };
+
+            // Fetch options for multiple-choice questions using JOIN
+            if (question.type === 'multipleChoice') {
+                const sqlSelectOptions = 'SELECT value FROM options WHERE questionnaireId = ? AND questionId = ?';
+                const optionRows = await new Promise((resolve) => {
+                    db.all(sqlSelectOptions, [questionnaireId, question.id], (err, rows) => {
+                        resolve(rows);
+                    });
+                });
+
+                if (optionRows.length > 0) {
+                    question.options = optionRows.map(optionRow => optionRow.value);
+                    console.log('Question Options:', question.options);
+                }
+            }
+
+            questionnaireData.questions.push(question);
+        }
+
+        console.log('Questionnaire Data:', questionnaireData); // Log questionnaire data
+
+        res.json(questionnaireData);
+    });
 });
 
 app.get('/results/:index', (req, res) => {
@@ -170,21 +203,21 @@ app.get('/results/:index', (req, res) => {
 app.post('/submit', (req, res) => {
     const answersFilePath = path.join(__dirname, 'src/answers.json');
     const questionnairesFilePath = path.join(__dirname, 'src/forms.json');
-    const formId = parseInt(req.body.formId);
+    const questionnaireId = parseInt(req.body.questionnaireId);
     const userId = 0; // Placeholder for user ID
 
     const existingQuestionnaires = JSON.parse(fs.readFileSync(questionnairesFilePath));
-    const specificForm = existingQuestionnaires.find(form => form.id === formId);
+    const specificQuestionnaire = existingQuestionnaires.find(questionnaire => questionnaire.id === questionnaireId);
 
-    if (!specificForm) {
-        // Handle case where the form doesn't exist
-        return res.status(404).send('Form not found.');
+    if (!specificQuestionnaire) {
+        // Handle case where the questionnaire doesn't exist
+        return res.status(404).send('Questionnaire not found.');
     }
 
     const formattedAnswers = {
-        formId,
+        questionnaireId,
         userId,
-        answers: specificForm.questions.map(question => {
+        answers: specificQuestionnaire.questions.map(question => {
             const key = `question_${question.id}`;
             const value = req.body[key];
             return question.type === 'numberInput' ? parseInt(value, 10) : value;

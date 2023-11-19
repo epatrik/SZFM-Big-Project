@@ -152,7 +152,7 @@ nav.list a {
     margin-bottom: 50px;
 }
 
-ul#formList {
+ul#questionnaireList {
     display: grid;
     row-gap: 5px;
     list-style: none;
@@ -160,7 +160,7 @@ ul#formList {
     padding: 0;
 }
 
-ul#formList li {
+ul#questionnaireList li {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -170,18 +170,18 @@ ul#formList li {
     transition: background-color 0.3s; /* Add transition for smoother effect */
 }
 
-ul#formList li a {
+ul#questionnaireList li a {
     display: block;
     text-decoration: none;
     color: #333;
     padding: 10px;
 }
 
-ul#formList li:hover {
+ul#questionnaireList li:hover {
     background-color: rgb(113, 71, 230); /* Change background on hover */
 }
 
-ul#formList li a:hover {
+ul#questionnaireList li a:hover {
     color: white;
 }
 
