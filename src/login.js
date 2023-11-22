@@ -28,3 +28,25 @@ submitBtn.addEventListener('click', async () => {
         // Handle unexpected errors, maybe display a generic error message.
     }
 })
+
+document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll("input");
+    const submitBtn = document.querySelector(".submit-btn");
+
+    inputs.forEach((input, index) => {
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+
+                // Jump to the next input
+                const nextIndex = index + 1;
+                if (nextIndex < inputs.length) {
+                    inputs[nextIndex].focus();
+                } else {
+                    // If at the last input (password), trigger the submit button
+                    submitBtn.click();
+                }
+            }
+        });
+    });
+});
