@@ -164,7 +164,7 @@ function calculateModus(numbers) {
   return parseInt(modus);
 }
 
-function createNumberStatsTable(numberStats) {
+function createNumberStatsTable(questions, numberStats) {
   const numberStatsTable = document.createElement('table');
   numberStatsTable.classList.add('number-stats-table');
 
@@ -180,21 +180,22 @@ function createNumberStatsTable(numberStats) {
   const modusHeader = headerRow.insertCell();
   modusHeader.textContent = 'Módusz';
 
-  Object.keys(numberStats).forEach(question => {
+  Object.keys(numberStats).forEach(questionId => {
     const row = numberStatsTable.insertRow();
     const cellQuestion = row.insertCell();
-    cellQuestion.textContent = question;
+    const question = questions.find(q => q.id.toString() === questionId.toString());
 
-    const stats = numberStats[question];
+    const questionText = question.question;
+    cellQuestion.textContent = questionText;
 
     const cellCount = row.insertCell();
-    cellCount.textContent = numberStats[question].count;
+    cellCount.textContent = numberStats[questionId].count;
     const cellAverage = row.insertCell();
-    cellAverage.textContent = numberStats[question].average.toFixed(2); // Limit average to 2 decimal places
+    cellAverage.textContent = numberStats[questionId].average.toFixed(2); // Limit average to 2 decimal places
     const cellMedian = row.insertCell();
-    cellMedian.textContent = numberStats[question].median.toFixed(2); // Limit median to 2 decimal places
+    cellMedian.textContent = numberStats[questionId].median; // Limit median to 2 decimal places
     const cellModus = row.insertCell();
-    cellModus.textContent = numberStats[question].modus.toFixed(2); // Limit modus to 2 decimal places
+    cellModus.textContent = numberStats[questionId].modus; // Limit modus to 2 decimal places
   });
 
   return numberStatsTable;
@@ -236,7 +237,7 @@ Promise.all([fetchQuestionnaireData, fetchAnswersData])
         }
 
         if (Object.keys(numberStats).length !== 0) {
-          const numberStatsTable = createNumberStatsTable(numberStats);
+          const numberStatsTable = createNumberStatsTable(questions, numberStats);
           resultsDiv.appendChild(numberStatsTable);
         }
 
