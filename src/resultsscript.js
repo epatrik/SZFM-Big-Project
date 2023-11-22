@@ -42,7 +42,7 @@ function createBreakdown(questions, filteredAnswers) {
   questions
     .filter(question => question.type === 'multipleChoice')
     .forEach(question => {
-      const options = question.answers;
+      const options = question.options;
       breakdown[question.question] = {};
 
       options.forEach(option => {
@@ -50,9 +50,11 @@ function createBreakdown(questions, filteredAnswers) {
       });
 
       filteredAnswers.forEach(answer => {
-        const index = question.id;
-        const chosenOption = answer.answers[index];
-        if (chosenOption !== '') {
+        const questionId = answer.questionId; // Change: Use questionId from the answer
+        const chosenOption = answer.answer;
+
+        // Change: Check for undefined and validate chosenOption as a non-empty string
+        if (questionId === question.id && chosenOption !== undefined && chosenOption !== '') {
           breakdown[question.question][chosenOption]++;
         }
       });
@@ -72,9 +74,22 @@ function createResultsTable(questions, filteredAnswers) {
     headerRow.appendChild(th);
   });
 
+  // Create an object to store answers based on their id
+  const groupedAnswers = {};
+
+  // Group answers based on id
   filteredAnswers.forEach(answer => {
+    const id = answer.id;
+    if (!groupedAnswers[id]) {
+      groupedAnswers[id] = [];
+    }
+    groupedAnswers[id].push(answer.answer);
+  });
+
+  // Create a row for each group of answers
+  Object.values(groupedAnswers).forEach(group => {
     const answerRow = resultsTable.insertRow();
-    answer.answers.forEach((ans, index) => {
+    group.forEach(ans => {
       const td = answerRow.insertCell();
       td.textContent = ans;
     });
@@ -86,26 +101,13 @@ function createResultsTable(questions, filteredAnswers) {
 function createNumberStatistics(questions, filteredAnswers) {
   const numberStats = {};
 
-  function calculateModus(numbers) {
-    const numCount = {};
-    let maxCount = 0;
-    let modus = null;
-
-    numbers.forEach(num => {
-      numCount[num] = (numCount[num] || 0) + 1;
-      if (numCount[num] > maxCount) {
-        maxCount = numCount[num];
-        modus = num;
-      }
-    });
-
-    return modus;
-  }
-
   questions
     .filter(question => question.type === 'numberInput')
     .forEach(question => {
-      const answers = filteredAnswers.map(answer => answer.answers[question.id]);
+      const questionId = question.id;
+      const answers = filteredAnswers
+        .filter(answer => answer.questionId === questionId)
+        .map(answer => answer.answer);
       const cleanAnswers = answers.filter(answer => answer !== '');
 
       const stats = {
@@ -115,7 +117,7 @@ function createNumberStatistics(questions, filteredAnswers) {
         modus: calculateModus(cleanAnswers),
       };
 
-      numberStats[question.question] = stats;
+      numberStats[questionId] = stats;
     });
 
   return numberStats;
@@ -135,6 +137,22 @@ function calculateMedian(numbers) {
   } else {
     return sortedNumbers[mid];
   }
+}
+
+function calculateModus(numbers) {
+  const numCount = {};
+  let maxCount = 0;
+  let modus = null;
+
+  numbers.forEach(num => {
+    numCount[num] = (numCount[num] || 0) + 1;
+    if (numCount[num] > maxCount) {
+      maxCount = numCount[num];
+      modus = num;
+    }
+  });
+
+  return parseInt(modus);
 }
 
 function createNumberStatsTable(numberStats) {
@@ -157,6 +175,9 @@ function createNumberStatsTable(numberStats) {
     const row = numberStatsTable.insertRow();
     const cellQuestion = row.insertCell();
     cellQuestion.textContent = question;
+
+    const stats = numberStats[question];
+
     const cellCount = row.insertCell();
     cellCount.textContent = numberStats[question].count;
     const cellAverage = row.insertCell();
@@ -175,8 +196,6 @@ let numberStats = {};
 
 Promise.all([fetchQuestionnaireData, fetchAnswersData])
   .then(([questionnairesData, answersData]) => {
-    console.log('Questionnaires Data:', questionnairesData);
-
     const questionnaire = questionnairesData.id === id ? questionnairesData : null;
 
     if (questionnaire) {

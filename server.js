@@ -216,8 +216,27 @@ app.get('/api/questionnaireData/:id', async (req, res) => {
     });
 });
 
-app.get('/api/answers/:id', async (req, res) => {
-    // Implement logic to fetch answer data from the database based on the provided questionnaire ID
+app.get('/api/answers/:id', (req, res) => {
+    const questionnaireId = req.params.id;
+
+    // Fetch answers data from the database based on the provided questionnaire ID
+    const sqlSelectAnswers = 'SELECT * FROM answers WHERE questionnaireId = ?';
+    db.all(sqlSelectAnswers, [questionnaireId], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        const answersData = rows.map(row => ({
+            id: row.id,
+            userId: row.userId,
+            questionnaireId: row.questionnaireId,
+            questionId: row.questionId,
+            answer: row.answer,
+        }));
+
+        res.json(answersData);
+    });
 });
 
 app.get('/results/:index', (req, res) => {
