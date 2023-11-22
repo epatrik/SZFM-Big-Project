@@ -49,13 +49,19 @@ function createBreakdown(questions, filteredAnswers) {
         breakdown[question.question][option] = 0;
       });
 
-      filteredAnswers.forEach(answer => {
-        const questionId = answer.questionId; // Change: Use questionId from the answer
-        const chosenOption = answer.answer;
+      breakdown[question.question]['Nem válaszolt'] = 0; // Initialize count for unanswered
 
-        // Change: Check for undefined and validate chosenOption as a non-empty string
-        if (questionId === question.id && chosenOption !== undefined && chosenOption !== '') {
-          breakdown[question.question][chosenOption]++;
+      filteredAnswers.forEach(answer => {
+        const questionId = answer.questionId;
+
+        if (questionId === question.id) {
+          const chosenOption = answer.answer;
+
+          if (chosenOption !== undefined && chosenOption !== '') {
+            breakdown[question.question][chosenOption]++;
+          } else {
+            breakdown[question.question]['Nem válaszolt']++;
+          }
         }
       });
     });
