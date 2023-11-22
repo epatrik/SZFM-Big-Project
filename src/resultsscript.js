@@ -191,14 +191,20 @@ function createNumberStatsTable(questions, numberStats) {
     const cellCount = row.insertCell();
     cellCount.textContent = numberStats[questionId].count;
     const cellAverage = row.insertCell();
-    cellAverage.textContent = numberStats[questionId].average.toFixed(2); // Limit average to 2 decimal places
+    cellAverage.textContent = formatNumber(numberStats[questionId].average.toFixed(2)); // Limit average to 2 decimal places
     const cellMedian = row.insertCell();
-    cellMedian.textContent = numberStats[questionId].median; // Limit median to 2 decimal places
+    cellMedian.textContent = numberStats[questionId].median;
     const cellModus = row.insertCell();
-    cellModus.textContent = numberStats[questionId].modus; // Limit modus to 2 decimal places
+    cellModus.textContent = numberStats[questionId].modus;
   });
 
   return numberStatsTable;
+}
+
+function formatNumber(number) {
+  let formatted = parseFloat(number).toFixed(2).toString();
+  formatted = formatted.replace(/\.?0+$/, '');
+  return formatted;
 }
 
 let breakdown = {};
