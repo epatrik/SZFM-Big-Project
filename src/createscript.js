@@ -46,7 +46,8 @@ function addOption(element) {
         input.type = 'text';
         input.name = 'options[]';
         input.placeholder = `${nextOptionNumber}. opció`;
-        input.autocomplete = 'off'; // Set autocomplete attribute to off
+        input.autocomplete = 'off';
+        input.required = optionsDiv.style.display === 'block'; // Set required based on the display state
 
         const removeOptionBtn = document.createElement('button');
         removeOptionBtn.type = 'button';
@@ -82,7 +83,14 @@ function renumberOptions(optionsDiv) {
 
 function showOptions(selectElement) {
     const optionsDiv = selectElement.parentElement.querySelector('.options');
+    const optionsInputs = optionsDiv.querySelectorAll('.option-item input[type="text"]');
+
     optionsDiv.style.display = selectElement.value === 'multipleChoice' ? 'block' : 'none';
+
+    // Set the 'required' attribute for options that are displayed
+    optionsInputs.forEach((input) => {
+        input.required = selectElement.value === 'multipleChoice';
+    });
 }
 
 function updateQuestionNumbers() {
