@@ -93,6 +93,7 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
                 answer TEXT,
                 PRIMARY KEY (id, questionId),
                 FOREIGN KEY (userId) REFERENCES accounts(id),
+                FOREIGN KEY (questionId) REFERENCES questions(id),
                 FOREIGN KEY (questionnaireId) REFERENCES questionnaires(id)
             )
         `, (createErr) => {
@@ -226,8 +227,11 @@ app.post('/submit', async (req, res) => {
 
     // Check if the user is logged in (userId is not -1)
     if (userId !== -1) {
-        // Check if the user has already submitted answers for this questionnaire
-        const checkExistingSubmissionQuery = 'SELECT * FROM answers WHERE userId = ? AND questionnaireId = ?';
+        // Check if the questionnaire is not public and the user has already submitted answers for it
+        const checkExistingSubmissionQuery = 'SELECT * FROM answers AS a ' +
+            'JOIN questionnaires AS q ON a.questionnaireId = q.id ' +
+            'WHERE a.userId = ? AND a.questionnaireId = ? AND q.isPublic = 0';
+
         db.get(checkExistingSubmissionQuery, [userId, questionnaireId], (err, existingSubmission) => {
             if (err) {
                 console.error('Error checking existing submission:', err.message);
@@ -235,7 +239,7 @@ app.post('/submit', async (req, res) => {
             }
 
             if (existingSubmission) {
-                return res.status(403).send('Forbidden: User has already submitted answers for this questionnaire');
+                return res.status(403).send('Forbidden: User has already submitted answers for this private questionnaire');
             }
 
             continueWithSubmission();
@@ -246,8 +250,8 @@ app.post('/submit', async (req, res) => {
     }
 
     function continueWithSubmission() {
-        // Check if the questionnaire exists
-        const checkQuestionnaireQuery = 'SELECT * FROM questionnaires WHERE id = ?';
+        // Check if the questionnaire exists and is active
+        const checkQuestionnaireQuery = 'SELECT * FROM questionnaires WHERE id = ? AND isActive = 1';
         db.get(checkQuestionnaireQuery, [questionnaireId], async (err, questionnaireRow) => {
             if (err) {
                 console.error('Error checking questionnaire:', err.message);
@@ -255,7 +259,7 @@ app.post('/submit', async (req, res) => {
             }
 
             if (!questionnaireRow) {
-                return res.status(404).send('Questionnaire not found');
+                return res.status(404).send('Active Questionnaire not found');
             }
 
             // Get the current highest id in the answers table
