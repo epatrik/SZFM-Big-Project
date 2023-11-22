@@ -222,7 +222,12 @@ Promise.all([fetchQuestionnaireData, fetchAnswersData])
         resultsDiv.appendChild(titleHeading);
 
         const answerCountPara = document.createElement('p');
-        answerCountPara.textContent = `Kitöltések száma: ${filteredAnswers.length}`;
+        const uniqueIds = new Set();
+        filteredAnswers.forEach(answer => {
+          uniqueIds.add(answer.id);
+        });
+        const uniqueIdsCount = uniqueIds.size;
+        answerCountPara.textContent = `Kitöltések száma: ${uniqueIdsCount}`;
         resultsDiv.appendChild(answerCountPara);
 
         if (Object.keys(breakdown).length !== 0) {
