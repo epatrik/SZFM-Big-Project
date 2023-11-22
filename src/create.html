@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Új kérdőív létrehozása</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -18,7 +18,7 @@
     <form class="fadein" id="questionnaireForm" action="/createQuestionnaire" method="post">
         <div class="que-title">
             <label for="title">Kérdőív címe:</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" required autocomplete="off">
             <label for="isPublic">Nyilvános:</label>
             <input type="checkbox" id="isPublic" name="isPublic">
         </div>
@@ -28,7 +28,7 @@
         <div id="questions">
             <div class="question">
                 <label>1. kérdés:</label>
-                <input type="text" name="question[]" required>
+                <input type="text" name="question[]" required autocomplete="off">
                 <select name="type[]" required onchange="showOptions(this)">
                     <option value="textInput">Szöveges bevitel</option>
                     <option value="numberInput">Szám bevitel</option>
@@ -39,7 +39,7 @@
                 <button type="button" onclick="removeQuestion(this)">Kérdés törlése</button>
                 <div class="options" style="display: none;">
                     <div class="option-item">
-                        <input type="text" name="options[]" placeholder="1. opció">
+                        <input type="text" name="options[] required" placeholder="1. opció" autocomplete="off">
                     </div>
                     <button type="button" onclick="addOption(this)">Új opció</button>
                 </div>

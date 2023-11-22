@@ -7,7 +7,7 @@ function addQuestion() {
     div.classList.add('question');
     div.innerHTML = `
         <label>${questionNumber}. kérdés:</label>
-        <input type="text" name="question[]" required>
+        <input type="text" name="question[]" required autocomplete="off">
         <select name="type[]" required onchange="showOptions(this)">
             <option value="textInput">Szöveges bevitel</option>
             <option value="numberInput">Szám bevitel</option>
@@ -46,6 +46,7 @@ function addOption(element) {
         input.type = 'text';
         input.name = 'options[]';
         input.placeholder = `${nextOptionNumber}. opció`;
+        input.autocomplete = 'off'; // Set autocomplete attribute to off
 
         const removeOptionBtn = document.createElement('button');
         removeOptionBtn.type = 'button';
@@ -81,18 +82,7 @@ function renumberOptions(optionsDiv) {
 
 function showOptions(selectElement) {
     const optionsDiv = selectElement.parentElement.querySelector('.options');
-    const requiredCheckbox = selectElement.parentElement.querySelector('[name="required[]"]');
-    
-    if (selectElement.value === 'multipleChoice') {
-        optionsDiv.style.display = 'block';
-        // Update the 'required' attribute based on the selected type
-        requiredCheckbox.removeAttribute('disabled');
-    } else {
-        optionsDiv.style.display = 'none';
-        // If it's not multipleChoice, disable the 'required' checkbox
-        requiredCheckbox.checked = false;
-        requiredCheckbox.setAttribute('disabled', 'disabled');
-    }
+    optionsDiv.style.display = selectElement.value === 'multipleChoice' ? 'block' : 'none';
 }
 
 function updateQuestionNumbers() {
