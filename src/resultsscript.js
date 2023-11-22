@@ -49,8 +49,6 @@ function createBreakdown(questions, filteredAnswers) {
         breakdown[question.question][option] = 0;
       });
 
-      breakdown[question.question]['Nem válaszolt'] = 0; // Initialize count for unanswered
-
       filteredAnswers.forEach(answer => {
         const questionId = answer.questionId;
 
@@ -60,10 +58,15 @@ function createBreakdown(questions, filteredAnswers) {
           if (chosenOption !== undefined && chosenOption !== '') {
             breakdown[question.question][chosenOption]++;
           } else {
-            breakdown[question.question]['Nem válaszolt']++;
+            breakdown[question.question]['Nem válaszolt'] = (breakdown[question.question]['Nem válaszolt'] || 0) + 1;
           }
         }
       });
+
+      // Remove "Nem válaszolt" if it's 0
+      if (breakdown[question.question]['Nem válaszolt'] === 0) {
+        delete breakdown[question.question]['Nem válaszolt'];
+      }
     });
 
   return breakdown;
