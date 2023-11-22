@@ -29,7 +29,7 @@ fetch(`/questionnaireData/${id}`)
             idInput.value = id;
             questionnaire.appendChild(idInput);
 
-            specific.questions.forEach(question => {
+            specific.questions.forEach((question, index) => {
                 const div = document.createElement('div');
                 const label = document.createElement('label');
                 let input;
@@ -70,6 +70,20 @@ fetch(`/questionnaireData/${id}`)
                 div.appendChild(label);
                 div.appendChild(input);
                 questionnaire.appendChild(div);
+
+                // Add event listener to capture Enter keypress
+                input.addEventListener('keypress', function (event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+
+                        // Move to the next input or select
+                        const nextIndex = index + 1;
+                        const nextInput = questionnaire.querySelector(`input[name="question_${nextIndex}"], select[name="question_${nextIndex}"]`);
+                        if (nextInput) {
+                            nextInput.focus();
+                        }
+                    }
+                });
 
                 if (question.required) {
                     label.addEventListener('mouseover', () => {
