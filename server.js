@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const dotenv = require('dotenv');
 
-dotenv.config({path: './.env'})
+dotenv.config({ path: './.env' })
 
 // Create or open the SQLite database file
 const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
@@ -242,6 +242,7 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/createQuestionnaire', (req, res) => {
+    console.log('Request Body:', req.body);
     const isPublic = req.body.isPublic === 'on';
 
     const newQuestionnaire = {
@@ -274,6 +275,10 @@ app.post('/createQuestionnaire', (req, res) => {
 
         const booleanRequired = required.map(value => value === 'true');
 
+        // Variable to keep track of the current option index
+        let currentOptionIndex = 0;
+
+        // Insert each question into the database
         questions.forEach((question, index) => {
             const newQuestion = {
                 id: index,
@@ -297,23 +302,29 @@ app.post('/createQuestionnaire', (req, res) => {
                     return res.sendStatus(500); // Internal Server Error
                 }
 
+                // Extract options directly from the request body based on the HTML structure
+                const optionsArray = req.body.options;
+
                 // Insert options for multiple-choice questions
                 if (newQuestion.type === 'multipleChoice') {
-                    const numOptions = options.length / questions.length;
 
-                    for (let i = 0; i < numOptions; i++) {
-                        const optionValue = options[index * numOptions + i];
-                        db.run('INSERT INTO options (questionnaireId, questionId, id, value) VALUES (?, ?, ?, ?)', [newQuestion.questionnaireId, index, i, optionValue], (optionError) => {
-                            if (optionError) {
-                                console.error(optionError);
-                            }
+                    const optionsForQuestion = optionsArray[index]; // Use the index to get options for the current question
+
+                        // Insert options into the database
+                        optionsForQuestion.forEach((optionValue, optionIndex) => {
+                            db.run('INSERT INTO options (questionnaireId, questionId, id, value) VALUES (?, ?, ?, ?)', [
+                                newQuestion.questionnaireId,
+                                newQuestion.id,
+                                optionIndex,
+                                optionValue
+                            ], (optionError) => {
+                                if (optionError) {
+                                    console.error(optionError);
+                                }
+                            });
                         });
-                    }
                 }
             });
-
-            newQuestion.id = index + 1; // Update the question ID after insertion
-            newQuestionnaire.questions.push(newQuestion);
         });
 
         res.redirect('/');
@@ -352,18 +363,18 @@ app.post('/createUser', async (req, res) => {
     });
 });
 
-app.post("/loginUser", (req, res)=> {
+app.post("/loginUser", (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
     const sqlSearch = "Select * from accounts where username = ?"
 
-    if (username == "" || password == ""){
+    if (username == "" || password == "") {
         console.log("Fill in all the fields")
         return res.json("Fill in all the fields")
     }
     else {
-        db.get (sqlSearch, [username], async (error, row) => {
+        db.get(sqlSearch, [username], async (error, row) => {
             if (error) {
                 console.error(error);
                 return res.sendStatus(500); // Internal Server Error
@@ -377,11 +388,11 @@ app.post("/loginUser", (req, res)=> {
                 const hashedPassword = row.password
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---------> Login Successful")
-                    return res.json({id: row.id,username: row.username,email: row.email})
-                } 
+                    return res.json({ id: row.id, username: row.username, email: row.email })
+                }
                 else {
                     console.log("---------> Username or password incorrect!")
-                    return res.json("Username or password incorrect!") 
+                    return res.json("Username or password incorrect!")
                 }
             }
         })
