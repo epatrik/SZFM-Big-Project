@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env' })
 
 // Create or open the SQLite database file
-const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
+const db = new sqlite3.Database('src/szfmdb.sqlite', (err) => {
     if (err) {
         console.error('Error opening database', err.message);
     } else {
