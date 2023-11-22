@@ -53,6 +53,9 @@ fetch(`/questionnaireData/${id}`)
                 input.name = `question_${question.id}`;
                 input.required = question.required; // Set the 'required' attribute
 
+                // Add autocomplete attribute to turn off autocomplete
+                input.autocomplete = 'off';
+
                 if (question.required) {
                     label.textContent = question.question;
                     const redStar = document.createElement('span');
