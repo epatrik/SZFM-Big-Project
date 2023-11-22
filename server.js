@@ -221,63 +221,87 @@ app.get('/results/:index', (req, res) => {
 
 app.post('/submit', async (req, res) => {
     const questionnaireId = parseInt(req.body.questionnaireId);
-    const userId = 0; // Placeholder for user ID
+    const userId = -1; //parseInt(req.body.userId); // Assuming userId is provided in the request body
+    // TODO
 
-    // Check if the questionnaire exists
-    const checkQuestionnaireQuery = 'SELECT * FROM questionnaires WHERE id = ?';
-    db.get(checkQuestionnaireQuery, [questionnaireId], async (err, questionnaireRow) => {
-        if (err) {
-            console.error('Error checking questionnaire:', err.message);
-            return res.status(500).send('Internal Server Error');
-        }
-
-        if (!questionnaireRow) {
-            return res.status(404).send('Questionnaire not found');
-        }
-
-        // Get the current highest id in the answers table
-        const getCurrentMaxIdQuery = 'SELECT MAX(id) as maxId FROM answers';
-        db.get(getCurrentMaxIdQuery, [], async (err, result) => {
+    // Check if the user is logged in (userId is not -1)
+    if (userId !== -1) {
+        // Check if the user has already submitted answers for this questionnaire
+        const checkExistingSubmissionQuery = 'SELECT * FROM answers WHERE userId = ? AND questionnaireId = ?';
+        db.get(checkExistingSubmissionQuery, [userId, questionnaireId], (err, existingSubmission) => {
             if (err) {
-                console.error('Error getting current max id:', err.message);
+                console.error('Error checking existing submission:', err.message);
                 return res.status(500).send('Internal Server Error');
             }
 
-            const currentMaxId = result.maxId || 0; // If there are no records yet, start from 0
-
-            // Prepare the answers for insertion
-            const answers = req.body;
-            delete answers.questionnaireId; // Remove unnecessary property
-
-            // Insert answers into the database with an incremented id
-            const insertAnswersQuery = 'INSERT INTO answers (id, userId, questionnaireId, questionId, answer) VALUES (?, ?, ?, ?, ?)';
-            const answersArray = Object.entries(answers);
-
-            for (const [key, answer] of answersArray) {
-                if (key.startsWith('question_')) {
-                    const questionId = parseInt(key.replace('question_', ''), 10);
-
-                    if (!isNaN(questionId)) {
-                        await new Promise((resolve) => {
-                            const newId = currentMaxId + 1;
-                            db.run(insertAnswersQuery, [newId, userId, questionnaireId, questionId, answer], (err) => {
-                                if (err) {
-                                    console.error('Error inserting answer:', err.message);
-                                    return res.status(500).send('Internal Server Error');
-                                }
-                                resolve();
-                            });
-                        });
-                    } else {
-                        console.error('Invalid question key:', key);
-                        return res.status(400).send('Bad Request: Invalid question key');
-                    }
-                }
+            if (existingSubmission) {
+                return res.status(403).send('Forbidden: User has already submitted answers for this questionnaire');
             }
 
-            res.redirect('/');
+            continueWithSubmission();
         });
-    });
+    } else {
+        // If userId is -1, proceed with the submission
+        continueWithSubmission();
+    }
+
+    function continueWithSubmission() {
+        // Check if the questionnaire exists
+        const checkQuestionnaireQuery = 'SELECT * FROM questionnaires WHERE id = ?';
+        db.get(checkQuestionnaireQuery, [questionnaireId], async (err, questionnaireRow) => {
+            if (err) {
+                console.error('Error checking questionnaire:', err.message);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            if (!questionnaireRow) {
+                return res.status(404).send('Questionnaire not found');
+            }
+
+            // Get the current highest id in the answers table
+            const getCurrentMaxIdQuery = 'SELECT MAX(id) as maxId FROM answers';
+            db.get(getCurrentMaxIdQuery, [], async (err, result) => {
+                if (err) {
+                    console.error('Error getting current max id:', err.message);
+                    return res.status(500).send('Internal Server Error');
+                }
+
+                const currentMaxId = result.maxId || 0; // If there are no records yet, start from 0
+
+                // Prepare the answers for insertion
+                const answers = req.body;
+                delete answers.questionnaireId; // Remove unnecessary property
+
+                // Insert answers into the database with an incremented id
+                const insertAnswersQuery = 'INSERT INTO answers (id, userId, questionnaireId, questionId, answer) VALUES (?, ?, ?, ?, ?)';
+                const answersArray = Object.entries(answers);
+
+                for (const [key, answer] of answersArray) {
+                    if (key.startsWith('question_')) {
+                        const questionId = parseInt(key.replace('question_', ''), 10);
+
+                        if (!isNaN(questionId)) {
+                            await new Promise((resolve) => {
+                                const newId = currentMaxId + 1;
+                                db.run(insertAnswersQuery, [newId, userId, questionnaireId, questionId, answer], (err) => {
+                                    if (err) {
+                                        console.error('Error inserting answer:', err.message);
+                                        return res.status(500).send('Internal Server Error');
+                                    }
+                                    resolve();
+                                });
+                            });
+                        } else {
+                            console.error('Invalid question key:', key);
+                            return res.status(400).send('Bad Request: Invalid question key');
+                        }
+                    }
+                }
+
+                res.redirect('/');
+            });
+        });
+    }
 });
 
 app.get('/create', (req, res) => {
@@ -289,7 +313,7 @@ app.post('/createQuestionnaire', (req, res) => {
     const isPublic = req.body.isPublic === 'on';
 
     const newQuestionnaire = {
-        userId: 0, // You can update this with the user ID when implemented
+        userId: -1, // TODO user ID implementation
         isActive: true,
         isPublic,
         title: req.body.title,
