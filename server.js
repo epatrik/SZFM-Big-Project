@@ -1,7 +1,6 @@
 const http = require('http');
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
 const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const dotenv = require('dotenv');
@@ -84,6 +83,26 @@ const db = new sqlite3.Database('szfmdb.sqlite', (err) => {
                 //console.log('Table "options" created or already exists');
             }
         });
+
+        db.run(`
+            CREATE TABLE IF NOT EXISTS answers (
+                id INTEGER,
+                userId INTEGER,
+                questionnaireId INTEGER,
+                questionId INTEGER,
+                answer TEXT,
+                PRIMARY KEY (id, questionId),
+                FOREIGN KEY (userId) REFERENCES accounts(id),
+                FOREIGN KEY (questionnaireId) REFERENCES questionnaires(id)
+            )
+        `, (createErr) => {
+            if (createErr) {
+                console.error('Error creating table', createErr.message);
+            } else {
+                //console.log('Table "answers" created or already exists');
+            }
+        });
+
     }
 });
 
@@ -200,41 +219,65 @@ app.get('/results/:index', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'results.html'));
 });
 
-app.post('/submit', (req, res) => {
-    const answersFilePath = path.join(__dirname, 'src/answers.json');
-    const questionnairesFilePath = path.join(__dirname, 'src/forms.json');
+app.post('/submit', async (req, res) => {
     const questionnaireId = parseInt(req.body.questionnaireId);
     const userId = 0; // Placeholder for user ID
 
-    const existingQuestionnaires = JSON.parse(fs.readFileSync(questionnairesFilePath));
-    const specificQuestionnaire = existingQuestionnaires.find(questionnaire => questionnaire.id === questionnaireId);
+    // Check if the questionnaire exists
+    const checkQuestionnaireQuery = 'SELECT * FROM questionnaires WHERE id = ?';
+    db.get(checkQuestionnaireQuery, [questionnaireId], async (err, questionnaireRow) => {
+        if (err) {
+            console.error('Error checking questionnaire:', err.message);
+            return res.status(500).send('Internal Server Error');
+        }
 
-    if (!specificQuestionnaire) {
-        // Handle case where the questionnaire doesn't exist
-        return res.status(404).send('Questionnaire not found.');
-    }
+        if (!questionnaireRow) {
+            return res.status(404).send('Questionnaire not found');
+        }
 
-    const formattedAnswers = {
-        questionnaireId,
-        userId,
-        answers: specificQuestionnaire.questions.map(question => {
-            const key = `question_${question.id}`;
-            const value = req.body[key];
-            return question.type === 'numberInput' ? parseInt(value, 10) : value;
-        })
-    };
+        // Get the current highest id in the answers table
+        const getCurrentMaxIdQuery = 'SELECT MAX(id) as maxId FROM answers';
+        db.get(getCurrentMaxIdQuery, [], async (err, result) => {
+            if (err) {
+                console.error('Error getting current max id:', err.message);
+                return res.status(500).send('Internal Server Error');
+            }
 
-    if (fs.existsSync(answersFilePath)) {
-        const existingData = fs.readFileSync(answersFilePath);
-        const parsedData = JSON.parse(existingData);
-        parsedData.push(formattedAnswers);
-        fs.writeFileSync(answersFilePath, JSON.stringify(parsedData, null, 2));
-    } else {
-        const newAnswers = [formattedAnswers];
-        fs.writeFileSync(answersFilePath, JSON.stringify(newAnswers, null, 2));
-    }
+            const currentMaxId = result.maxId || 0; // If there are no records yet, start from 0
 
-    res.redirect('/');
+            // Prepare the answers for insertion
+            const answers = req.body;
+            delete answers.questionnaireId; // Remove unnecessary property
+
+            // Insert answers into the database with an incremented id
+            const insertAnswersQuery = 'INSERT INTO answers (id, userId, questionnaireId, questionId, answer) VALUES (?, ?, ?, ?, ?)';
+            const answersArray = Object.entries(answers);
+
+            for (const [key, answer] of answersArray) {
+                if (key.startsWith('question_')) {
+                    const questionId = parseInt(key.replace('question_', ''), 10);
+
+                    if (!isNaN(questionId)) {
+                        await new Promise((resolve) => {
+                            const newId = currentMaxId + 1;
+                            db.run(insertAnswersQuery, [newId, userId, questionnaireId, questionId, answer], (err) => {
+                                if (err) {
+                                    console.error('Error inserting answer:', err.message);
+                                    return res.status(500).send('Internal Server Error');
+                                }
+                                resolve();
+                            });
+                        });
+                    } else {
+                        console.error('Invalid question key:', key);
+                        return res.status(400).send('Bad Request: Invalid question key');
+                    }
+                }
+            }
+
+            res.redirect('/');
+        });
+    });
 });
 
 app.get('/create', (req, res) => {
@@ -242,7 +285,7 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/createQuestionnaire', (req, res) => {
-    console.log('Request Body:', req.body);
+    //console.log('Request Body:', req.body);
     const isPublic = req.body.isPublic === 'on';
 
     const newQuestionnaire = {
@@ -271,12 +314,8 @@ app.post('/createQuestionnaire', (req, res) => {
         const questions = req.body.question || [];
         const types = req.body.type || [];
         const required = req.body.required || [];
-        const options = req.body.options || [];
 
         const booleanRequired = required.map(value => value === 'true');
-
-        // Variable to keep track of the current option index
-        let currentOptionIndex = 0;
 
         // Insert each question into the database
         questions.forEach((question, index) => {
@@ -310,19 +349,19 @@ app.post('/createQuestionnaire', (req, res) => {
 
                     const optionsForQuestion = optionsArray[index]; // Use the index to get options for the current question
 
-                        // Insert options into the database
-                        optionsForQuestion.forEach((optionValue, optionIndex) => {
-                            db.run('INSERT INTO options (questionnaireId, questionId, id, value) VALUES (?, ?, ?, ?)', [
-                                newQuestion.questionnaireId,
-                                newQuestion.id,
-                                optionIndex,
-                                optionValue
-                            ], (optionError) => {
-                                if (optionError) {
-                                    console.error(optionError);
-                                }
-                            });
+                    // Insert options into the database
+                    optionsForQuestion.forEach((optionValue, optionIndex) => {
+                        db.run('INSERT INTO options (questionnaireId, questionId, id, value) VALUES (?, ?, ?, ?)', [
+                            newQuestion.questionnaireId,
+                            newQuestion.id,
+                            optionIndex,
+                            optionValue
+                        ], (optionError) => {
+                            if (optionError) {
+                                console.error(optionError);
+                            }
                         });
+                    });
                 }
             });
         });
