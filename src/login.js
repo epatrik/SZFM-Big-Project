@@ -4,7 +4,7 @@ const submitBtn = document.querySelector('.submit-btn');
 
 submitBtn.addEventListener('click', async () => {
     try {
-        const response = await fetch('/loginUser', {
+        const response = await fetch('/api/loginUser', {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json'}),

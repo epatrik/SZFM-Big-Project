@@ -1,7 +1,7 @@
 const queryString = window.location.pathname;
 const id = queryString.split('/').pop();
 
-fetch(`/questionnaireData/${id}`)
+fetch(`/api/questionnaireData/${id}`)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -20,7 +20,7 @@ fetch(`/questionnaireData/${id}`)
 
             const questionnaire = document.createElement('form');
             questionnaire.setAttribute('method', 'POST');
-            questionnaire.setAttribute('action', '/submit');
+            questionnaire.setAttribute('action', '/api/submit');
             questionnaire.addEventListener('submit', validateForm);
 
             const idInput = document.createElement('input');

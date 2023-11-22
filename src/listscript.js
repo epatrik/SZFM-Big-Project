@@ -1,4 +1,4 @@
-fetch('/questionnaires')
+fetch('/api/questionnaires')
     .then(response => response.json())
     .then(data => {
         const questionnaireList = document.getElementById('questionnaireList');

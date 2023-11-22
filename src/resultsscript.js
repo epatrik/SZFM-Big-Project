@@ -1,8 +1,8 @@
 const queryString = window.location.pathname;
-const id = parseInt(queryString.split('/').pop()); // Parse formId as integer
+const id = parseInt(queryString.split('/').pop()); // Parse questionnaireId as integer
 
-const fetchFormData = fetch('/forms.json').then(response => response.json());
-const fetchAnswersData = fetch('/answers.json').then(response => response.json());
+const fetchQuestionnaireData = fetch('/api/questionnaireData/:id').then(response => response.json());
+const fetchAnswersData = fetch('/api/answers/:id').then(response => response.json());
 
 function createBreakdownTable(breakdown) {
     const breakdownTable = document.createElement('table');
@@ -173,13 +173,13 @@ function createNumberStatsTable(numberStats) {
 let breakdown = {};
 let numberStats = {};
 
-Promise.all([fetchFormData, fetchAnswersData])
-  .then(([formsData, answersData]) => {
-    const form = formsData.find(form => form.id === id);
+Promise.all([fetchQuestionnaireData, fetchAnswersData])
+  .then(([questionnairesData, answersData]) => {
+    const questionnaire = questionnairesData.find(questionnaire => questionnaire.id === id);
 
-    if (form) {
-      const questions = form.questions;
-      const filteredAnswers = answersData.filter(answer => parseInt(answer.formId) === id);
+    if (questionnaire) {
+      const questions = questionnaire.questions;
+      const filteredAnswers = answersData.filter(answer => parseInt(answer.questionnaireId) === id);
 
       breakdown = createBreakdown(questions, filteredAnswers);
       numberStats = createNumberStatistics(questions, filteredAnswers);
@@ -188,7 +188,7 @@ Promise.all([fetchFormData, fetchAnswersData])
 
       if (resultsDiv) {
         const titleHeading = document.createElement('h2');
-        titleHeading.textContent = form.title;
+        titleHeading.textContent = questionnaire.title;
         resultsDiv.appendChild(titleHeading);
 
         const answerCountPara = document.createElement('p');
@@ -213,7 +213,7 @@ Promise.all([fetchFormData, fetchAnswersData])
         console.error('resultsDiv is null. Check the HTML for an element with id="resultsDiv".');
       }
     } else {
-      console.error('No results found for this form ID.');
+      console.error('No results found for this questionnaire ID.');
     }
   })
   .catch(error => {

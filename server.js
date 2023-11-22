@@ -121,7 +121,7 @@ app.get('/list', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'list.html'));
 });
 
-app.get('/questionnaires', (req, res) => {
+app.get('/api/questionnaires', (req, res) => {
     const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE isActive = 1 AND isPublic = 1';
     db.all(sqlSelectQuestionnaires, [], (err, rows) => {
         if (err) {
@@ -153,7 +153,7 @@ app.get('/questionnaire/:index', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'questionnaire.html'));
 });
 
-app.get('/questionnaireData/:id', async (req, res) => {
+app.get('/api/questionnaireData/:id', async (req, res) => {
     const questionnaireId = req.params.id;
 
     const sqlSelectQuestionnaire = 'SELECT * FROM questionnaires WHERE id = ?';
@@ -216,11 +216,15 @@ app.get('/questionnaireData/:id', async (req, res) => {
     });
 });
 
+app.get('/api/answers/:id', async (req, res) => {
+    // Implement logic to fetch answer data from the database based on the provided questionnaire ID
+});
+
 app.get('/results/:index', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'results.html'));
 });
 
-app.post('/submit', async (req, res) => {
+app.post('/api/submit', async (req, res) => {
     const questionnaireId = parseInt(req.body.questionnaireId);
     const userId = -1; //parseInt(req.body.userId); // Assuming userId is provided in the request body
     // TODO
@@ -311,7 +315,7 @@ app.get('/create', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'create.html'));
 });
 
-app.post('/createQuestionnaire', (req, res) => {
+app.post('/api/createQuestionnaire', (req, res) => {
     //console.log('Request Body:', req.body);
     const isPublic = req.body.isPublic === 'on';
 
@@ -397,7 +401,7 @@ app.post('/createQuestionnaire', (req, res) => {
     });
 });
 
-app.post('/createUser', async (req, res) => {
+app.post('/api/createUser', async (req, res) => {
     const username = req.body.username;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const email = req.body.email;
@@ -429,7 +433,7 @@ app.post('/createUser', async (req, res) => {
     });
 });
 
-app.post("/loginUser", (req, res) => {
+app.post("/api/loginUser", (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
