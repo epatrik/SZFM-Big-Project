@@ -28,10 +28,10 @@ submitBtn.addEventListener('click', async () => {
             location.href = '/';
         } else {
             console.log(loginMessage);
+            alertBox(loginMessage);
         }
     } catch (error) {
         console.error('An error occurred during the fetch:', error);
-        // Handle unexpected errors, maybe display a generic error message.
     }
 })
 
@@ -56,3 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+const alertBox = (data) => {
+    const alertContainer = document.querySelector('.alert-box');
+    const alertMsg = document.querySelector('.alert');
+    alertMsg.innerHTML = data;
+
+    alertContainer.style.top = `5%`;
+    setTimeout(() => {
+        alertContainer.style.top = null;
+    }, 5000);
+}

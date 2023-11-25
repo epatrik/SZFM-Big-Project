@@ -1,4 +1,4 @@
-const name = document.querySelector('.name');
+const username = document.querySelector('.name');
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');
 const submitBtn = document.querySelector('.submit-btn');
@@ -17,18 +17,19 @@ submitBtn.addEventListener('click', async () => {
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
-                username: name.value,
+                username: username.value,
                 password: password.value,
                 email: email.value
             })
         });
 
-        if (response.ok) {
+        const message = await response.json();
+        if (message == "Created") {
             console.log('User created successfully!');
-            // You might want to redirect the user or perform other actions.
+            location.href = '/login';
         } else {
-            console.error('Failed to create user:', response.statusText);
-            // Handle errors, maybe display an error message to the user.
+            console.log('Failed to create user');
+            alertBox(message);
         }
     } catch (error) {
         console.error('An error occurred during the fetch:', error);
@@ -57,3 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+const alertBox = (data) => {
+    const alertContainer = document.querySelector('.alert-box');
+    const alertMsg = document.querySelector('.alert');
+    alertMsg.innerHTML = data;
+
+    alertContainer.style.top = `5%`;
+    setTimeout(() => {
+        alertContainer.style.top = null;
+    }, 5000);
+}

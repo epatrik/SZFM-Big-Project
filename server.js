@@ -439,23 +439,29 @@ app.post('/api/createUser', async (req, res) => {
     db.get(sqlSearch, [username], async (error, row) => {
         if (error) {
             console.error(error);
-            return res.sendStatus(500); // Internal Server Error
+            return res.json("Szerver hiba"); // Internal Server Error
         }
 
-        if (row) {
-            console.log('Username already exists!');
-            return res.sendStatus(409); // Conflict
-        } else {
-            db.run(sqlInsert, [username, hashedPassword, email], function (error) {
-                if (error) {
-                    console.error(error);
-                    return res.sendStatus(500); // Internal Server Error
-                }
-
-                console.log('--------> Created new User');
-                console.log('Inserted row ID:', this.lastID);
-                return res.sendStatus(201); // Created
-            });
+        if (username == "" || hashedPassword == "" || email == "") {
+            console.log("Fill in all the fields")
+            return res.json("Töltsd ki az összes mezőt!")
+        }
+        else {
+            if (row) {
+                console.log('Username already exists!');
+                return res.json("Felhasználónév foglalt!")
+            } else {
+                db.run(sqlInsert, [username, hashedPassword, email], function (error) {
+                    if (error) {
+                        console.error(error);
+                        return res.json("Szerver hiba"); // Internal Server Error
+                    }
+    
+                    console.log('--------> Created new User');
+                    console.log('Inserted row ID:', this.lastID);
+                    return res.json("Created"); // Created
+                });
+            }
         }
     });
 });
