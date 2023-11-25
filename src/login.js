@@ -2,6 +2,12 @@ const name = document.querySelector('.name');
 const password = document.querySelector('.password');
 const submitBtn = document.querySelector('.submit-btn');
 
+window.onload = () => {
+    if(sessionStorage.id){
+        location.href = '/';
+    }
+}
+
 submitBtn.addEventListener('click', async () => {
     try {
         const response = await fetch('/api/loginUser', {
