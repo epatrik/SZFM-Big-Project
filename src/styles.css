@@ -130,7 +130,7 @@ nav.list {
     to {  
         opacity:1;  
     }  
- }
+}
 
 nav.list a:hover {
     background-color:rgb(66, 52, 131);
@@ -260,3 +260,66 @@ form#questionnaireForm {
     cursor: pointer;
 }
 
+.hide {
+    display: none;
+}
+
+.logout {
+    position: relative;
+    left: 675px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px;
+    background-color: rgb(34, 23, 83);
+    border: solid 2px rgb(133, 104, 226);
+    color: rgb(218, 204, 237);
+    font-weight: bold;
+    text-shadow: 0vh 5px 10px rgb(17, 5, 44);
+    padding: 16px;
+    border-radius: 6px;
+}
+
+.logout:hover {
+    background-color: rgb(20, 13, 51);
+    transition: background-color 0.2s;
+}
+
+.lg-movedown {
+    animation-name: lg-movedown;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes lg-movedown {
+    from {top: 440px;
+    opacity: 0;}
+    to {top: 507px;
+    opacity: 1;}
+}
+
+
+/*
+@media screen and (min-width: 2000px) {
+    /* Médiakérés példa: max 1200px széles kijelző */
+    /*#title-container {
+        background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+        display: flex;
+        margin-top: 36%;
+        height: 100px;
+        justify-content: center;
+        align-items: center;
+        
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    h1 {
+        color: #ffffff;
+        top: 100px;
+        font-size: 35px;
+        text-align: center;
+        white-space: nowrap;
+        text-shadow: 0vh 5px 10px rgb(17, 5, 44);
+        font-weight: bold;
+    }
+}
+*/
