@@ -149,6 +149,30 @@ app.get('/api/questionnaires', (req, res) => {
     });
 });
 
+app.get('/my-questionnaires', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'my-questionnaires.html'));
+});
+
+app.get('/api/my-questionnaires', (req, res) => {
+    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE userId = -1';
+    db.all(sqlSelectQuestionnaires, [], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        const questionnairesData = rows.map(row => ({
+            id: row.id,
+            userId: row.userId,
+            isActive: row.isActive === 1,
+            isPublic: row.isPublic === 1,
+            title: row.title,
+        }));
+
+        res.json(questionnairesData);
+    });
+});
+
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'login.html'));
 });
