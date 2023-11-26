@@ -207,6 +207,85 @@ function formatNumber(number) {
   return formatted;
 }
 
+function createUpdateField(questionnaireId, isActive, isPublic) {
+  // Assuming updateDiv is already defined
+  const updateDiv = document.getElementById('updateDiv');
+
+  // Create form element
+  const updateForm = document.createElement('form');
+
+  // Create input for isActive
+  const isActiveInput = document.createElement('input');
+  isActiveInput.type = 'checkbox';
+  isActiveInput.checked = isActive; // Set the initial value based on existing data
+  isActiveInput.name = 'isActive';
+  isActiveInput.id = 'isActive';
+  const isActiveLabel = document.createElement('label');
+  isActiveLabel.for = 'isActive';
+  isActiveLabel.textContent = 'Aktív:';
+
+  // Create input for isPublic
+  const isPublicInput = document.createElement('input');
+  isPublicInput.type = 'checkbox';
+  isPublicInput.checked = isPublic; // Set the initial value based on existing data
+  isPublicInput.name = 'isPublic';
+  isPublicInput.id = 'isPublic';
+  const isPublicLabel = document.createElement('label');
+  isPublicLabel.for = 'isPublic';
+  isPublicLabel.textContent = 'Nyilvánosan elérhető:';
+
+  // Create submit button
+  const submitButton = document.createElement('button');
+  submitButton.type = 'submit';
+  submitButton.textContent = 'Frissítés';
+
+  // Add event listener for form submission
+  updateForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    const updatedData = {
+      id: questionnaireId,
+      isActive: event.target.isActive.checked,
+      isPublic: event.target.isPublic.checked,
+      // Add other fields as needed
+    };
+    console.log(updatedData);
+    // Call a function to handle the update in the database
+    updateQuestionnaireData(updatedData);
+  });
+
+  // Add inputs, labels, and submit button to the form
+  updateForm.appendChild(isActiveLabel);
+  updateForm.appendChild(isActiveInput);
+  updateForm.appendChild(document.createElement('br')); // Add a line break for better readability
+  updateForm.appendChild(isPublicLabel);
+  updateForm.appendChild(isPublicInput);
+  updateForm.appendChild(submitButton);
+
+  // Add the form to the updateDiv
+  updateDiv.appendChild(updateForm);
+}
+
+// Function to update questionnaire data on the server
+function updateQuestionnaireData(updatedData) {
+  // Use fetch to send the updated data to the server (assuming your server has an endpoint for updating questionnaires)
+  fetch('/update-questionnaire', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Update successful:', data);
+      // Add any additional logic you need after a successful update
+    })
+    .catch(error => {
+      console.error('Error updating questionnaire:', error);
+      // Handle errors as needed
+    });
+}
+
 let breakdown = {};
 let numberStats = {};
 
@@ -215,6 +294,9 @@ Promise.all([fetchQuestionnaireData, fetchAnswersData])
     const questionnaire = questionnairesData.id === id ? questionnairesData : null;
 
     if (questionnaire) {
+      const updateDiv = document.getElementById('updateDiv');
+      createUpdateField(questionnaire.id, questionnaire.isActive, questionnaire.isPublic);
+
       const questions = questionnaire.questions;
       const filteredAnswers = answersData.filter(answer => parseInt(answer.questionnaireId) === id);
 

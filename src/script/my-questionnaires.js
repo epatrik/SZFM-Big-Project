@@ -3,9 +3,7 @@ fetch('/api/my-questionnaires')
     .then(data => {
         const questionnaireList = document.getElementById('questionnaireList');
 
-        const activeQuestionnaires = data.filter(questionnaire => questionnaire.isActive);
-
-        activeQuestionnaires.forEach(questionnaire => {
+        data.forEach(questionnaire => {
             const listItem = document.createElement('li');
             const link = document.createElement('a');
 

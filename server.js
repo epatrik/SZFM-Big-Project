@@ -327,6 +327,28 @@ app.get('/results/:index', (req, res) => {
     })
 });
 
+// Define an endpoint to handle questionnaire updates
+app.post('/update-questionnaire', (req, res) => {
+    const updatedData = req.body; // Assuming the request body contains the updated data
+    const { id, isActive, isPublic } = updatedData;
+    console.log(updatedData);
+  
+    // Update the questionnaire in the database
+    db.run(
+      'UPDATE questionnaires SET isActive = ?, isPublic = ? WHERE id = ?',
+      [isActive, isPublic, id],
+      (err) => {
+        if (err) {
+          console.error('Error updating questionnaire:', err.message);
+          res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+          console.log('Questionnaire updated successfully');
+          res.json({ message: 'Update successful' });
+        }
+      }
+    );
+  });
+
 app.post('/api/submit', async (req, res) => {
     const questionnaireId = parseInt(req.body.questionnaireId);
     const userId = parseInt(req.session.userId) || -1;
