@@ -3,11 +3,8 @@ const express = require('express');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
-const dotenv = require('dotenv');
 const expressSession = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(expressSession);
-
-dotenv.config({ path: './.env' })
 
 // Create or open the SQLite database file
 const db = new sqlite3.Database('src/szfmdb.sqlite', (err) => {
@@ -115,7 +112,7 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(expressSession({
-    secret: process.env.SESSION_SECRET || 'secret',
+    secret: 'secret',
     resave: false,
     saveUninitialized: false,
     store: new SQLiteStore()
