@@ -318,13 +318,12 @@ app.get('/results/:index', (req, res) => {
             return res.status(500).send('Internal Server Error');
         }
 
-        if (userIdOfQuestionnaire.userId == req.session.userId) {
+        if (userIdOfQuestionnaire && userIdOfQuestionnaire.userId == req.session.userId) {
             res.sendFile(path.join(__dirname, 'src', 'results.html'));
+        } else {
+            res.redirect('/');
         }
-        else {
-            res.redirect('/')
-        }
-    })
+    });
 });
 
 // Define an endpoint to handle questionnaire updates
