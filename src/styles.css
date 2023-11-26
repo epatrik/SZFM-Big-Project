@@ -1,308 +1,324 @@
-@media screen and (max-width: 1280px) {
-    body,
-    ul {
-        margin: 0;
-        padding: 0;
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Dosis', sans-serif;
+    /*background-color: #f2f2f2;*/
+    /*background-image: linear-gradient(to right, rgb(39, 24, 95) , rgb(103, 77, 175), rgb(44, 20, 131));*/
+    background-color: rgb(58, 41, 122);
+    text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
+    min-width: 700px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#title-container {
+    background-image: linear-gradient(to right, rgb(19, 11, 46), rgb(26, 15, 73), rgb(19, 11, 46));
+    display: flex;
+    margin-top: 12%;
+    top: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+h1 {
+    color: #ffffff;
+    top: 100px;
+    font-size: 35px;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0vh 5px 10px rgb(17, 5, 44);
+    font-weight: bold;
+}
+
+nav#kezdolap {
+    margin-bottom: 20px;
+}
+
+nav#kezdolap a {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    /*background-color: #eaeaea;*/
+    border-radius: 5px;
+    /*margin: 0 5px;*/
+}
+
+nav#kezdolap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(rgb(47, 33, 107), rgb(15, 9, 43));
+    margin-top: 0px;
+    overflow-x: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 20px;
+    max-width: 800px;
+    min-width: 700px;
+    border: solid 4px rgb(133, 104, 226);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0vh 0vh 5px rgb(37, 14, 92);
+}
+
+nav#kezdolap a {
+    background-color: rgb(171, 171, 245);
+    width: 250px;
+    margin-bottom: 10px;
+    box-shadow: 0vh 1vh 2vh rgb(31, 11, 78);
+    transition: background-color 0.2s;
+}
+
+nav#kezdolap a:hover {
+    background-color: rgb(118, 118, 207);
+    color: white;
+}
+
+.list-header {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 800px;
+    height: 50px;
+    background-image: linear-gradient(to right, rgb(19, 11, 46), rgb(26, 15, 73), rgb(19, 11, 46));
+    box-shadow: 0 10px 20px rgb(34, 27, 65);
+}
+
+#header-movedown {
+    animation-name: header-movedown;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes header-movedown {
+    from {
+        top: -50px;
     }
 
-    body {
-        font-family: 'Dosis', sans-serif;
-        /*background-color: #f2f2f2;*/
-        /*background-image: linear-gradient(to right, rgb(39, 24, 95) , rgb(103, 77, 175), rgb(44, 20, 131));*/
-        background-color: rgb(58, 41, 122);
-        text-align: center;
-        margin: 0 auto;
-        max-width: 800px;
-        min-width: 700px;
-        overflow-y: auto;
-        overflow-x: auto;
+    to {
+        top: 0px;
+    }
+}
+
+nav.list {
+    display: flex;
+    padding-top: 5px;
+    justify-content: end;
+    padding-right: 5px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.fadein {
+    animation: fadeIn 0.3s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
 
-    #title-container {
-        background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
-        display: flex;
-        margin-top: 12%;
-        top: 100px;
-        height: 100px;
-        justify-content: center;
-        align-items: center;
-        
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+    to {
+        opacity: 1;
     }
+}
 
-    h1 {
-        color: #ffffff;
-        top: 100px;
-        font-size: 35px;
-        text-align: center;
-        white-space: nowrap;
-        text-shadow: 0vh 5px 10px rgb(17, 5, 44);
-        font-weight: bold;
-    }
+nav.list a:hover {
+    background-color: rgb(66, 52, 131);
+    color: rgb(193, 183, 237);
+}
 
-    nav#kezdolap {
-        margin-bottom: 20px;
-    }
+nav.list a {
+    padding: 10px;
+    min-width: 70px;
+    background-color: none;
+    margin-left: 5px;
+    text-decoration: none;
+    color: rgb(135, 135, 255);
+    transition: background-color 0.2s;
+}
 
-    nav#kezdolap a {
-        display: inline-block;
-        padding: 8px 12px;
-        text-decoration: none;
-        color: #333;
-        /*background-color: #eaeaea;*/
-        border-radius: 5px;
-        /*margin: 0 5px;*/
-    }
+#list-h1 {
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
 
-    nav#kezdolap {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-image: radial-gradient(rgb(47, 33, 107), rgb(15, 9, 43));
-        margin-top: 0px;
-        overflow-x:auto;
-        padding-top: 50px;
-        padding-bottom: 50px;
-        font-size: 20px;
-        max-width: 800px;
-        min-width: 700px;
-        border: solid 4px rgb(133, 104, 226);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        box-shadow: 0vh 0vh 5px rgb(37, 14, 92);
-    }
+ul#questionnaireList {
+    display: grid;
+    row-gap: 5px;
+    list-style: none;
+    overflow-y: auto;
+    padding: 0;
+}
 
-    nav#kezdolap a {
-        background-color: rgb(171, 171, 245);
-        width: 250px;
-        margin-bottom: 10px;
-        box-shadow: 0vh 1vh 2vh rgb(31, 11, 78);
-        transition: background-color 0.2s;
-    }
+ul#questionnaireList li {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 700px;
+    min-width: 600px;
+    transition: background-color 0.3s;
+    /* Add transition for smoother effect */
+}
 
-    nav#kezdolap a:hover {
-        background-color: rgb(118, 118, 207);
-        color: white;
-    }
+ul#questionnaireList li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+}
 
-    .list-header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        min-width: 800px;
-        height: 50px;
-        background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
-        box-shadow: 0 10px 20px rgb(34, 27, 65);
-    }
+ul#questionnaireList li:hover {
+    background-color: rgb(113, 71, 230);
+    /* Change background on hover */
+}
 
-    #header-movedown {
-        animation-name: header-movedown;
-        animation-duration: 0.6s;
-        animation-fill-mode: forwards;
-    }
+ul#questionnaireList li a:hover {
+    color: white;
+}
 
-    @keyframes header-movedown {
-        from {top: -50px;}
-        to {top: 0px;}
-    }
+.create-title {
+    margin-top: 100px;
+}
 
-    nav.list {
-        display: flex;
-        padding-top:5px;
-        justify-content: end;
-        padding-right: 5px;
-        color:rgb(255, 255, 255);
-        font-weight: bold;
-    }
+form#questionnaireForm {
+    margin-top: 50px;
+}
 
-    .fadein {
-        animation: fadeIn 0.3s ease-in;
-        animation-fill-mode: forwards;
-    }
-
-    @keyframes fadeIn {  
-        from {  
-            opacity:0;  
-        }  
-    
-        to {  
-            opacity:1;  
-        }  
-    }
-
-    nav.list a:hover {
-        background-color:rgb(66, 52, 131);
-        color: rgb(193, 183, 237);
-    }
-
-    nav.list a {
-        padding: 10px;
-        min-width: 70px;
-        background-color: none;
-        margin-left: 5px;
-        text-decoration: none;
-        color: rgb(135, 135, 255);
-        transition: background-color 0.2s;
-    }
-
-    #list-h1 {
-        margin-top: 150px;
-        margin-bottom: 50px;
-    }
-
-    ul#questionnaireList {
-        display: grid;
-        row-gap: 5px;
-        list-style: none;
-        overflow-y: auto;
-        padding: 0;
-    }
-
-    ul#questionnaireList li {
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin: 0 auto;
-        max-width: 700px;
-        min-width: 600px;
-        transition: background-color 0.3s; /* Add transition for smoother effect */
-    }
-
-    ul#questionnaireList li a {
-        display: block;
-        text-decoration: none;
-        color: #333;
-        padding: 10px;
-    }
-
-    ul#questionnaireList li:hover {
-        background-color: rgb(113, 71, 230); /* Change background on hover */
-    }
-
-    ul#questionnaireList li a:hover {
-        color: white;
-    }
-
-    .create-title {
-        margin-top: 100px;
-    }
-
-    form#questionnaireForm {
-        margin-top: 50px;
-    }
-
-    .footer {
-        display: flex;
-        width: 100%;
-        min-height: 70px;
-        min-width: 800px;
-        background-image: linear-gradient(to right, rgb(17, 10, 39) , rgb(17, 10, 48), rgb(13, 8, 32));
-        justify-content: center;
-        align-items:center;
-        margin-bottom: 30px;
-        /*background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+.footer {
+    display: flex;
+    width: 100%;
+    min-height: 70px;
+    min-width: 800px;
+    background-image: linear-gradient(to right, rgb(17, 10, 39), rgb(17, 10, 48), rgb(13, 8, 32));
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    /*background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
         */
-    }
+}
 
-    .que-title {
-        display: flex;
-        margin-bottom: 30px;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        text-shadow: 0 2px 10px rgb(31, 25, 56);
-    }
+.que-title {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgb(31, 25, 56);
+}
 
-    #title {
-        margin-left: 5px;
-        margin-right: 30px;
-        background-color: rgb(214, 206, 250);
-        border: solid 1px white;
-        border-radius: 1px;
-        box-shadow: 0 2px 10px rgb(48, 31, 114);
-    }
+#title {
+    margin-left: 5px;
+    margin-right: 30px;
+    background-color: rgb(214, 206, 250);
+    border: solid 1px white;
+    border-radius: 1px;
+    box-shadow: 0 2px 10px rgb(48, 31, 114);
+}
 
-    #questions {
-        max-height: 320px;
-        min-height: 320px;
-        overflow-y: auto;
-        background-color: rgb(44, 31, 99);
-        padding: 30px;
-        border: solid 1.25px rgb(32, 21, 80);
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-    }
+#questions {
+    max-height: 320px;
+    min-height: 320px;
+    overflow-y: auto;
+    background-color: rgb(44, 31, 99);
+    padding: 30px;
+    border: solid 1.25px rgb(32, 21, 80);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
 
-    .question {
-        background-image: linear-gradient(to right, rgb(27, 15, 65) , rgb(28, 17, 78), rgb(27, 15, 65));
-        color: white;
-        padding: 40px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-    }
+.question {
+    background-image: linear-gradient(to right, rgb(27, 15, 65), rgb(28, 17, 78), rgb(27, 15, 65));
+    color: white;
+    padding: 40px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
 
-    .btn {
-        margin-right: 30px;
-        width: 150px;
-        padding: 10px;
-        background-color:rgb(172, 159, 230);
-        border-radius: 10px;
-        border: none;
-        transition: background-color 0.3s;
-    }
+.btn {
+    margin-right: 30px;
+    width: 150px;
+    padding: 10px;
+    background-color: rgb(172, 159, 230);
+    border-radius: 10px;
+    border: none;
+    transition: background-color 0.3s;
+}
 
-    .btn:hover {
-        background-color: rgb(109, 95, 172);
-        color: white;
-        text-shadow: 0 2px 10px rgb(31, 25, 56);
-        cursor: pointer;
-    }
+.btn:hover {
+    background-color: rgb(109, 95, 172);
+    color: white;
+    text-shadow: 0 2px 10px rgb(31, 25, 56);
+    cursor: pointer;
+}
 
-    .hide {
-        display: none;
-    }
+.hide {
+    display: none;
+}
 
-    .logout {
-        position: relative;
-        left: 675px;
-        font-family: 'Dosis', sans-serif;
-        font-size: 16px;
-        background-color: rgb(34, 23, 83);
-        border: solid 2px rgb(133, 104, 226);
-        color: rgb(218, 204, 237);
-        font-weight: bold;
-        text-shadow: 0vh 5px 10px rgb(17, 5, 44);
-        padding: 16px;
-        border-radius: 6px;
-    }
+.logout {
+    position: relative;
+    left: 675px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px;
+    background-color: rgb(34, 23, 83);
+    border: solid 2px rgb(133, 104, 226);
+    color: rgb(218, 204, 237);
+    font-weight: bold;
+    text-shadow: 0vh 5px 10px rgb(17, 5, 44);
+    padding: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-    .logout:hover {
-        background-color: rgb(20, 13, 51);
-        transition: background-color 0.2s;
-    }
+.logout:hover {
+    background-color: rgb(20, 13, 51);
+    transition: background-color 0.2s;
+}
 
-    .lg-movedown {
-        animation-name: fadeIn;
-        animation-duration: 0.5s;
-        animation-fill-mode: forwards;
-    }
+.lg-movedown {
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
 
-    .type {
-        font-family: 'Dosis', sans-serif;
-        margin-right: 30px;
-        padding: 2px;
-        font-size: 11px;
-        background-color: rgb(221, 211, 236);
-        border-radius: 3px;
-        border: solid 1px black;
-    }
+.type {
+    font-family: 'Dosis', sans-serif;
+    margin-right: 30px;
+    padding: 2px;
+    font-size: 10px;
+    background-color: rgb(221, 211, 236);
+    border-radius: 5px;
+    border: solid 1px black;
+}
 
+input {
+    font-family: 'Dosis', sans-serif;
+    height: 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(221, 211, 236);
+    box-shadow: 0 5px 20px rgb(20, 13, 49);
 }
 
 @media screen and (max-width: 2560px) {
+
     body,
     ul {
         margin: 0;
@@ -323,13 +339,13 @@
     }
 
     #title-container {
-        background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+        background-image: linear-gradient(to right, rgb(19, 11, 46), rgb(26, 15, 73), rgb(19, 11, 46));
         display: flex;
         margin-top: 18%;
         height: 120px;
         justify-content: center;
         align-items: center;
-        
+
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
@@ -364,7 +380,7 @@
         align-items: center;
         background-image: radial-gradient(rgb(47, 33, 107), rgb(15, 9, 43));
         margin-top: 0px;
-        overflow-x:auto;
+        overflow-x: auto;
         padding-top: 50px;
         padding-bottom: 50px;
         font-size: 25px;
@@ -390,13 +406,13 @@
     }
 
     .list-header {
-        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         min-width: 800px;
-        height: 50px;
-        background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
+        height: 60px;
+        font-size: 20px;
+        background-image: linear-gradient(to right, rgb(19, 11, 46), rgb(26, 15, 73), rgb(19, 11, 46));
         box-shadow: 0 10px 20px rgb(34, 27, 65);
     }
 
@@ -407,16 +423,21 @@
     }
 
     @keyframes header-movedown {
-        from {top: -50px;}
-        to {top: 0px;}
+        from {
+            top: -50px;
+        }
+
+        to {
+            top: 0px;
+        }
     }
 
     nav.list {
         display: flex;
-        padding-top:5px;
+        padding-top: 5px;
         justify-content: end;
         padding-right: 5px;
-        color:rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
         font-weight: bold;
     }
 
@@ -425,23 +446,24 @@
         animation-fill-mode: forwards;
     }
 
-    @keyframes fadeIn {  
-        from {  
-            opacity:0;  
-        }  
-    
-        to {  
-            opacity:1;  
-        }  
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 
     nav.list a:hover {
-        background-color:rgb(66, 52, 131);
+        background-color: rgb(66, 52, 131);
         color: rgb(193, 183, 237);
     }
 
     nav.list a {
         padding: 10px;
+        padding-bottom: 10px;
         min-width: 70px;
         background-color: none;
         margin-left: 5px;
@@ -470,7 +492,8 @@
         margin: 0 auto;
         max-width: 700px;
         min-width: 600px;
-        transition: background-color 0.3s; /* Add transition for smoother effect */
+        transition: background-color 0.3s;
+        /* Add transition for smoother effect */
     }
 
     ul#questionnaireList li a {
@@ -481,7 +504,8 @@
     }
 
     ul#questionnaireList li:hover {
-        background-color: rgb(113, 71, 230); /* Change background on hover */
+        background-color: rgb(113, 71, 230);
+        /* Change background on hover */
     }
 
     ul#questionnaireList li a:hover {
@@ -501,9 +525,9 @@
         width: 100%;
         min-height: 70px;
         min-width: 800px;
-        background-image: linear-gradient(to right, rgb(17, 10, 39) , rgb(17, 10, 48), rgb(13, 8, 32));
+        background-image: linear-gradient(to right, rgb(17, 10, 39), rgb(17, 10, 48), rgb(13, 8, 32));
         justify-content: center;
-        align-items:center;
+        align-items: center;
         margin-bottom: 30px;
         /*background-image: linear-gradient(to right, rgb(19, 11, 46) , rgb(26, 15, 73), rgb(19, 11, 46));
         */
@@ -540,7 +564,7 @@
     }
 
     .question {
-        background-image: linear-gradient(to right, rgb(27, 15, 65) , rgb(28, 17, 78), rgb(27, 15, 65));
+        background-image: linear-gradient(to right, rgb(27, 15, 65), rgb(28, 17, 78), rgb(27, 15, 65));
         color: white;
         padding: 50px;
         font-size: 25px;
@@ -553,7 +577,7 @@
         width: 200px;
         padding: 10px;
         font-size: 17px;
-        background-color:rgb(172, 159, 230);
+        background-color: rgb(172, 159, 230);
         border-radius: 10px;
         border: none;
         transition: background-color 0.3s;
@@ -599,10 +623,15 @@
     }
 
     @keyframes lg-movedown {
-        from {top: 500px;
-        opacity: 0;}
-        to {top: 668px;
-        opacity: 1;}
+        from {
+            top: 500px;
+            opacity: 0;
+        }
+
+        to {
+            top: 668px;
+            opacity: 1;
+        }
     }
 
     .option-item {
@@ -618,11 +647,9 @@
         border-radius: 5px;
         border: solid 1px black;
     }
-
 }
 
-
-/*
+    /*
 @media screen and (min-width: 2000px) {
     /* Médiakérés példa: max 1200px széles kijelző */
     /*#title-container {
