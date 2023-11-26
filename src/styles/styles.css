@@ -1,5 +1,5 @@
 
-@media screen and (min-width: 1px) and (max-width: 2559px) {
+@media screen and (min-width: 1px) and (max-width: 1920px) {
     body,
     ul {
         margin: 0;
@@ -334,7 +334,7 @@
     }
 }
 
-@media screen and (min-width: 2560px) {
+@media screen and (min-width: 1920px) {
 
     body,
     ul {
@@ -349,8 +349,8 @@
         background-color: rgb(58, 41, 122);
         text-align: center;
         margin: 0 auto;
-        max-width: 1400px;
-        min-width: 1200px;
+        max-width: 800px;
+        min-width: 700px;
         overflow-y: auto;
         overflow-x: auto;
     }
@@ -401,8 +401,8 @@
         padding-top: 50px;
         padding-bottom: 50px;
         font-size: 25px;
-        max-width: 1400px;
-        min-width: 1200px;
+        max-width: 800px;
+        min-width: 700px;
         border: solid 4px rgb(133, 104, 226);
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -620,7 +620,7 @@
 
     .logout {
         position: relative;
-        left: 1100px;
+        left: 640px;
         font-family: 'Dosis', sans-serif;
         font-size: 24px;
         background-color: rgb(34, 23, 83);
@@ -630,7 +630,7 @@
         text-shadow: 0vh 5px 10px rgb(17, 5, 44);
         padding: 16px;
         border-radius: 6px;
-        top: 713px;
+        top: 600px;
         cursor: pointer;
     }
 
