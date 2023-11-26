@@ -587,7 +587,6 @@ app.post("/api/loginUser", (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
-    console.log(req.session.userId + " logged out")
     req.session.userId = -1;
     res.redirect('/');
 });
