@@ -1,3 +1,4 @@
+
 @media screen and (max-width: 1920px) {
     body,
     ul {
@@ -319,12 +320,20 @@
         height: 20px;
         border-radius: 4px;
         border: none;
+
         background-color: rgb(221, 211, 236);
         box-shadow: 0 5px 20px rgb(20, 13, 49);
     }
+
+    .opt {
+        font-family: 'Dosis', sans-serif;
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
+    }
 }
 
-@media screen and (max-width: 2560px) {
+@media screen and (min-width: 2000px) and (max-width: 2560px) {
 
     body,
     ul {
@@ -414,6 +423,7 @@
 
     .list-header {
         position: fixed;
+        z-index: 10;
         top: 0;
         left: 0;
         width: 100%;
@@ -578,7 +588,7 @@
         background-image: linear-gradient(to right, rgb(27, 15, 65), rgb(28, 17, 78), rgb(27, 15, 65));
         color: white;
         padding: 50px;
-        font-size: 25px;
+        font-size: 30px;
         margin-bottom: 20px;
         border-radius: 5px;
     }
@@ -620,6 +630,7 @@
         padding: 16px;
         border-radius: 6px;
         top: 713px;
+        cursor: pointer;
     }
 
     .logout:hover {
@@ -649,7 +660,7 @@
         font-family: 'Dosis', sans-serif;
         margin-right: 45px;
         padding: 3px;
-        font-size: 15px;
+        font-size: 20px;
         background-color: rgb(221, 211, 236);
         border-radius: 5px;
         border: solid 1px black;
@@ -658,6 +669,16 @@
 
     .del:hover {
         background-color: rgb(158, 145, 177);
+        transition: background-color 0.2s;
+    }
+
+    .opt {
+        font-family: 'Dosis', sans-serif;
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 18px;
+        margin: 20px;
     }
 
     input {
@@ -665,6 +686,8 @@
         height: 20px;
         border-radius: 4px;
         border: none;
+        font-size: 20px;
+        height: 25px;
         background-color: rgb(221, 211, 236);
         box-shadow: 0 5px 20px rgb(20, 13, 49);
     }
