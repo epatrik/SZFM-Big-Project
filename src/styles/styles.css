@@ -321,16 +321,35 @@
         height: 20px;
         border-radius: 4px;
         border: none;
-
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-right: 10px;
         background-color: rgb(221, 211, 236);
-        box-shadow: 0 5px 20px rgb(20, 13, 49);
+    }
+
+    .option-remove {
+        font-family: 'Dosis', sans-serif;
+        border: none;
+
     }
 
     .opt {
+        margin-top: 8px;
         font-family: 'Dosis', sans-serif;
         border: none;
         border-radius: 3px;
-        padding: 10px;
+        padding: 5px;
+    }
+
+    button {
+        font-family: 'Dosis', sans-serif;
+        border: none;
+        border-radius: 3px;
+    }
+
+    button:hover {
+        background-color: rgb(158, 145, 177);
+
     }
 }
 
@@ -674,24 +693,34 @@
         transition: background-color 0.2s;
     }
 
-    .opt {
-        font-family: 'Dosis', sans-serif;
-        border: none;
-        border-radius: 3px;
-        padding: 10px;
-        font-size: 18px;
-        margin: 20px;
-    }
-
     input {
         font-family: 'Dosis', sans-serif;
         height: 20px;
         border-radius: 4px;
         border: none;
-        font-size: 20px;
-        height: 25px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-right: 10px;
         background-color: rgb(221, 211, 236);
-        box-shadow: 0 5px 20px rgb(20, 13, 49);
+    }
+
+    button {
+        font-family: 'Dosis', sans-serif;
+        border: none;
+        border-radius: 3px;
+    }
+
+    button:hover {
+        background-color: rgb(158, 145, 177);
+
+    }
+
+    .opt {
+        margin-top: 8px;
+        font-family: 'Dosis', sans-serif;
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
     }
 
 }
