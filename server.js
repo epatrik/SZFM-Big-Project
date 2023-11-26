@@ -277,7 +277,7 @@ app.get('/api/questionnaireData/:id', async (req, res) => {
 app.get('/api/answers/:id', (req, res) => {
     const questionnaireId = req.params.id;
     const userIdQuery = 'SELECT userId FROM questionnaires WHERE id = ?';
-    
+
     db.get(userIdQuery, [questionnaireId], (err, userIdOfQuestionnaire) => {
         if (err) {
             console.error(err.message);
@@ -330,22 +330,22 @@ app.get('/results/:index', (req, res) => {
 app.post('/update-questionnaire', (req, res) => {
     const updatedData = req.body; // Assuming the request body contains the updated data
     const { id, isActive, isPublic } = updatedData;
-  
+
     // Update the questionnaire in the database
     db.run(
-      'UPDATE questionnaires SET isActive = ?, isPublic = ? WHERE id = ?',
-      [isActive, isPublic, id],
-      (err) => {
-        if (err) {
-          console.error('Error updating questionnaire:', err.message);
-          res.status(500).json({ error: 'Internal Server Error' });
-        } else {
-          //console.log('Questionnaire updated successfully');
-          res.json({ message: 'Update successful' });
+        'UPDATE questionnaires SET isActive = ?, isPublic = ? WHERE id = ?',
+        [isActive, isPublic, id],
+        (err) => {
+            if (err) {
+                console.error('Error updating questionnaire:', err.message);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                //console.log('Questionnaire updated successfully');
+                res.json({ message: 'Update successful' });
+            }
         }
-      }
     );
-  });
+});
 
 app.post('/api/submit', async (req, res) => {
     const questionnaireId = parseInt(req.body.questionnaireId);
@@ -555,7 +555,7 @@ app.post('/api/createUser', async (req, res) => {
                         console.error(error);
                         return res.json("Szerver hiba"); // Internal Server Error
                     }
-    
+
                     console.log('Inserted row ID:', this.lastID);
                     return res.json("Created"); // Created
                 });
