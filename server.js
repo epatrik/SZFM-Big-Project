@@ -154,8 +154,8 @@ app.get('/my-questionnaires', (req, res) => {
 });
 
 app.get('/api/my-questionnaires', (req, res) => {
-    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE userId = -1 ORDER BY id DESC';
-    db.all(sqlSelectQuestionnaires, [], (err, rows) => {
+    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE userId = ? ORDER BY id DESC';
+    db.all(sqlSelectQuestionnaires, [req.session.userId], (err, rows) => {
         if (err) {
             console.error(err.message);
             return res.status(500).send('Internal Server Error');
