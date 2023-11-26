@@ -56,6 +56,7 @@ function addOption(element) {
         const removeOptionBtn = document.createElement('button');
         removeOptionBtn.type = 'button';
         removeOptionBtn.textContent = 'Törlés';
+        removeOptionBtn.classList.add('option-remove');
         removeOptionBtn.onclick = function() {
             removeOption(this);
             renumberOptions(optionsDiv); // Update numbering after removing an option
