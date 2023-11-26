@@ -318,11 +318,11 @@ app.get('/results/:index', (req, res) => {
             return res.status(500).send('Internal Server Error');
         }
 
-        if (userIdOfQuestionnaire.userId == req.session.userId) {
-            res.sendFile(path.join(__dirname, 'src', 'results.html'));
+        if (userIdOfQuestionnaire == undefined || userIdOfQuestionnaire.userId != req.session.userId) {
+            res.redirect('/')
         }
         else {
-            res.redirect('/')
+            res.sendFile(path.join(__dirname, 'src', 'results.html'));
         }
     })
 });
@@ -527,6 +527,43 @@ app.post('/api/createQuestionnaire', (req, res) => {
         });
 
         res.redirect('/');
+    });
+});
+
+app.post('/api/deleteQuestionnaire/:id', (req, res) => {
+    const questionnaireId = req.params.id;
+  
+    const sqlDeleteQuestionnaire = 'DELETE FROM questionnaires WHERE id = ?';
+    const sqlDeleteQuestions = 'DELETE FROM questions WHERE questionnaireId = ?';
+    const sqlDeleteOptions = 'DELETE FROM options WHERE questionnaireId = ?';
+    const sqlDeleteAnswers = 'DELETE FROM answers WHERE questionnaireId = ?';
+    db.run(sqlDeleteQuestionnaire, [questionnaireId], (err) => {
+        if (err) {
+            console.error('Error deleting questionnaire:', err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+  
+        db.run(sqlDeleteQuestions, [questionnaireId], (err) => {
+            if (err) {
+            console.error('Error deleting questions:', err.message);
+            return res.status(500).send('Internal Server Error');
+            }
+    
+            db.run(sqlDeleteOptions, [questionnaireId], (err) => {
+                if (err) {
+                console.error('Error deleting options:', err.message);
+                return res.status(500).send('Internal Server Error');
+                }
+                
+                db.run(sqlDeleteAnswers, [questionnaireId], (err) => {
+                    if (err) {
+                    console.error('Error deleting answers:', err.message);
+                    return res.status(500).send('Internal Server Error');
+                    }
+                });
+            });
+        });
+        return res.sendStatus(200);
     });
 });
 
