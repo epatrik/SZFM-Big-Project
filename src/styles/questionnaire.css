@@ -45,9 +45,11 @@ select {
     box-sizing: border-box;
     border-radius: 4px;
     margin-top: 5px;
+    font-family: 'Dosis', sans-serif;
 }
 
 button {
+    font-family: 'Dosis', sans-serif;
     padding: 10px 20px;
     background-color: rgb(101, 76, 214);
     color: #fff;
@@ -77,3 +79,44 @@ button:hover {
         opacity:1;  
     }  
  }
+
+@media screen and (max-width: 2560px) {
+
+    #questionnaireForm {
+        width: 70%;
+        margin: 0 auto;
+        background-color: rgb(200, 193, 232);
+        border: 1px solid #ccc;
+        padding: 30px;
+        border-radius: 5px;
+        margin-bottom: 50px;
+        font-size: 28px;
+    }
+
+    button {
+        font-family: 'Dosis', sans-serif;
+        padding: 10px 20px;
+        background-color: rgb(101, 76, 214);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 30px;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+    }
+
+    input,
+    select {
+        width: 100%;
+        background-color: rgb(178, 171, 212);
+        border: solid 1px rgb(109, 102, 141);
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+}
