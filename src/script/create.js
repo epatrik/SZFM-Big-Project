@@ -1,4 +1,4 @@
-let questionNumber = 1;
+let questionNumber = 0;
 
 function addQuestion() {
     questionNumber++;
@@ -19,7 +19,7 @@ function addQuestion() {
         <button type="button" onclick="removeQuestion(this)" class="type del">Kérdés törlése</button>
         <div class="options" style="display: none;">
             <div class="option-item">
-                <input type="text" name="options[${questionNumber - 1}][]" placeholder="1. opció">
+                <input type="text" name="options[${questionNumber - 1}][]" placeholder="1. opció" autocomplete="off">
             </div>
             <button type="button" onclick="addOption(this)" class="opt">Új opció</button>
         </div>
@@ -57,7 +57,7 @@ function addOption(element) {
         removeOptionBtn.type = 'button';
         removeOptionBtn.textContent = 'Törlés';
         removeOptionBtn.classList.add('option-remove');
-        removeOptionBtn.onclick = function() {
+        removeOptionBtn.onclick = function () {
             removeOption(this);
             renumberOptions(optionsDiv); // Update numbering after removing an option
         };
@@ -113,7 +113,7 @@ window.addEventListener('load', function () {
     // Add the new event listener for form submission
     document.getElementById('questionnaireForm').addEventListener('submit', function () {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        
+
         checkboxes.forEach((checkbox) => {
             if (!checkbox.checked) {
                 // If checkbox is unchecked, add a hidden input with a default value
