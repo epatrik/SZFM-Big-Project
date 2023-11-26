@@ -1,3 +1,5 @@
+@media screen and (max-width: 1920px) {
+
 body {
   background-color: rgb(58, 41, 122);
   font-family: 'Dosis', sans-serif;
@@ -78,22 +80,88 @@ body {
   background-color: #f0f0f0;
 }
 
-@media screen and (max-width: 2560px) {
+}
 
+@media screen and (min-width: 1920px) {
+
+  body {
+    background-color: rgb(58, 41, 122);
+    font-family: 'Dosis', sans-serif;
+  }
+  
+  /* Style for the main results div */
   #resultsDiv {
     background-color: rgb(178, 171, 212);
     margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 30px;
   }
-
+  
+  
+  
+  /* Style for the breakdown table */
   .breakdown-table {
     margin-bottom: 20px;
     border-collapse: collapse;
     width: 100%;
-    border: 1px solid #000000;
+  }
+  
+  .breakdown-table th,
+  .breakdown-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .breakdown-table th {
+    background-color: #f0f0f0;
+  }
+  
+  .breakdown-table td table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .breakdown-table td table td {
+    border: 1px solid #ccc;
+    padding: 6px;
+  }
+  
+  /* Style for the answers table */
+  .answers-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .answers-table th,
+  .answers-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .answers-table th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Style for the number stats table */
+  .number-stats-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .number-stats-table th,
+  .number-stats-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .number-stats-table th {
+    background-color: #f0f0f0;
   }
 
 }
