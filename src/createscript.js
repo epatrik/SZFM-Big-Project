@@ -9,14 +9,14 @@ function addQuestion() {
     div.innerHTML = `
         <label>${questionNumber}. kérdés:</label>
         <input type="text" name="question[]" required autocomplete="off">
-        <select name="type[]" required onchange="showOptions(this)">
+        <select name="type[]" required onchange="showOptions(this)" class="type">
             <option value="textInput">Szöveges bevitel</option>
             <option value="numberInput">Szám bevitel</option>
             <option value="multipleChoice">Több opció</option>
         </select>
         <label for="required">Kötelező:</label>
         <input type="checkbox" name="required[]" value="true">
-        <button type="button" onclick="removeQuestion(this)">Kérdés törlése</button>
+        <button type="button" onclick="removeQuestion(this)" class="type">Kérdés törlése</button>
         <div class="options" style="display: none;">
             <div class="option-item">
                 <input type="text" name="options[${questionNumber - 1}][]" placeholder="1. opció">
