@@ -255,11 +255,11 @@ function createUpdateField(questionnaireId, isActive, isPublic) {
   // Create delete button
   const deleteButton = document.createElement('button');
   deleteButton.type = 'button'; // Set the type to button
-  deleteButton.textContent = 'Delete Questionnaire';
+  deleteButton.textContent = 'Kérdőív törlése';
 
   // Add event listener for delete button
   deleteButton.addEventListener('click', async function () {
-    const confirmation = confirm('Are you sure you want to delete this questionnaire?');
+    const confirmation = confirm('Biztos törölni akarod a kérdőívet?');
 
     if (confirmation) {
       deleteQuestionnaire(questionnaireId);
