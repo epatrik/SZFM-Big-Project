@@ -147,27 +147,37 @@ app.get('/api/questionnaires', (req, res) => {
 });
 
 app.get('/my-questionnaires', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'my-questionnaires.html'));
+    if (req.session.userId != -1) {
+        res.sendFile(path.join(__dirname, 'src', 'my-questionnaires.html'));
+    }
+    else {
+        res.redirect('/')
+    }
 });
 
 app.get('/api/my-questionnaires', (req, res) => {
-    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE userId = ? ORDER BY id DESC';
-    db.all(sqlSelectQuestionnaires, [req.session.userId], (err, rows) => {
-        if (err) {
-            console.error(err.message);
-            return res.status(500).send('Internal Server Error');
-        }
+    if (req.session.userId != -1) {
+        const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE userId = ? ORDER BY id DESC';
+        db.all(sqlSelectQuestionnaires, [req.session.userId], (err, rows) => {
+            if (err) {
+                console.error(err.message);
+                return res.status(500).send('Internal Server Error');
+            }
 
-        const questionnairesData = rows.map(row => ({
-            id: row.id,
-            userId: row.userId,
-            isActive: row.isActive === 1,
-            isPublic: row.isPublic === 1,
-            title: row.title,
-        }));
+            const questionnairesData = rows.map(row => ({
+                id: row.id,
+                userId: row.userId,
+                isActive: row.isActive === 1,
+                isPublic: row.isPublic === 1,
+                title: row.title,
+            }));
 
-        res.json(questionnairesData);
-    });
+            res.json(questionnairesData);
+        });
+    }
+    else {
+        res.redirect('/')
+    }
 });
 
 app.get('/login', (req, res) => {
@@ -189,95 +199,79 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/questionnaire/:index', (req, res) => {
-    const userIdQuery = 'SELECT userId FROM questionnaires WHERE id = ?';
-    db.get(userIdQuery, [req.params.index], (err, userIdOfQuestionnaire) => {
-        if (err) {
-            console.error(err.message);
-            return res.status(500).send('Internal Server Error');
-        }
-
-        if (userIdOfQuestionnaire.userId == req.session.userId || userIdOfQuestionnaire.userId == -1) {
-            res.sendFile(path.join(__dirname, 'src', 'questionnaire.html'));
-        }
-        else {
-            res.redirect('/')
-        }
-    })
+    if (req.session.userId != -1) {
+        res.sendFile(path.join(__dirname, 'src', 'questionnaire.html'));
+    }
+    else {
+        res.redirect('/')
+    }
 });
 
 app.get('/api/questionnaireData/:id', async (req, res) => {
     const questionnaireId = req.params.id;
-    const userIdQuery = 'SELECT userId FROM questionnaires WHERE id = ?';
-    db.get(userIdQuery, [questionnaireId], (err, userIdOfQuestionnaire) => {
-        if (err) {
-            console.error(err.message);
-            return res.status(500).send('Internal Server Error');
-        }
+    if (req.session.id != -1) {
+        const sqlSelectQuestionnaire = 'SELECT * FROM questionnaires WHERE id = ?';
+        db.get(sqlSelectQuestionnaire, [questionnaireId], async (err, row) => {
+            if (err) {
+                console.error('Error fetching questionnaire:', err.message);
+                return res.status(500).send('Internal Server Error');
+            }
 
-        if (userIdOfQuestionnaire.userId == req.session.userId || userIdOfQuestionnaire.userId == -1) {
-            const sqlSelectQuestionnaire = 'SELECT * FROM questionnaires WHERE id = ?';
-            db.get(sqlSelectQuestionnaire, [questionnaireId], async (err, row) => {
-                if (err) {
-                    console.error('Error fetching questionnaire:', err.message);
-                    return res.status(500).send('Internal Server Error');
-                }
+            if (!row) {
+                return res.status(404).send('Questionnaire not found');
+            }
 
-                if (!row) {
-                    return res.status(404).send('Questionnaire not found');
-                }
+            const questionnaireData = {
+                id: row.id,
+                userId: row.userId,
+                isActive: row.isActive === 1,
+                isPublic: row.isPublic === 1,
+                title: row.title,
+                questions: [],
+            };
 
-                const questionnaireData = {
-                    id: row.id,
-                    userId: row.userId,
-                    isActive: row.isActive === 1,
-                    isPublic: row.isPublic === 1,
-                    title: row.title,
-                    questions: [],
+            const sqlSelectQuestions = 'SELECT * FROM questions WHERE questionnaireId = ?';
+            const questionRows = await new Promise((resolve) => {
+                db.all(sqlSelectQuestions, [questionnaireId], (err, rows) => {
+                    resolve(rows);
+                });
+            });
+
+            for (const questionRow of questionRows) {
+                const question = {
+                    id: questionRow.id,
+                    question: questionRow.question,
+                    type: questionRow.type,
+                    required: questionRow.required === 1,
+                    options: [], // Add this line
                 };
 
-                const sqlSelectQuestions = 'SELECT * FROM questions WHERE questionnaireId = ?';
-                const questionRows = await new Promise((resolve) => {
-                    db.all(sqlSelectQuestions, [questionnaireId], (err, rows) => {
-                        resolve(rows);
-                    });
-                });
-
-                for (const questionRow of questionRows) {
-                    const question = {
-                        id: questionRow.id,
-                        question: questionRow.question,
-                        type: questionRow.type,
-                        required: questionRow.required === 1,
-                        options: [], // Add this line
-                    };
-
-                    // Fetch options for multiple-choice questions using JOIN
-                    if (question.type === 'multipleChoice') {
-                        const sqlSelectOptions = 'SELECT value FROM options WHERE questionnaireId = ? AND questionId = ?';
-                        const optionRows = await new Promise((resolve) => {
-                            db.all(sqlSelectOptions, [questionnaireId, question.id], (err, rows) => {
-                                resolve(rows);
-                            });
+                // Fetch options for multiple-choice questions using JOIN
+                if (question.type === 'multipleChoice') {
+                    const sqlSelectOptions = 'SELECT value FROM options WHERE questionnaireId = ? AND questionId = ?';
+                    const optionRows = await new Promise((resolve) => {
+                        db.all(sqlSelectOptions, [questionnaireId, question.id], (err, rows) => {
+                            resolve(rows);
                         });
+                    });
 
-                        if (optionRows.length > 0) {
-                            question.options = optionRows.map(optionRow => optionRow.value);
-                            //console.log('Question Options:', question.options);
-                        }
+                    if (optionRows.length > 0) {
+                        question.options = optionRows.map(optionRow => optionRow.value);
+                        //console.log('Question Options:', question.options);
                     }
-
-                    questionnaireData.questions.push(question);
                 }
 
-                //console.log('Questionnaire Data:', questionnaireData); // Log questionnaire data
+                questionnaireData.questions.push(question);
+            }
 
-                res.json(questionnaireData);
-            });
-        }
-        else {
-            res.redirect('/')
-        }
-    })
+            //console.log('Questionnaire Data:', questionnaireData); // Log questionnaire data
+
+            res.json(questionnaireData);
+        });
+    }
+    else {
+        res.redirect('/')
+    }
 });
 
 app.get('/api/answers/:id', (req, res) => {
@@ -290,7 +284,7 @@ app.get('/api/answers/:id', (req, res) => {
             return res.status(500).send('Internal Server Error');
         }
 
-        if (userIdOfQuestionnaire.userId == req.session.userId || userIdOfQuestionnaire.userId == -1) {
+        if (userIdOfQuestionnaire.userId == req.session.userId) {
             // Fetch answers data from the database based on the provided questionnaire ID
             const sqlSelectAnswers = 'SELECT * FROM answers WHERE questionnaireId = ?';
             db.all(sqlSelectAnswers, [questionnaireId], (err, rows) => {
@@ -324,7 +318,7 @@ app.get('/results/:index', (req, res) => {
             return res.status(500).send('Internal Server Error');
         }
 
-        if (userIdOfQuestionnaire.userId == req.session.userId || userIdOfQuestionnaire.userId == -1) {
+        if (userIdOfQuestionnaire.userId == req.session.userId) {
             res.sendFile(path.join(__dirname, 'src', 'results.html'));
         }
         else {
