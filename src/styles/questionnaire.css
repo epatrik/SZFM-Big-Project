@@ -1,3 +1,5 @@
+@media screen and (max-width: 1920px) {
+
 body {
     font-family: 'Dosis', sans-serif;
     background-color: rgb(58, 41, 122);
@@ -79,6 +81,8 @@ button:hover {
         opacity:1;  
     }  
  }
+
+}
 
 @media screen and (max-width: 2560px) {
 

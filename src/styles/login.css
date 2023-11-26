@@ -1,3 +1,5 @@
+@media screen and (max-width: 1920px) {
+
 *{
     margin: 0;
     padding: 0;
@@ -120,6 +122,8 @@ input:focus::placeholder{
         opacity:1;  
     }  
  }
+
+}
 
  @media screen and (max-width: 2560px) {
 

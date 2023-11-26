@@ -77,3 +77,23 @@ body {
 .number-stats-table th {
   background-color: #f0f0f0;
 }
+
+@media screen and (max-width: 2560px) {
+
+  #resultsDiv {
+    background-color: rgb(178, 171, 212);
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 30px;
+  }
+
+  .breakdown-table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #000000;
+  }
+
+}
