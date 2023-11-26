@@ -248,7 +248,6 @@ function createUpdateField(questionnaireId, isActive, isPublic) {
       isPublic: event.target.isPublic.checked,
       // Add other fields as needed
     };
-    console.log(updatedData);
     // Call a function to handle the update in the database
     updateQuestionnaireData(updatedData);
   });
@@ -277,7 +276,7 @@ function updateQuestionnaireData(updatedData) {
   })
     .then(response => response.json())
     .then(data => {
-      console.log('Update successful:', data);
+      //console.log('Update successful:', data);
       // Add any additional logic you need after a successful update
     })
     .catch(error => {

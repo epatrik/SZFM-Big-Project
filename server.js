@@ -331,7 +331,6 @@ app.get('/results/:index', (req, res) => {
 app.post('/update-questionnaire', (req, res) => {
     const updatedData = req.body; // Assuming the request body contains the updated data
     const { id, isActive, isPublic } = updatedData;
-    console.log(updatedData);
   
     // Update the questionnaire in the database
     db.run(
@@ -342,7 +341,7 @@ app.post('/update-questionnaire', (req, res) => {
           console.error('Error updating questionnaire:', err.message);
           res.status(500).json({ error: 'Internal Server Error' });
         } else {
-          console.log('Questionnaire updated successfully');
+          //console.log('Questionnaire updated successfully');
           res.json({ message: 'Update successful' });
         }
       }
