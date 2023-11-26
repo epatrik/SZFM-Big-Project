@@ -1,4 +1,3 @@
-console.log('Script file loaded.');
 const loginButton = document.getElementById("login");
 const createButton = document.getElementById("create");
 const dataButton = document.getElementById("data");
