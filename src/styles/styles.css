@@ -300,12 +300,17 @@ form#questionnaireForm {
 
 .type {
     font-family: 'Dosis', sans-serif;
-    margin-right: 30px;
-    padding: 2px;
-    font-size: 10px;
+    margin-right: 45px;
+    padding: 3px;
+    font-size: 15px;
     background-color: rgb(221, 211, 236);
     border-radius: 5px;
     border: solid 1px black;
+    cursor: pointer;
+}
+
+.del:hover {
+    background-color: rgb(158, 145, 177);
 }
 
 input {
@@ -332,8 +337,8 @@ input {
         background-color: rgb(58, 41, 122);
         text-align: center;
         margin: 0 auto;
-        max-width: 1200px;
-        min-width: 1000px;
+        max-width: 1400px;
+        min-width: 1200px;
         overflow-y: auto;
         overflow-x: auto;
     }
@@ -345,7 +350,6 @@ input {
         height: 120px;
         justify-content: center;
         align-items: center;
-
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
@@ -361,6 +365,7 @@ input {
 
     nav#kezdolap {
         margin-bottom: 20px;
+        min-height: 170px;
     }
 
     nav#kezdolap a {
@@ -384,8 +389,8 @@ input {
         padding-top: 50px;
         padding-bottom: 50px;
         font-size: 25px;
-        max-width: 1200px;
-        min-width: 1100px;
+        max-width: 1400px;
+        min-width: 1200px;
         border: solid 4px rgb(133, 104, 226);
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -410,8 +415,8 @@ input {
         left: 0;
         width: 100%;
         min-width: 800px;
-        height: 60px;
-        font-size: 20px;
+        height: 80px;
+        font-size: 24px;
         background-image: linear-gradient(to right, rgb(19, 11, 46), rgb(26, 15, 73), rgb(19, 11, 46));
         box-shadow: 0 10px 20px rgb(34, 27, 65);
     }
@@ -434,7 +439,7 @@ input {
 
     nav.list {
         display: flex;
-        padding-top: 5px;
+        padding-top: 14px;
         justify-content: end;
         padding-right: 5px;
         color: rgb(255, 255, 255);
@@ -490,8 +495,11 @@ input {
         border: 1px solid #ccc;
         border-radius: 5px;
         margin: 0 auto;
-        max-width: 700px;
-        min-width: 600px;
+        height: 50px;
+        max-width: 1100px;
+        min-width: 900px;
+        padding: 20px;
+        font-size: 20px;
         transition: background-color 0.3s;
         /* Add transition for smoother effect */
     }
@@ -523,7 +531,7 @@ input {
     .footer {
         display: flex;
         width: 100%;
-        min-height: 70px;
+        min-height: 80px;
         min-width: 800px;
         background-image: linear-gradient(to right, rgb(17, 10, 39), rgb(17, 10, 48), rgb(13, 8, 32));
         justify-content: center;
@@ -553,8 +561,8 @@ input {
     }
 
     #questions {
-        max-height: 560px;
-        min-height: 560px;
+        min-height: 750px;
+        max-height: 750px;
         overflow-y: auto;
         background-color: rgb(44, 31, 99);
         padding: 30px;
@@ -598,9 +606,9 @@ input {
 
     .logout {
         position: relative;
-        left: 1050px;
+        left: 1100px;
         font-family: 'Dosis', sans-serif;
-        font-size: 16px;
+        font-size: 24px;
         background-color: rgb(34, 23, 83);
         border: solid 2px rgb(133, 104, 226);
         color: rgb(218, 204, 237);
@@ -608,7 +616,7 @@ input {
         text-shadow: 0vh 5px 10px rgb(17, 5, 44);
         padding: 16px;
         border-radius: 6px;
-        top: 668px;
+        top: 713px;
     }
 
     .logout:hover {
@@ -634,10 +642,6 @@ input {
         }
     }
 
-    .option-item {
-        background-color: black;
-    }
-
     .type {
         font-family: 'Dosis', sans-serif;
         margin-right: 45px;
@@ -646,7 +650,22 @@ input {
         background-color: rgb(221, 211, 236);
         border-radius: 5px;
         border: solid 1px black;
+        cursor: pointer;
     }
+
+    .del:hover {
+        background-color: rgb(158, 145, 177);
+    }
+
+    input {
+        font-family: 'Dosis', sans-serif;
+        height: 20px;
+        border-radius: 4px;
+        border: none;
+        background-color: rgb(221, 211, 236);
+        box-shadow: 0 5px 20px rgb(20, 13, 49);
+    }
+
 }
 
     /*
