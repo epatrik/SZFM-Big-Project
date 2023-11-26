@@ -3,3 +3,6 @@
 
 # Ignore environment variables file
 .env
+
+#Ignore current sessions
+sessions

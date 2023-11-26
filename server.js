@@ -4,6 +4,8 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const dotenv = require('dotenv');
+const expressSession = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(expressSession);
 
 dotenv.config({ path: './.env' })
 
@@ -112,6 +114,12 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(expressSession({
+    secret: process.env.SESSION_SECRET || 'secret',
+    resave: false,
+    saveUninitialized: false,
+    store: new SQLiteStore()
+}));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'index.html'));
@@ -122,7 +130,31 @@ app.get('/list', (req, res) => {
 });
 
 app.get('/api/questionnaires', (req, res) => {
-    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE isActive = 1 AND isPublic = 1';
+    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE isActive = 1 AND isPublic = 1 ORDER BY id DESC';
+    db.all(sqlSelectQuestionnaires, [], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        const questionnairesData = rows.map(row => ({
+            id: row.id,
+            userId: row.userId,
+            isActive: row.isActive === 1,
+            isPublic: row.isPublic === 1,
+            title: row.title,
+        }));
+
+        res.json(questionnairesData);
+    });
+});
+
+app.get('/my-questionnaires', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'my-questionnaires.html'));
+});
+
+app.get('/api/my-questionnaires', (req, res) => {
+    const sqlSelectQuestionnaires = 'SELECT * FROM questionnaires WHERE userId = -1 ORDER BY id DESC';
     db.all(sqlSelectQuestionnaires, [], (err, rows) => {
         if (err) {
             console.error(err.message);
@@ -245,7 +277,7 @@ app.get('/results/:index', (req, res) => {
 
 app.post('/api/submit', async (req, res) => {
     const questionnaireId = parseInt(req.body.questionnaireId);
-    const userId = -1; //parseInt(req.body.userId); // Assuming userId is provided in the request body
+    const userId = parseInt(req.session.userId) || -1;
     // TODO
 
     // Check if the user is logged in (userId is not -1)
@@ -339,7 +371,7 @@ app.post('/api/createQuestionnaire', (req, res) => {
     const isPublic = req.body.isPublic === 'on';
 
     const newQuestionnaire = {
-        userId: -1, // TODO user ID implementation
+        userId: req.session.userId || -1,
         isActive: true,
         isPublic,
         title: req.body.title,
@@ -431,23 +463,29 @@ app.post('/api/createUser', async (req, res) => {
     db.get(sqlSearch, [username], async (error, row) => {
         if (error) {
             console.error(error);
-            return res.sendStatus(500); // Internal Server Error
+            return res.json("Szerver hiba"); // Internal Server Error
         }
 
-        if (row) {
-            console.log('Username already exists!');
-            return res.sendStatus(409); // Conflict
-        } else {
-            db.run(sqlInsert, [username, hashedPassword, email], function (error) {
-                if (error) {
-                    console.error(error);
-                    return res.sendStatus(500); // Internal Server Error
-                }
-
-                console.log('--------> Created new User');
-                console.log('Inserted row ID:', this.lastID);
-                return res.sendStatus(201); // Created
-            });
+        if (username == "" || hashedPassword == "" || email == "") {
+            console.log("Fill in all the fields")
+            return res.json("Töltsd ki az összes mezőt!")
+        }
+        else {
+            if (row) {
+                console.log('Username already exists!');
+                return res.json("Felhasználónév foglalt!")
+            } else {
+                db.run(sqlInsert, [username, hashedPassword, email], function (error) {
+                    if (error) {
+                        console.error(error);
+                        return res.json("Szerver hiba"); // Internal Server Error
+                    }
+    
+                    console.log('--------> Created new User');
+                    console.log('Inserted row ID:', this.lastID);
+                    return res.json("Created"); // Created
+                });
+            }
         }
     });
 });
@@ -477,6 +515,8 @@ app.post("/api/loginUser", (req, res) => {
                 const hashedPassword = row.password
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---------> Login Successful")
+                    req.session.userId = row.id; // Store user ID in the session
+                    console.log("userId: " + req.session.userId)
                     return res.json({ id: row.id, username: row.username, email: row.email })
                 }
                 else {
@@ -487,6 +527,12 @@ app.post("/api/loginUser", (req, res) => {
         })
     }
 })
+
+app.get('/logout', (req, res) => {
+    console.log(req.session.userId + " logged out")
+    req.session.userId = -1;
+    res.redirect('/');
+});
 
 const server = http.createServer(app);
 

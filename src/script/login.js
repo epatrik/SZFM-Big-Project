@@ -1,34 +1,39 @@
 const name = document.querySelector('.name');
-const email = document.querySelector('.email');
 const password = document.querySelector('.password');
 const submitBtn = document.querySelector('.submit-btn');
 
+window.onload = () => {
+    if(sessionStorage.id){
+        location.href = '/';
+    }
+}
+
 submitBtn.addEventListener('click', async () => {
     try {
-        const response = await fetch('/api/createUser', {
+        const response = await fetch('/api/loginUser', {
             method: 'post',
             headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
+                'Content-Type': 'application/json'}),
             body: JSON.stringify({
                 username: name.value,
-                password: password.value,
-                email: email.value
+                password: password.value
             })
-        });
+        })
 
-        if (response.ok) {
-            console.log('User created successfully!');
-            // You might want to redirect the user or perform other actions.
+        const loginMessage = await response.json();
+        if (loginMessage.id) {
+            console.log(loginMessage.username + ' logged in successfully!');
+            sessionStorage.id = loginMessage.id;
+            sessionStorage.username = loginMessage.username;
+            location.href = '/';
         } else {
-            console.error('Failed to create user:', response.statusText);
-            // Handle errors, maybe display an error message to the user.
+            console.log(loginMessage);
+            alertBox(loginMessage);
         }
     } catch (error) {
         console.error('An error occurred during the fetch:', error);
-        // Handle unexpected errors, maybe display a generic error message.
     }
-});
+})
 
 document.addEventListener("DOMContentLoaded", function () {
     const inputs = document.querySelectorAll("input");
@@ -51,3 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+const alertBox = (data) => {
+    const alertContainer = document.querySelector('.alert-box');
+    const alertMsg = document.querySelector('.alert');
+    alertMsg.innerHTML = data;
+
+    alertContainer.style.top = `5%`;
+    setTimeout(() => {
+        alertContainer.style.top = null;
+    }, 5000);
+}
