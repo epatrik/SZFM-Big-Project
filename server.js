@@ -533,12 +533,10 @@ app.post('/api/createUser', async (req, res) => {
         }
 
         if (username == "" || hashedPassword == "" || email == "") {
-            console.log("Fill in all the fields")
             return res.json("Töltsd ki az összes mezőt!")
         }
         else {
             if (row) {
-                console.log('Username already exists!');
                 return res.json("Felhasználónév foglalt!")
             } else {
                 db.run(sqlInsert, [username, hashedPassword, email], function (error) {
@@ -547,7 +545,6 @@ app.post('/api/createUser', async (req, res) => {
                         return res.json("Szerver hiba"); // Internal Server Error
                     }
     
-                    console.log('--------> Created new User');
                     console.log('Inserted row ID:', this.lastID);
                     return res.json("Created"); // Created
                 });
@@ -563,7 +560,6 @@ app.post("/api/loginUser", (req, res) => {
     const sqlSearch = "Select * from accounts where username = ?"
 
     if (username == "" || password == "") {
-        console.log("Fill in all the fields")
         return res.json("Fill in all the fields")
     }
     else {
@@ -574,19 +570,15 @@ app.post("/api/loginUser", (req, res) => {
             }
 
             if (!row) {
-                console.log("--------> Username or password incorrect!")
                 return res.json("Username or password incorrect!")
             }
             else {
                 const hashedPassword = row.password
                 if (await bcrypt.compare(password, hashedPassword)) {
-                    console.log("---------> Login Successful")
                     req.session.userId = row.id; // Store user ID in the session
-                    console.log("userId: " + req.session.userId)
                     return res.json({ id: row.id, username: row.username, email: row.email })
                 }
                 else {
-                    console.log("---------> Username or password incorrect!")
                     return res.json("Username or password incorrect!")
                 }
             }
