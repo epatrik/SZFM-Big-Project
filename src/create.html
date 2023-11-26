@@ -25,26 +25,7 @@
         <div>
             
         </div>
-        <div id="questions">
-            <div class="question">
-                <label>1. kérdés:</label>
-                <input type="text" name="question[0]" required autocomplete="off">
-                <select name="type[0]" required onchange="showOptions(this)" class="type">
-                    <option value="textInput">Szöveges bevitel</option>
-                    <option value="numberInput">Szám bevitel</option>
-                    <option value="multipleChoice">Több opció</option>
-                </select>
-                <label for="required">Kötelező:</label>
-                <input type="checkbox" name="required[0]" value="true">
-                <button type="button" onclick="removeQuestion(this)" class="type del">Kérdés törlése</button>
-                <div class="options" style="display: none;">
-                    <div class="option-item">
-                        <input type="text" name="options[0][]" placeholder="1. opció" autocomplete="off">
-                    </div>
-                    <button type="button" onclick="addOption(this)" class="opt">Új opció</button>
-                </div>
-            </div>
-        </div>
+        <div id="questions"></div>
         <div class="footer">
             <button type="button" onclick="addQuestion()" class="btn">Új kérdés</button>
             <button type="submit" class="btn">Kérdőív elmentése</button>
