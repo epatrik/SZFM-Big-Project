@@ -7,7 +7,8 @@ submitBtn.addEventListener('click', async () => {
         const response = await fetch('/api/loginUser', {
             method: 'post',
             headers: new Headers({
-                'Content-Type': 'application/json'}),
+                'Content-Type': 'application/json'
+            }),
             body: JSON.stringify({
                 username: name.value,
                 password: password.value

@@ -80,6 +80,27 @@ body {
   background-color: #f0f0f0;
 }
 
+#updateDiv {
+  margin: 20px;
+  background-color: rgb(178, 171, 212);
+  width: 15%;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+button {
+  margin-left: 25px;
+  font-family: 'Dosis', sans-serif;
+  background-color: rgb(230, 226, 253);
+  border: 1px solid rgb(150, 150, 150);
+}
+
+button:hover {
+  background-color: rgb(114, 93, 250);
+  color: white;
+  transition: all 0.2s;
+}
+
 }
 
 @media screen and (min-width: 1920px) {
@@ -162,6 +183,27 @@ body {
   
   .number-stats-table th {
     background-color: #f0f0f0;
+  }
+
+  #updateDiv {
+    margin: 20px;
+    background-color: rgb(178, 171, 212);
+    width: 15%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  button {
+    margin-left: 25px;
+    font-family: 'Dosis', sans-serif;
+    background-color: rgb(230, 226, 253);
+    border: 1px solid rgb(150, 150, 150);
+  }
+  
+  button:hover {
+    background-color: rgb(114, 93, 250);
+    color: white;
+    transition: all 0.2s;
   }
 
 }
