@@ -583,7 +583,7 @@ app.post("/api/loginUser", (req, res) => {
     }
 })
 
-app.get('/logout', (req, res) => {
+app.get('/api/logout', (req, res) => {
     req.session.userId = -1;
     res.redirect('/');
 });

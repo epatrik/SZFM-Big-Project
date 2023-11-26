@@ -22,7 +22,7 @@ window.onload = () => {
 
 logOut.addEventListener('click', async () => {
     try {
-        const response = await fetch('/logout', {
+        const response = await fetch('/api/logout', {
             method: 'get',
         });
 
