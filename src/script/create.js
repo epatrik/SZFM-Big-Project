@@ -21,7 +21,7 @@ function addQuestion() {
             <div class="option-item">
                 <input type="text" name="options[${questionNumber - 1}][]" placeholder="1. opció">
             </div>
-            <button type="button" onclick="addOption(this)">Új opció</button>
+            <button type="button" onclick="addOption(this)" class="opt">Új opció</button>
         </div>
     `;
     questionsDiv.appendChild(div);
