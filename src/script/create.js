@@ -16,7 +16,7 @@ function addQuestion() {
         </select>
         <label for="required">Kötelező:</label>
         <input type="checkbox" name="required[]" value="true">
-        <button type="button" onclick="removeQuestion(this)" class="type">Kérdés törlése</button>
+        <button type="button" onclick="removeQuestion(this)" class="type del">Kérdés törlése</button>
         <div class="options" style="display: none;">
             <div class="option-item">
                 <input type="text" name="options[${questionNumber - 1}][]" placeholder="1. opció">
