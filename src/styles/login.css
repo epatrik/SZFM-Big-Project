@@ -121,23 +121,58 @@ input:focus::placeholder{
     }  
  }
 
-<<<<<<< HEAD:src/login.css
  @media screen and (max-width: 2560px) {
 
     #loginForm{
         width: auto;
-        min-width: 475px;
+        min-width: 600px;
         margin: 0 auto;
+        height: 700px;
         background-color: rgb(209, 201, 248);
         border: 1px solid #858585;
         padding-left: 20px;
         padding-right: 20px;
         border-radius: 5px;
+        font-size: 20px;
     }
 
- }
-=======
- .alert-box{
+    input,
+    .submit-btn {
+        width: 80%;
+        height: 45px;
+        display: block;
+        margin: 20px auto;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid #858585;
+        padding-bottom: 10px;
+        padding-top: 8px;
+        font-size: 20px;
+        transition: .5s;
+        font-family: 'Dosis', sans-serif;
+    }
+
+    input {
+        top: 50px;
+    }
+
+    .submit-btn {
+
+        margin-top: 60px;
+    }
+
+    .heading{
+        text-transform: capitalize;
+        text-align: center;
+        font-size: 60px;
+        font-weight: 300;
+        margin-bottom: 150px;
+        margin-top: 30px;
+    }
+
+}
+
+.alert-box{
     position: absolute;
     top: -100%;
     left: 50%;
@@ -156,4 +191,3 @@ input:focus::placeholder{
     text-align: center;
     transition: 1s;
 }
->>>>>>> 9a40d880556530ec39d3ba9bbe1382804bf2dbe3:src/styles/login.css
