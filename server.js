@@ -181,7 +181,10 @@ app.get('/api/my-questionnaires', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    if (req.session.userId == -1) {
+    if (req.session.userId == undefined) {
+        req.session.userId = -1;
+    }
+    if (req.session.userId == -1 ) {
         res.sendFile(path.join(__dirname, 'src', 'login.html'));
     }
     else {
@@ -199,18 +202,12 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/questionnaire/:index', (req, res) => {
-    if (req.session.userId != -1) {
-        res.sendFile(path.join(__dirname, 'src', 'questionnaire.html'));
-    }
-    else {
-        res.redirect('/')
-    }
+    res.sendFile(path.join(__dirname, 'src', 'questionnaire.html'));
 });
 
 app.get('/api/questionnaireData/:id', async (req, res) => {
     const questionnaireId = req.params.id;
-    if (req.session.id != -1) {
-        const sqlSelectQuestionnaire = 'SELECT * FROM questionnaires WHERE id = ?';
+    const sqlSelectQuestionnaire = 'SELECT * FROM questionnaires WHERE id = ?';
         db.get(sqlSelectQuestionnaire, [questionnaireId], async (err, row) => {
             if (err) {
                 console.error('Error fetching questionnaire:', err.message);
@@ -268,10 +265,6 @@ app.get('/api/questionnaireData/:id', async (req, res) => {
 
             res.json(questionnaireData);
         });
-    }
-    else {
-        res.redirect('/')
-    }
 });
 
 app.get('/api/answers/:id', (req, res) => {
