@@ -252,13 +252,30 @@ function createUpdateField(questionnaireId, isActive, isPublic) {
     updateQuestionnaireData(updatedData);
   });
 
-  // Add inputs, labels, and submit button to the form
+  // Create delete button
+  const deleteButton = document.createElement('button');
+  deleteButton.type = 'button'; // Set the type to button
+  deleteButton.textContent = 'Kérdőív törlése';
+
+  // Add event listener for delete button
+  deleteButton.addEventListener('click', async function () {
+    const confirmation = confirm('Biztos törölni akarod a kérdőívet?');
+
+    if (confirmation) {
+      deleteQuestionnaire(questionnaireId);
+    }
+    location.reload();
+  });
+
+  // Add inputs, labels, submit and delete button to the form
   updateForm.appendChild(isActiveLabel);
   updateForm.appendChild(isActiveInput);
   updateForm.appendChild(document.createElement('br')); // Add a line break for better readability
   updateForm.appendChild(isPublicLabel);
   updateForm.appendChild(isPublicInput);
   updateForm.appendChild(submitButton);
+  updateForm.appendChild(document.createElement('br')); // Add a line break for better readability
+  updateForm.appendChild(deleteButton);
 
   // Add the form to the updateDiv
   updateDiv.appendChild(updateForm);
@@ -283,6 +300,22 @@ function updateQuestionnaireData(updatedData) {
       console.error('Error updating questionnaire:', error);
       // Handle errors as needed
     });
+}
+
+async function deleteQuestionnaire(questionnaireId) {
+  try {
+    const response = await fetch(`/api/deleteQuestionnaire/${questionnaireId}`, {
+      method: 'POST',
+    });
+
+    if (response.ok) {
+      console.log('Questionnaire deleted successfully');
+    } else {
+      console.error('Error deleting questionnaire');
+    }
+  } catch (error) {
+    console.error('Error deleting questionnaire:', error);
+  }
 }
 
 let breakdown = {};
