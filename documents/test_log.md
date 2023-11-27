@@ -42,3 +42,23 @@
 | 38 | 11/26 | Csepreghy Tamás | A kijelentkezés gomb működik és a kezdőfelületre kerül vissza az oldal | Igen | Igen | Átment |
 | 39 | 11/26 | Csepreghy Tamás | A kérdőív készítés során, sok kérdés esetén nem csúsznak ki a kérdések a keretből | Igen | Igen | Átment |
 | 40 | 11/26 | Csepreghy Tamás | Ha egy kérdést nem kötelező kitölteni, akkor azt üresen hagyva is beküldhető az eredmény | Igen | Igen | Átment |
+| 41 | 11/27 | Eperjesi Patrik | Regisztrálásnál adatok elmentése adatbázisba | Helyes kitöltés esetén elmenti az adatbázisba az adatokat | Elmentette helyesen az adatokat | Átment |
+| 42 | 11/27 | Eperjesi Patrik | Adatbázis létrejövetele | Ha nincs adatbázis létrehoz egy üreset | Létrejött | Átment |
+| 43 | 11/27 | Eperjesi Patrik | Kérdőív mentése adatbázisba | Kérdőív létrehozásakor létrejön egy új sor a kérdőív adataival a questionnaires táblában | Létrejön | Átment |
+| 44 | 11/27 | Eperjesi Patrik | Kérdések mentése adatbázisba | Kérdőív létrehozásakor minden kérdés mentve lesz a questions táblában | El lettek mentve | Átment |
+| 45 | 11/27 | Eperjesi Patrik | Több opciós kérdések válaszlehetőségeinek mentése adatbázisba | Minden válaszlehetőség mentve lesz az options táblában | El lettek mentve | Átment |
+| 46 | 11/27 | Eperjesi Patrik | Válaszok mentése | Adott válaszok el lesznek mentve az answers táblába | El lettek mentve | Átment |
+| 47 | 11/27 | Eperjesi Patrik | Adatbázis táblák összekötöttsége | A táblák helyesen össze vannak kötve egymással | A táblák helyesen össze vannak kötve egymással | Átment |
+| 48 | 11/27 | Eperjesi Patrik | Hozzáférés nyilvános kérdőívekhez url-en keresztül bejelentkezés nélkül | Hozzá lehet férni | Hozzá lehet férni | Átment |
+| 49 | 11/27 | Eperjesi Patrik | Hozzáférés nyilvános kérdőívekhez url-en keresztül bejelentkezve | Hozzá lehet férni | Hozzá lehet férni | Átment |
+| 50 | 11/27 | Eperjesi Patrik | Hozzáférés nem nyilvános kérdőívekhez url-en keresztül bejelentkezés nélkül | Visszadob a kezdőoldalra | Visszadob a kezdőoldalra | Átment |
+| 51 | 11/27 | Eperjesi Patrik | Hozzáférés nem nyilvános kérdőívekhez url-en keresztül bejelentkezve | Hozzá lehet férni | Hozzá lehet férni | Átment |
+| 52 | 11/27 | Eperjesi Patrik | Kérdőív összegzésekhez való hozzáférés bejelentkezés nélkül | Nem lehet hozzáférni | Nem lehet hozzáférni | Átment |
+| 53 | 11/27 | Eperjesi Patrik | Nem saját kérdőív összegzéshez való hozzáférés bejelentkezve | Nem lehet hozzáférni | Nem lehet hozzáférni | Átment |
+| 54 | 11/27 | Eperjesi Patrik | Saját kérdőív összegzéshez való hozzáférés bejelentkezve | Hozzá lehet férni | Hozzá lehet férni | Átment |
+| 55 | 11/27 | Eperjesi Patrik | Saját kérdőív törlése | A kérdőív összes adata törlődik | A kérdőív összes adata törlődött | Átment
+| 56 | 11/27 | Eperjesi Patrik | Törlés megerősítés | Törlés gombra nyomva egy felugró ablak jelenik meg | Törlés gombra nyomva egy felugró ablak jelenik meg | Átment
+| 57 | 11/27 | Eperjesi Patrik | Törlésnél felugró ablak elutasítása | Nem törlődik a kérdőív | Nem törlődött a kérdőív | Átment |
+| 58 | 11/27 | Eperjesi Patrik | Nem saját kérdőív törlése | Nem lehet törölni | Nem lehet törölni | Átment |
+| 59 | 11/27 | Eperjesi Patrik | Saját kérdőív nyilvánosságának állítása | Átállításkor megváltozik a kérdőív nyilvánossága | Átállításkor megváltozott a kérdőív nyilvánossága | Átment |
+| 60 | 11/27 | Eperjesi Patrik | Saját kérdőív aktívságának állítása | Átállításkor megváltozik a kérdőív aktívsága | Átállításkor megváltozott a kérdőív aktívsága | Átment |
